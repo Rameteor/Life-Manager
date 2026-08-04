@@ -276,7 +276,7 @@
     .phonetic { margin-top: 6px; color: var(--muted); font-size: 13px; }
     .meaning { margin: auto 0; font-size: 18px; font-weight: 650; line-height: 1.45; }
     .word-hint { color: var(--muted); font-size: 11px; }
-    .word-delete { position: absolute; right: 9px; bottom: 8px; z-index: 2; }
+    .word-delete { position: absolute; right: 9px; top: 8px; z-index: 2; }
 
     .fab { position: fixed; right: 24px; bottom: 24px; z-index: 30; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; background: var(--primary); color: #fff; box-shadow: 0 14px 32px rgba(0,113,227,.32); cursor: pointer; font-size: 26px; }
     .smart-panel { position: fixed; right: 24px; bottom: 94px; z-index: 30; width: min(380px, calc(100vw - 32px)); max-height: 500px; overflow: auto; padding: 18px; background: rgba(255,255,255,.96); border: 1px solid rgba(0,0,0,.06); border-radius: 20px; box-shadow: var(--shadow-float); backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%); transform-origin: bottom right; animation: smart-in .2s ease both; }
@@ -305,6 +305,29 @@
     .analysis-name { font-weight: 650; }
     .analysis-metric { color: var(--text); font-size: 13px; }
     .analysis-note { color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .analysis-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    .analysis-local-note { color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .coach-grid { display: grid; gap: 10px; margin-bottom: 18px; }
+    .coach-insight { display: grid; grid-template-columns: 42px 1fr; gap: 12px; padding: 15px; border: 1px solid var(--border); border-radius: 15px; background: #fff; }
+    .coach-insight-symbol { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 13px; background: #171b24; color: #fff; font-size: 16px; font-weight: 750; }
+    .coach-insight strong { display: block; margin-bottom: 5px; font-size: 14px; }
+    .coach-insight p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.6; }
+    .coach-insight em { color: var(--text); font-style: normal; font-weight: 650; }
+    .life-meta-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); gap: 16px; margin-bottom: 20px; }
+    .life-level-card { position: relative; overflow: hidden; color: #fff; background: radial-gradient(420px 180px at 100% 0%, rgba(90,200,250,.3), transparent 70%), linear-gradient(135deg,#171b24,#313949); }
+    .life-level-card .section-note, .life-level-card .metric-note { color: rgba(255,255,255,.68); }
+    .life-level-card .progress { background: rgba(255,255,255,.16); }
+    .life-level-card .progress span { background: linear-gradient(90deg,#64d2ff,#a4e8ff); }
+    .life-level-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+    .level-number { font-size: 38px; font-weight: 780; letter-spacing: -1.4px; line-height: 1; }
+    .level-number small { font-size: 13px; letter-spacing: 0; color: rgba(255,255,255,.7); }
+    .achievement-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+    .achievement-badge { display: inline-flex; align-items: center; gap: 6px; min-height: 30px; padding: 0 10px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: rgba(255,255,255,.1); color: #fff; font-size: 11px; font-weight: 650; }
+    .achievement-badge.locked { color: rgba(255,255,255,.48); background: transparent; }
+    .backup-card { display: flex; flex-direction: column; }
+    .backup-status { display: flex; align-items: center; gap: 10px; margin: 16px 0; padding: 12px; border-radius: 13px; background: #eef8f1; color: #1f6a36; font-size: 12px; line-height: 1.5; }
+    .backup-status::before { content: '✓'; width: 27px; height: 27px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; background: #34c759; color: #fff; font-weight: 800; }
+    .backup-card .btn { margin-top: auto; }
 
     .toast-region { position: fixed; z-index: 60; right: 24px; top: 20px; display: grid; gap: 8px; pointer-events: none; }
     .toast { min-width: 260px; max-width: min(380px, calc(100vw - 32px)); padding: 13px 14px; border-radius: 13px; background: #242426; color: #fff; box-shadow: var(--shadow-float); font-size: 13px; line-height: 1.45; animation: toast-in .25s ease both; pointer-events: auto; }
@@ -316,6 +339,36 @@
     .system-alert { margin-bottom: 18px; padding: 13px 15px; display: flex; align-items: center; gap: 10px; border-radius: 14px; background: #fff7e8; color: #8a4f00; font-size: 13px; line-height: 1.45; }
     .system-alert.danger { background: #fff0f0; color: #a8322d; }
     .system-alert strong { flex: 1; }
+    .goal-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px; }
+    .goal-toolbar .segmented button { min-height: 36px; padding: 0 13px; border-radius: 9px; background: transparent; color: var(--muted); cursor: pointer; font-size: 13px; }
+    .goal-card { display: grid; gap: 16px; }
+    .goal-card.archived { opacity: .82; }
+    .goal-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    .goal-card-actions { display: flex; align-items: center; gap: 3px; }
+    .goal-framework { margin-left: 6px; color: var(--muted); background: #f1f3f6; }
+    .kr-section { padding-top: 15px; border-top: 1px solid var(--border); }
+    .kr-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .kr-heading strong { font-size: 13px; }
+    .kr-list { display: grid; gap: 8px; }
+    .kr-item { padding: 11px 12px; border-radius: 13px; background: #f5f7fa; }
+    .kr-row { display: flex; align-items: flex-start; gap: 10px; }
+    .kr-kind { flex: 0 0 auto; min-width: 36px; padding: 4px 7px; border-radius: 8px; background: var(--module-soft); color: var(--module-action); font-size: 10px; font-weight: 750; text-align: center; }
+    .kr-copy { min-width: 0; flex: 1; }
+    .kr-title { color: #343842; font-size: 13px; font-weight: 610; line-height: 1.4; overflow-wrap: anywhere; }
+    .kr-progress { margin-top: 4px; color: var(--muted); font-size: 11px; }
+    .kr-actions { flex: 0 0 auto; display: flex; align-items: center; gap: 2px; }
+    .kr-actions .btn { min-height: 32px; }
+    .kr-item .progress { height: 5px; margin: 9px 0 0; }
+    .kr-form { display: grid; grid-template-columns: minmax(150px, 1fr) 84px 82px 82px 84px auto; gap: 7px; align-items: end; margin-top: 10px; }
+    .kr-form .input, .kr-form .select { min-height: 38px; font-size: 12px; }
+    .kr-form .btn { min-height: 38px; padding-inline: 11px; }
+    .linked-goal { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px; color: var(--primary); }
+    .daily-summary { margin-top: 20px; overflow: hidden; background: radial-gradient(420px 170px at 100% 0%, var(--module-soft), transparent 72%), rgba(255,255,255,.86); }
+    .daily-summary-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+    .daily-summary-stat { padding: 11px 9px; border-radius: 12px; background: rgba(245,247,250,.88); text-align: center; }
+    .daily-summary-stat strong { display: block; font-size: 16px; font-variant-numeric: tabular-nums; }
+    .daily-summary-stat span { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; }
+    .daily-summary-copy { margin: 14px 0 0; color: #4e535e; font-size: 13px; line-height: 1.65; }
     .quick-jumps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; margin: 12px 0 14px; }
     .quick-jump { min-height: 42px; padding: 6px; border-radius: 12px; background: #eef1f5; color: #4f5664; cursor: pointer; font-size: 12px; font-weight: 650; }
     .habit-matrix { display: grid; grid-template-columns: minmax(112px, 1.5fr) repeat(7, minmax(38px, .55fr)) 38px; gap: 7px; align-items: center; overflow-x: auto; padding-bottom: 4px; }
@@ -324,8 +377,36 @@
     .habit-name { overflow: hidden; color: #343842; font-size: 13px; font-weight: 620; text-overflow: ellipsis; white-space: nowrap; }
     .habit-check { min-width: 38px; min-height: 38px; border-radius: 11px; background: #eef1f5; color: #8a909c; cursor: pointer; font-size: 14px; }
     .habit-check.done { background: #e6f5ea; color: #248a3d; box-shadow: inset 0 0 0 1px rgba(52,199,89,.16); }
+    .habit-check.makeup { background: #e9f4ff; color: #1769aa; box-shadow: inset 0 0 0 1px rgba(0,113,227,.15); }
+    .habit-check.leave { background: #fff4df; color: #9a6100; box-shadow: inset 0 0 0 1px rgba(255,149,0,.18); }
     .habit-check:disabled { opacity: .36; cursor: default; }
     .habit-streak { color: var(--muted); font-size: 11px; text-align: center; }
+    .habit-legend { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 14px; color: var(--muted); font-size: 11px; }
+    .habit-legend span { display: inline-flex; align-items: center; gap: 5px; }
+    .habit-legend i { width: 9px; height: 9px; border-radius: 3px; background: #e6f5ea; }
+    .habit-legend .makeup-key { background: #e9f4ff; }
+    .habit-legend .leave-key { background: #fff4df; }
+    .budget-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .budget-item { padding: 12px; border-radius: 13px; background: var(--surface-soft); }
+    .budget-item-head { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 12px; }
+    .budget-item-head strong { color: var(--text); }
+    .budget-item.attention { background: #fff8e8; }
+    .budget-item.over { background: #fff0f0; }
+    .budget-item .progress { margin: 9px 0 0; }
+    .budget-fields { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .tag-picker { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .tag-choice { position: relative; }
+    .tag-choice input { position: absolute; opacity: 0; }
+    .tag-choice label, .mood-tag { display: inline-flex; align-items: center; min-height: 30px; padding: 5px 10px; border-radius: 999px; background: #f2f2f7; color: #5e6370; font-size: 12px; cursor: pointer; }
+    .tag-choice input:checked + label { background: var(--module-soft); color: var(--module-action); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--module) 24%, transparent); font-weight: 650; }
+    .mood-tag { min-height: 0; padding: 3px 8px; cursor: default; }
+    .insight-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .insight-item { padding: 14px; border-radius: 14px; background: var(--surface-soft); }
+    .insight-item strong { display: block; margin-bottom: 5px; font-size: 14px; }
+    .insight-item p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+    .word-review-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; padding: 0 12px 13px; }
+    .word-review-actions .btn { min-width: 0; padding-inline: 6px; }
+    .word-schedule { padding: 0 12px 13px; color: var(--muted); font-size: 11px; text-align: center; }
     .todo-swipe { position: relative; }
     .todo-swipe-underlay { display: none; }
     .todo-swipe-content.list-row { border-bottom: 1px solid var(--border); }
@@ -366,6 +447,17 @@
       .form-row { grid-template-columns: 1fr 1fr; }
       .form-row > * { grid-column: span 1 !important; }
       .form-row > .span-12, .form-row > .mobile-wide { grid-column: 1 / -1 !important; }
+      .goal-toolbar { align-items: stretch; }
+      .goal-toolbar .segmented { width: 100%; }
+      .goal-toolbar .segmented button { flex: 1; }
+      .goal-card-head { gap: 8px; }
+      .kr-form { grid-template-columns: 1fr 1fr; }
+      .kr-form > :first-child { grid-column: 1 / -1; }
+      .kr-form .btn { grid-column: 1 / -1; }
+      .kr-row { flex-wrap: wrap; }
+      .kr-actions { width: 100%; justify-content: flex-end; }
+      .daily-summary-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .daily-summary-stat:first-child { grid-column: 1 / -1; }
       .choice-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
       .mood-picker { gap: 5px; }
       .mood-option label { min-height: 50px; font-size: 24px; }
@@ -376,6 +468,9 @@
       .timeline-item { grid-template-columns: 52px 14px 1fr auto; gap: 7px; }
       .analysis-row { grid-template-columns: 90px 1fr; gap: 10px; padding-block: 12px; }
       .analysis-note { grid-column: 1 / -1; }
+      .analysis-toolbar { align-items: stretch; flex-direction: column; }
+      .analysis-toolbar .btn { width: 100%; }
+      .life-meta-grid { grid-template-columns: 1fr; }
       .modal { left: 0; right: 0; bottom: 0; top: auto; width: 100%; max-height: 92dvh; transform: none; border-radius: 22px 22px 0 0; animation-name: sheet-in; }
       @keyframes sheet-in { from { opacity: 0; transform: translateY(30px); } }
       .mobile-tabbar {
@@ -669,6 +764,14 @@
       backdrop-filter: blur(18px) saturate(120%);
       -webkit-backdrop-filter: blur(18px) saturate(120%);
     }
+    .card.life-level-card {
+      color: #fff;
+      border-color: rgba(255,255,255,.12);
+      background: radial-gradient(420px 180px at 100% 0%, rgba(90,200,250,.3), transparent 70%), linear-gradient(135deg,#171b24,#313949);
+      box-shadow: 0 24px 52px rgba(35,45,65,.2), inset 0 1px 0 rgba(255,255,255,.12);
+    }
+    .life-level-card .progress-copy { color: rgba(255,255,255,.68); }
+    .life-level-card .progress-copy strong { color: #fff; }
     .card-pad { padding: 23px; }
     .section-title { font-size: 17px; font-weight: 690; letter-spacing: -.38px; }
     .section-note { color: #7b808c; line-height: 1.55; }
@@ -793,7 +896,9 @@
     .timeline-node { background: var(--module-action); box-shadow: 0 0 0 5px var(--module-soft); }
 
     .word-grid { gap: 18px; }
-    .word-card { height: 190px; }
+    .word-card { height: auto; min-height: 190px; background: rgba(255,255,255,.86); box-shadow: var(--shadow); }
+    .word-flip { height: 190px; }
+    .word-card .word-face { box-shadow: none; }
     .word-face { padding: 22px; border: 1px solid rgba(255,255,255,.86); border-radius: 22px; background: rgba(255,255,255,.86); box-shadow: var(--shadow); }
     .word-front { background: radial-gradient(240px 150px at 100% 0%, var(--module-soft), transparent 72%), rgba(255,255,255,.9); }
     .word-back { background: var(--module-soft); }
@@ -937,6 +1042,8 @@
       .activity-copy { grid-template-columns: 1fr; gap: 3px; padding-top: 2px; }
       .activity-date { color: #969ba6; font-size: 11px; }
       .activity-arrow { align-self: center; }
+      .budget-grid, .budget-fields, .insight-grid { grid-template-columns: 1fr; }
+      .word-review-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .fab { display: none; }
       .fab-label { display: none; }
       .smart-panel { left: 12px; right: 12px; bottom: calc(86px + env(safe-area-inset-bottom)); transform-origin: bottom center; }
@@ -1006,12 +1113,13 @@
     </div>
     <div class="field">
       <label for="smartInput">输入自然语言或快捷命令</label>
-      <textarea class="textarea" id="smartInput" placeholder="记账 30 晚餐 · 待办 晚上8点跑步 · 心情 5 今天很高效"></textarea>
+      <textarea class="textarea" id="smartInput" placeholder="可一次记录多件事，例如：今天打车花了35，晚上跑步30分钟"></textarea>
     </div>
     <div class="smart-examples">
       <button class="smart-example" data-example="记账 30 晚餐">记账 30 晚餐</button>
       <button class="smart-example" data-example="待办 晚上8点跑步">待办 晚上8点跑步</button>
       <button class="smart-example" data-example="心情 5 今天很高效">心情 5 今天很高效</button>
+      <button class="smart-example" data-example="今天打车花了35，晚上跑步30分钟">同时记账 + 运动</button>
     </div>
     <div class="quick-jumps" aria-label="常用快捷操作">
       <button class="quick-jump" data-quick-module="daily" data-focus="todoText">＋ 待办</button>
@@ -1038,8 +1146,12 @@
 
   const STORAGE_KEY = 'lifeWorkbench.v1';
   const BACKUP_KEY = 'lifeWorkbench.backup';
-  const APP_VERSION = 2;
+  const AUTO_BACKUP_KEY = 'lifeWorkbench.autoBackups.v1';
+  const AUTO_BACKUP_INTERVAL = 7 * 24 * 60 * 60 * 1000;
+  const APP_VERSION = 3;
   const CATEGORIES = ['餐饮','交通','购物','娱乐','住房','医疗','教育','工资','理财','通讯','人情','其他'];
+  const BUDGET_CATEGORIES = CATEGORIES.filter(x=>x!=='工资');
+  const MOOD_TAGS = ['工作','运动','熬夜','学习','社交','家庭','健康','休息'];
   const SPORTS = ['跑步','游泳','健身','骑行','瑜伽','篮球','跳绳','散步'];
   const GOAL_LEVELS = {long:'长期目标',quarter:'季度目标',month:'月度目标'};
   const GOAL_STATUSES = {active:'进行中',paused:'已暂停',completed:'已完成'};
@@ -1065,13 +1177,14 @@
   let activeModule = localStorage.getItem('lifeWorkbench.active') || 'home';
   let moodRange = localStorage.getItem('lifeWorkbench.moodRange') === 'month' ? 'month' : 'week';
   let activeTripId = '';
+  let goalArchiveView = false;
   let lastFocus = null;
   let lastSnapshot = null;
 
   const defaultState = () => ({
     schemaVersion: APP_VERSION,
     meta: { createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
-    settings: { dailyWordGoal: 10, monthlyBudget: 0 },
+    settings: { dailyWordGoal: 10, monthlyBudget: 0, categoryBudgets: {} },
     goals: { items: [] },
     habits: { items: [] },
     daily: { todos: [] }, ledger: { entries: [] }, fitness: { workouts: [] },
@@ -1131,26 +1244,40 @@
     next.meta = {...next.meta, ...(src.meta||{})};
     next.settings.dailyWordGoal = clamp(Number(src.settings?.dailyWordGoal)||10,1,200);
     next.settings.monthlyBudget = clamp(Number(src.settings?.monthlyBudget)||0,0,1e9);
-    const goalIds=new Set();
+    next.settings.categoryBudgets = Object.fromEntries(BUDGET_CATEGORIES.map(category=>[category,clamp(Number(src.settings?.categoryBudgets?.[category])||0,0,1e9)]).filter(([,limit])=>limit>0));
+    const goalIds=new Set(),keyResultIds=new Set();
     next.goals.items = Array.isArray(src.goals?.items) ? src.goals.items.filter(x=>x&&x.title).map(x=>{
-      const progress=clamp(Math.round(Number(x.progress)||0),0,100);
+      const keyResults=Array.isArray(x.keyResults)?x.keyResults.filter(kr=>kr&&kr.title).slice(0,100).map(kr=>{
+        const kind=kr.kind==='todo'?'todo':'kr',target=clamp(Number(kr.target)||1,.01,1e9);
+        const current=clamp(Number(kr.current)||0,0,target),completed=Boolean(kr.completed)||current>=target;
+        return {...kr,id:claimId(keyResultIds,kr.id),title:String(kr.title).trim().slice(0,200),kind,target,current:completed?target:current,increment:clamp(Number(kr.increment)||(kind==='todo'?1:Math.max(.01,target/10)),.01,target),unit:String(kr.unit||(kind==='todo'?'项':'%')).trim().slice(0,20)||'项',completed,createdAt:kr.createdAt||nowIso(),updatedAt:kr.updatedAt||kr.createdAt||nowIso()};
+      }):[];
+      const derivedProgress=keyResults.length?Math.round(keyResults.reduce((sum,kr)=>sum+kr.current/kr.target,0)/keyResults.length*100):null;
+      const archivedAt=typeof x.archivedAt==='string'&&!Number.isNaN(Date.parse(x.archivedAt))?x.archivedAt:null;
+      const progress=archivedAt?100:clamp(derivedProgress??Math.round(Number(x.progress)||0),0,100);
       let status=Object.hasOwn(GOAL_STATUSES,x.status)?x.status:'active';
-      if(progress>=100)status='completed';
-      return {...x,id:claimId(goalIds,x.id),title:String(x.title).slice(0,200),level:Object.hasOwn(GOAL_LEVELS,x.level)?x.level:'long',parentId:typeof x.parentId==='string'?x.parentId:null,deadline:validDate(x.deadline)?x.deadline:dateKey(),progress:status==='completed'?100:progress,status,createdAt:x.createdAt||nowIso(),updatedAt:x.updatedAt||x.createdAt||nowIso()};
+      if(progress>=100||archivedAt)status='completed';
+      return {...x,id:claimId(goalIds,x.id),title:String(x.title).slice(0,200),framework:x.framework==='smart'?'smart':'okr',level:Object.hasOwn(GOAL_LEVELS,x.level)?x.level:'long',parentId:typeof x.parentId==='string'?x.parentId:null,deadline:validDate(x.deadline)?x.deadline:dateKey(),progress:status==='completed'?100:progress,status,keyResults,archivedAt,createdAt:x.createdAt||nowIso(),updatedAt:x.updatedAt||x.createdAt||nowIso()};
     }) : [];
     next.goals.items.forEach(x=>{if(!next.goals.items.some(parent=>parent.id===x.parentId&&parent.id!==x.id))x.parentId=null;});
     const habitIds=new Set();
     next.habits.items = Array.isArray(src.habits?.items) ? src.habits.items.filter(x=>x&&x.name).map(x=>({
-      ...x,id:claimId(habitIds,x.id),name:String(x.name).slice(0,80),dates:Array.isArray(x.dates)?[...new Set(x.dates.filter(validDate))].slice(-730):[],createdAt:x.createdAt||nowIso()
+      ...x,id:claimId(habitIds,x.id),name:String(x.name).slice(0,80),dates:Array.isArray(x.dates)?[...new Set(x.dates.filter(validDate))].slice(-730):[],leaveDates:Array.isArray(x.leaveDates)?[...new Set(x.leaveDates.filter(validDate))].slice(-730):[],makeupDates:Array.isArray(x.makeupDates)?[...new Set(x.makeupDates.filter(validDate))].slice(-730):[],createdAt:x.createdAt||nowIso()
     })) : [];
+    next.habits.items.forEach(x=>{const done=new Set(x.dates);x.leaveDates=x.leaveDates.filter(d=>!done.has(d));x.makeupDates=x.makeupDates.filter(d=>done.has(d));});
+    const normalizedGoalIds=new Set(next.goals.items.map(x=>x.id)),keyResultOwners=new Map(next.goals.items.flatMap(goal=>goal.keyResults.map(kr=>[kr.id,goal.id])));
     const todoIds=new Set();
-    next.daily.todos = Array.isArray(src.daily?.todos) ? src.daily.todos.filter(x=>x&&x.text).map(x=>({...x,id:claimId(todoIds,x.id),text:String(x.text).slice(0,200),priority:['high','medium','low'].includes(x.priority)?x.priority:'medium',date:validDate(x.date)?x.date:dateKey(),done:Boolean(x.done)})) : [];
+    next.daily.todos = Array.isArray(src.daily?.todos) ? src.daily.todos.filter(x=>x&&x.text).map(x=>{
+      const linkedGoalId=normalizedGoalIds.has(x.goalId)&&keyResultOwners.get(x.keyResultId)===x.goalId?x.goalId:null;
+      const linkedKeyResultId=linkedGoalId?x.keyResultId:null,done=Boolean(x.done);
+      return {...x,id:claimId(todoIds,x.id),text:String(x.text).slice(0,200),priority:['high','medium','low'].includes(x.priority)?x.priority:'medium',date:validDate(x.date)?x.date:dateKey(),done,completedAt:done&&typeof x.completedAt==='string'?x.completedAt:null,goalId:linkedGoalId,keyResultId:linkedKeyResultId,progressIncrement:linkedGoalId?clamp(Number(x.progressIncrement)||1,.01,1e9):null,krApplied:linkedGoalId?Boolean(x.krApplied||(done&&x.krApplied!==false)):false};
+    }) : [];
     const ledgerIds=new Set();
-    next.ledger.entries = Array.isArray(src.ledger?.entries) ? src.ledger.entries.filter(x=>x&&Number(x.amount)>0&&validDate(x.date)).map(x=>({...x,id:claimId(ledgerIds,x.id),type:x.type==='income'?'income':'expense',amount:clamp(Number(x.amount),.01,1e9),category:CATEGORIES.includes(x.category)?x.category:'其他',note:String(x.note||'').slice(0,200)})) : [];
+    next.ledger.entries = Array.isArray(src.ledger?.entries) ? src.ledger.entries.filter(x=>x&&Number(x.amount)>0&&validDate(x.date)).map(x=>({...x,id:claimId(ledgerIds,x.id),type:x.type==='income'?'income':'expense',amount:clamp(Number(x.amount),.01,1e9),category:CATEGORIES.includes(x.category)?x.category:'其他',note:String(x.note||'').slice(0,200),isInvestment:x.type!=='income'&&Boolean(x.isInvestment)})) : [];
     const workoutIds=new Set();
     next.fitness.workouts = Array.isArray(src.fitness?.workouts) ? src.fitness.workouts.filter(x=>x&&SPORTS.includes(x.type)&&validDate(x.date)).map(x=>({...x,id:claimId(workoutIds,x.id),minutes:clamp(Math.round(Number(x.minutes)||0),1,1440),calories:clamp(Math.round(Number(x.calories)||0),0,100000),note:String(x.note||'').slice(0,200)})) : [];
     const moodIds=new Set();
-    next.mood.entries = Array.isArray(src.mood?.entries) ? src.mood.entries.filter(x=>x&&validDate(x.date)).map(x=>{const score=clamp(Number(x.score)||4,1,6);return {...x,id:claimId(moodIds,x.id),score,emoji:MOODS.find(m=>m.score===score).emoji,text:String(x.text||'').slice(0,5000)};}) : [];
+    next.mood.entries = Array.isArray(src.mood?.entries) ? src.mood.entries.filter(x=>x&&validDate(x.date)).map(x=>{const score=clamp(Number(x.score)||4,1,6);return {...x,id:claimId(moodIds,x.id),score,emoji:MOODS.find(m=>m.score===score).emoji,text:String(x.text||'').slice(0,5000),tags:Array.isArray(x.tags)?[...new Set(x.tags.filter(tag=>MOOD_TAGS.includes(tag)))]:[]};}) : [];
     const readingBookIds=new Set();
     next.reading.books = Array.isArray(src.reading?.books) ? src.reading.books.filter(x=>x&&x.title&&Number(x.totalPages)>0).map(x=>{ const total=clamp(Math.round(Number(x.totalPages)),1,100000),noteIds=new Set(),currentPage=clamp(Math.round(Number(x.currentPage)||0),0,total); return {...x,id:claimId(readingBookIds,x.id),title:String(x.title).slice(0,200),author:String(x.author||'').slice(0,200),status:['wishlist','reading','finished'].includes(x.status)?x.status:(currentPage>=total?'finished':'reading'),totalPages:total,currentPage,notes:Array.isArray(x.notes)?x.notes.filter(n=>n&&n.text).map(n=>({...n,id:claimId(noteIds,n.id),kind:n.kind==='highlight'?'highlight':'note',text:String(n.text).slice(0,5000),page:clamp(Math.round(Number(n.page)||0),0,total),date:validDate(n.date)?n.date:dateKey()})):[]}; }) : [];
     const bookIds=new Set(next.reading.books.map(x=>x.id));
@@ -1159,10 +1286,10 @@
     const tripIds=new Set();
     next.travel.trips=Array.isArray(src.travel?.trips)?src.travel.trips.filter(x=>x&&x.destination&&validDate(x.startDate)&&validDate(x.endDate)&&x.endDate>=x.startDate).map(x=>{const itineraryIds=new Set(),packingIds=new Set();return {...x,id:claimId(tripIds,x.id),destination:String(x.destination).slice(0,200),itinerary:Array.isArray(x.itinerary)?x.itinerary.map(i=>({...i,id:claimId(itineraryIds,i.id),title:String(i.title||'').slice(0,200),done:Boolean(i.done)})).filter(i=>i.title):[],packing:Array.isArray(x.packing)?x.packing.map(i=>({...i,id:claimId(packingIds,i.id),text:String(i.text||'').slice(0,200),done:Boolean(i.done)})).filter(i=>i.text):[]};}):[];
     const englishWordIds=new Set();
-    next.english.words=Array.isArray(src.english?.words)?src.english.words.filter(x=>x&&x.word&&x.meaning).map(x=>({...x,id:claimId(englishWordIds,x.id),word:String(x.word).slice(0,100),phonetic:String(x.phonetic||'').slice(0,100),meaning:String(x.meaning).slice(0,500),reviewCount:Math.max(0,Math.round(Number(x.reviewCount)||0)),mastered:Boolean(x.mastered),nextReviewDate:validDate(x.nextReviewDate)?x.nextReviewDate:dateKey()})):[];
+    next.english.words=Array.isArray(src.english?.words)?src.english.words.filter(x=>x&&x.word&&x.meaning).map(x=>({...x,id:claimId(englishWordIds,x.id),word:String(x.word).slice(0,100),phonetic:String(x.phonetic||'').slice(0,100),meaning:String(x.meaning).slice(0,500),reviewCount:Math.max(0,Math.round(Number(x.reviewCount)||0)),lapseCount:Math.max(0,Math.round(Number(x.lapseCount)||0)),intervalDays:clamp(Math.round(Number(x.intervalDays)||1),1,3650),easeFactor:clamp(Number(x.easeFactor)||2.5,1.3,3),mastered:Boolean(x.mastered),nextReviewDate:validDate(x.nextReviewDate)?x.nextReviewDate:dateKey()})):[];
     const wordIds=new Set(next.english.words.map(x=>x.id));
     const studyIds=new Set();
-    next.english.studyLogs=Array.isArray(src.english?.studyLogs)?src.english.studyLogs.filter(x=>x&&wordIds.has(x.wordId)&&validDate(x.date)).map(x=>({...x,id:claimId(studyIds,x.id)})):[];
+    next.english.studyLogs=Array.isArray(src.english?.studyLogs)?src.english.studyLogs.filter(x=>x&&wordIds.has(x.wordId)&&validDate(x.date)).map(x=>({...x,id:claimId(studyIds,x.id),action:x.action==='review'?'review':'learn',rating:['easy','fuzzy','forgot'].includes(x.rating)?x.rating:null})):[];
     return next;
   }
 
@@ -1174,9 +1301,53 @@
 
   let state=loadState();
 
+  function readAutoBackups(){
+    try {
+      const parsed=JSON.parse(localStorage.getItem(AUTO_BACKUP_KEY)||'null');
+      return parsed&&Array.isArray(parsed.snapshots)?parsed:{snapshots:[]};
+    } catch(_) { return {snapshots:[]}; }
+  }
+
+  function ensureWeeklySnapshot(force=false){
+    const archive=readAutoBackups(),last=archive.snapshots.at(-1),lastTime=Date.parse(last?.createdAt||'');
+    if(!force&&Number.isFinite(lastTime)&&Date.now()-lastTime<AUTO_BACKUP_INTERVAL)return last;
+    const snapshot={createdAt:nowIso(),payload:{app:'life-workbench',exportedAt:nowIso(),data:state}};
+    try {
+      localStorage.setItem(AUTO_BACKUP_KEY,JSON.stringify({snapshots:[...archive.snapshots,snapshot].slice(-3)}));
+      return snapshot;
+    } catch(_) { return last||null; }
+  }
+
+  function autoBackupInfo(){
+    const last=readAutoBackups().snapshots.at(-1),date=last&&new Date(last.createdAt);
+    if(!date||Number.isNaN(date.getTime()))return {time:'尚未创建',detail:'浏览器存储不可用时，请手动导出备份'};
+    const time=new Intl.DateTimeFormat('zh-CN',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(date);
+    return {time,detail:'每 7 天在本浏览器内保留一次快照（最多 3 份）'};
+  }
+
+  function derivedLifeProgress(){
+    const todoDone=state.daily.todos.filter(x=>x.done).length,goalDone=state.goals.items.filter(x=>x.status==='completed').length;
+    const workoutMinutes=state.fitness.workouts.reduce((sum,x)=>sum+(Number(x.minutes)||0),0),habitChecks=state.habits.items.reduce((sum,x)=>sum+x.dates.length,0);
+    const readingPages=state.reading.progressLogs.reduce((sum,x)=>sum+Math.max(0,Number(x.delta)||0),0),finishedBooks=state.reading.books.filter(x=>x.status==='finished').length;
+    const studyLogs=state.english.studyLogs.length,reviewLogs=state.english.studyLogs.filter(x=>x.action==='review').length,trackedDays=new Set(state.ledger.entries.map(x=>x.date)).size;
+    const xp=todoDone*10+goalDone*120+Math.round(workoutMinutes/5)+state.fitness.workouts.length*10+habitChecks*5+Math.round(readingPages/2)+finishedBooks*80+studyLogs*4+trackedDays*2+state.mood.entries.length*2;
+    const level=Math.floor(Math.sqrt(xp/150))+1,start=150*(level-1)**2,next=150*level**2,levelProgress=Math.round((xp-start)/Math.max(1,next-start)*100);
+    const achievements=[
+      {icon:'✓',name:'完成第一步',earned:todoDone>=1,hint:'完成 1 项待办'},
+      {icon:'目',name:'目标达成者',earned:goalDone>=1,hint:'完成 1 个目标'},
+      {icon:'动',name:'活力 600',earned:workoutMinutes>=600,hint:'累计运动 600 分钟'},
+      {icon:'读',name:'阅读达人',earned:finishedBooks>=10,hint:'读完 10 本书'},
+      {icon:'词',name:'复习百词',earned:reviewLogs>=100,hint:'完成 100 次复习'},
+      {icon:'行',name:'习惯成形',earned:habitChecks>=30,hint:'累计习惯打卡 30 次'}
+    ];
+    return {xp,level,start,next,levelProgress,achievements,earned:achievements.filter(x=>x.earned).length};
+  }
+
+  ensureWeeklySnapshot();
+
   function persist(){
     state.meta.updatedAt=nowIso();
-    try { localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); return true; }
+    try { localStorage.setItem(STORAGE_KEY,JSON.stringify(state)); ensureWeeklySnapshot(); return true; }
     catch(err){ toast('保存失败：浏览器存储空间不可用。'); return false; }
   }
 
@@ -1222,6 +1393,48 @@
     return {limit,spent,remaining:limit-spent,ratio:limit?spent/limit:0};
   }
 
+  function recalculateGoal(goal){
+    if(!goal)return;
+    const keyResults=Array.isArray(goal.keyResults)?goal.keyResults:[];
+    if(keyResults.length){
+      keyResults.forEach(kr=>{kr.current=clamp(Number(kr.current)||0,0,Number(kr.target)||1);kr.completed=kr.current>=kr.target;});
+      goal.progress=Math.round(keyResults.reduce((sum,kr)=>sum+kr.current/kr.target,0)/keyResults.length*100);
+      if(goal.archivedAt){goal.progress=100;goal.status='completed';}
+      else if(goal.progress>=100)goal.status='completed';
+      else if(goal.status==='completed')goal.status='active';
+    }
+    goal.updatedAt=nowIso();
+  }
+
+  function setTodoDone(draft,todoId,done){
+    const todo=draft.daily.todos.find(x=>x.id===todoId);if(!todo)return;
+    todo.done=Boolean(done);todo.completedAt=todo.done?nowIso():null;
+    if(!todo.goalId||!todo.keyResultId)return;
+    const goal=draft.goals.items.find(x=>x.id===todo.goalId),kr=goal?.keyResults?.find(x=>x.id===todo.keyResultId);
+    if(!goal||!kr){todo.goalId=null;todo.keyResultId=null;todo.progressIncrement=null;todo.krApplied=false;return;}
+    const increment=clamp(Number(todo.progressIncrement)||Number(kr.increment)||1,.01,kr.target);
+    if(todo.done&&!todo.krApplied){kr.current=clamp(kr.current+increment,0,kr.target);todo.krApplied=true;}
+    else if(!todo.done&&todo.krApplied){kr.current=clamp(kr.current-increment,0,kr.target);todo.krApplied=false;}
+    kr.completed=kr.current>=kr.target;kr.updatedAt=nowIso();recalculateGoal(goal);
+  }
+
+  function buildDailySummary(day=dateKey()){
+    const todos=state.daily.todos.filter(x=>x.date===day),completed=todos.filter(x=>x.done);
+    const entries=state.ledger.entries.filter(x=>x.date===day),expense=entries.filter(x=>x.type==='expense').reduce((sum,x)=>sum+x.amount,0),income=entries.filter(x=>x.type==='income').reduce((sum,x)=>sum+x.amount,0);
+    const workouts=state.fitness.workouts.filter(x=>x.date===day),minutes=workouts.reduce((sum,x)=>sum+x.minutes,0);
+    const pages=state.reading.progressLogs.filter(x=>x.date===day).reduce((sum,x)=>sum+Math.max(0,Number(x.delta)||0),0);
+    const moods=state.mood.entries.filter(x=>x.date===day),moodScore=moods.length?Number((moods.reduce((sum,x)=>sum+x.score,0)/moods.length).toFixed(1)):null;
+    const mood=moodScore?MOODS.find(x=>x.score===Math.round(moodScore)):null,linkedDone=completed.filter(x=>x.goalId&&x.keyResultId).length;
+    const facts=[];
+    facts.push(todos.length?`完成了 ${completed.length}/${todos.length} 项计划${linkedDone?`，其中 ${linkedDone} 项推进了目标`:''}`:'今天还没有安排待办');
+    if(entries.length)facts.push(`记录 ${entries.length} 笔收支，支出 ${money(expense)}${income?`、收入 ${money(income)}`:''}`);
+    if(minutes)facts.push(`运动 ${minutes} 分钟`);
+    if(pages)facts.push(`阅读 ${Math.round(pages)} 页`);
+    if(moodScore)facts.push(`平均心情 ${mood?.emoji||''} ${moodScore} 分`);
+    if(facts.length===1&&!todos.length)facts.push('记下一笔生活数据后，小结会自动补全');
+    return {todoDone:completed.length,todoTotal:todos.length,expense,minutes,pages:Math.round(pages),moodScore,moodEmoji:mood?.emoji||'—',copy:`${facts.join('；')}。`};
+  }
+
   function recentActivities(limit=6){
     const items=[];
     state.daily.todos.filter(x=>x.done&&x.completedAt).forEach(x=>items.push({module:'daily',icon:'计',summary:`完成计划：${x.text}`,date:x.date,createdAt:x.completedAt}));
@@ -1245,7 +1458,7 @@
     const dueWords=state.english.words.filter(x=>!x.mastered&&x.nextReviewDate<=today).length;
     const moodLabel=latestMood?MOODS.find(x=>x.score===latestMood.score)?.label:'';
     const bookProgress=currentBook?Math.round(currentBook.currentPage/currentBook.totalPages*100):0;
-    const streakDays=workoutStreak(),workedOutToday=state.fitness.workouts.some(x=>x.date===today);
+    const streakDays=workoutStreak(),workedOutToday=state.fitness.workouts.some(x=>x.date===today),game=derivedLifeProgress(),backup=autoBackupInfo();
     const stateRank={attention:0,populated:1,empty:2};
     const dashboardCards=[
       {key:'todos',state:pending?'attention':'empty',priority:0,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="todos" data-card-state="${pending?'attention':'empty'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">今日待办</h2><p class="section-note">${todos.length?`${todoDone}/${todos.length} 项已完成`:'今天还没有安排'}</p></div><span class="nav-icon home-card-symbol" style="--icon:#0071e3">计</span></div><div class="home-card-body"><div class="metric-value home-card-primary">${pending} <small style="font-size:13px;color:var(--muted)">项</small></div></div><div class="home-card-actions"><button class="btn small secondary" type="button" data-module="daily"><span class="home-action-full">查看今日计划</span><span class="home-action-short">计划</span></button></div></article>`},
@@ -1253,34 +1466,44 @@
       {key:'mood',state:latestMood?'populated':'empty',priority:3,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="mood" data-card-state="${latestMood?'populated':'empty'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">最近心情</h2><p class="section-note">${latestMood?formatFullDate(latestMood.date):'等待第一次记录'}</p></div>${latestMood?`<span class="home-card-symbol" style="font-size:31px" aria-hidden="true">${latestMood.emoji}</span>`:'<span class="nav-icon home-card-symbol" style="--icon:#ff375f">心</span>'}</div><div class="home-card-body"><div class="metric-value home-card-primary">${latestMood?`${latestMood.score} 分`:'暂无'}</div><div class="metric-note home-card-detail">${latestMood?esc(moodLabel||'已记录'):'记录一下此刻的感受'}</div></div><div class="home-card-actions"><button class="btn small secondary" type="button" data-module="mood"><span class="home-action-full">记录心情</span><span class="home-action-short">记录</span></button></div></article>`},
       {key:'reading',state:currentBook?'populated':'empty',priority:4,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="reading" data-card-state="${currentBook?'populated':'empty'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">正在阅读</h2><p class="section-note">${currentBook?esc(currentBook.author||'未填写作者'):'书架里暂无在读书籍'}</p></div><span class="nav-icon home-card-symbol" style="--icon:#af52de">读</span></div><div class="home-card-body"><div class="row-title home-card-primary" style="font-size:20px;font-weight:700">${currentBook?esc(currentBook.title):'暂无'}</div>${currentBook?`<div class="progress" role="progressbar" aria-valuenow="${bookProgress}" aria-valuemin="0" aria-valuemax="100"><span style="width:${bookProgress}%"></span></div><div class="progress-copy home-card-detail"><span>第 ${currentBook.currentPage} / ${currentBook.totalPages} 页</span><strong>${bookProgress}%</strong></div>`:'<div class="metric-note home-card-detail" style="margin-top:10px">添加书籍后会在这里显示进度</div>'}</div><div class="home-card-actions"><button class="btn small secondary" type="button" data-module="reading"><span class="home-action-full">打开书架</span><span class="home-action-short">书架</span></button></div></article>`},
       {key:'fitness',state:workedOutToday||streakDays?'populated':'empty',priority:5,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="fitness" data-card-state="${workedOutToday||streakDays?'populated':'empty'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">运动连续打卡</h2><p class="section-note">稳定积累比一次满分更重要</p></div><span class="nav-icon home-card-symbol" style="--icon:#ff9500">动</span></div><div class="home-card-body"><div class="metric-value home-card-primary" style="color:var(--orange)">${streakDays} <small style="font-size:13px;color:var(--muted)">天</small></div><div class="metric-note home-card-detail">${workedOutToday?'今天已完成打卡':'今天还可以动一动'}</div></div><div class="home-card-actions"><button class="btn small secondary" type="button" data-module="fitness"><span class="home-action-full">去运动打卡</span><span class="home-action-short">打卡</span></button></div></article>`},
-      {key:'words',state:dueWords?'attention':'empty',priority:1,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="words" data-card-state="${dueWords?'attention':'empty'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">待复习单词</h2><p class="section-note">按照间隔重复计划复习</p></div><span class="nav-icon home-card-symbol" style="--icon:#5856d6">词</span></div><div class="home-card-body"><div class="metric-value home-card-primary">${dueWords} <small style="font-size:13px;color:var(--muted)">个</small></div><div class="metric-note home-card-detail">${dueWords?'翻转卡片即可完成一次复习':'今天的复习已清空'}</div></div><div class="home-card-actions"><button class="btn small secondary" type="button" data-module="english"><span class="home-action-full">开始复习</span><span class="home-action-short">开始</span></button></div></article>`}
+      {key:'words',state:dueWords?'attention':'empty',priority:1,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="words" data-card-state="${dueWords?'attention':'empty'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">待复习单词</h2><p class="section-note">按照间隔重复计划复习</p></div><span class="nav-icon home-card-symbol" style="--icon:#5856d6">词</span></div><div class="home-card-body"><div class="metric-value home-card-primary">${dueWords} <small style="font-size:13px;color:var(--muted)">个</small></div><div class="metric-note home-card-detail">${dueWords?'翻卡后选择掌握程度':'今天的复习已清空'}</div></div><div class="home-card-actions"><button class="btn small secondary" type="button" data-module="english"><span class="home-action-full">开始复习</span><span class="home-action-short">开始</span></button></div></article>`}
     ].sort((a,b)=>stateRank[a.state]-stateRank[b.state]||a.priority-b.priority);
     return `<section class="page color-plan">
       ${pageHead('人生看板','把今天、财务、身心与学习放在一个清晰的视野里。')}
       <div class="grid-cards home-dashboard-grid">${dashboardCards.map(card=>card.markup).join('')}</div>
+      <div class="life-meta-grid" style="margin-top:20px">
+        <article class="card card-pad life-level-card"><div class="life-level-top"><div><h2 class="section-title" style="color:#fff">人生经验值</h2><p class="section-note">系统按已发生的行动实时计算，不需要额外打卡。</p></div><div class="level-number">Lv.${game.level} <small>${game.xp} XP</small></div></div><div class="progress" role="progressbar" aria-label="人生等级进度" aria-valuenow="${game.levelProgress}" aria-valuemin="0" aria-valuemax="100" style="margin-top:18px"><span style="width:${game.levelProgress}%"></span></div><div class="progress-copy"><span>本级 ${game.xp-game.start} XP</span><strong>距 Lv.${game.level+1} 还差 ${game.next-game.xp} XP</strong></div><div class="achievement-list" aria-label="成就徽章">${game.achievements.map(x=>`<span class="achievement-badge ${x.earned?'':'locked'}" title="${esc(x.hint)}"><span aria-hidden="true">${x.earned?x.icon:'○'}</span>${esc(x.name)}</span>`).join('')}</div></article>
+        <article class="card card-pad backup-card"><div><h2 class="section-title">本地优先备份</h2><p class="section-note">${esc(backup.detail)}</p></div><div class="backup-status"><span>上次浏览器快照<br><strong>${esc(backup.time)}</strong></span></div><button class="btn secondary" type="button" data-action="export-backup">一键导出 JSON</button><p class="section-note" style="margin:10px 0 0">浏览器不会允许网页无提示自动下载；需要保存到文件时请点击导出。</p></article>
+      </div>
       <div class="grid-two" style="margin-top:20px"><div class="card card-pad"><div class="section-head"><div><h2 class="section-title">目标牵引行动</h2><p class="section-note">用长期、季度和月度目标连接每天的选择。</p></div><button class="btn small" type="button" data-module="goals">管理目标</button></div><div class="section-note">${state.goals.items.filter(x=>x.status==='active').length} 个目标正在推进。</div></div><div class="card card-pad"><div class="section-head"><div><h2 class="section-title">今日习惯</h2><p class="section-note">${state.habits.items.filter(x=>x.dates.includes(today)).length}/${state.habits.items.length} 项已打卡</p></div><button class="btn small secondary" type="button" data-module="travel">打开矩阵</button></div></div></div>
       <div class="card card-pad" style="margin-top:20px"><div class="section-head"><div><h2 class="section-title">最近动态</h2><p class="section-note">运动、阅读、学习与完成事项自动关联。</p></div></div><div class="list">${renderActivityList(5)}</div></div>
     </section>`;
   }
 
+  function renderGoalCard(goal,goals,today){
+    const days=daysBetween(today,goal.deadline),parent=goals.find(x=>x.id===goal.parentId),keyResults=goal.keyResults||[];
+    const deadlineCopy=goal.status==='completed'?'已完成':days<0?`已逾期 ${Math.abs(days)} 天`:days===0?'今天截止':`还剩 ${days} 天`;
+    const archiveCopy=goal.archivedAt?`归档于 ${formatFullDate(dateKey(new Date(goal.archivedAt)))}`:deadlineCopy;
+    const krMarkup=keyResults.map(kr=>{
+      const percent=Math.round(kr.current/kr.target*100),synced=state.daily.todos.some(todo=>todo.date===today&&todo.keyResultId===kr.id);
+      return `<div class="kr-item"><div class="kr-row"><span class="kr-kind">${kr.kind==='todo'?'TODO':'KR'}</span><div class="kr-copy"><div class="kr-title">${esc(kr.title)}</div><div class="kr-progress">${kr.current} / ${kr.target} ${esc(kr.unit)} · 单次推进 ${kr.increment} ${esc(kr.unit)}</div></div>${goal.archivedAt?'':`<div class="kr-actions"><button class="btn secondary small" type="button" data-action="sync-kr" data-id="${kr.id}" data-goal-id="${goal.id}" ${kr.completed||synced||goal.status==='paused'?'disabled':''}>${kr.completed?'已达成':synced?'今日已同步':'同步今天'}</button><button class="icon-btn" type="button" data-action="delete-kr" data-id="${kr.id}" data-goal-id="${goal.id}" aria-label="删除拆解项">×</button></div>`}</div><div class="progress"><span style="width:${percent}%"></span></div>${goal.archivedAt?'':`<form class="inline-form" data-form="kr-update" data-id="${kr.id}" data-goal-id="${goal.id}"><input class="input" name="current" type="number" min="0" max="${kr.target}" step="any" value="${kr.current}" aria-label="${esc(kr.title)}当前进度"><button class="btn ghost small" type="submit">校准进度</button></form>`}</div>`;
+    }).join('');
+    return `<article class="card card-pad goal-card ${goal.archivedAt?'archived':''}"><div class="goal-card-head"><div><span class="badge badge-${goal.status==='completed'?'low':goal.status==='paused'?'medium':'high'}">${GOAL_LEVELS[goal.level]}</span><span class="badge goal-framework">${goal.framework==='smart'?'SMART':'OKR'}</span><h2 class="book-title" style="margin-top:10px">${esc(goal.title)}</h2><div class="row-meta">${parent?`上级：${esc(parent.title)} · `:''}截止 ${formatFullDate(goal.deadline)} · ${archiveCopy}</div></div><div class="goal-card-actions">${goal.archivedAt?`<button class="btn ghost small" type="button" data-action="restore-goal" data-id="${goal.id}">恢复</button>`:goal.status==='completed'?`<button class="btn ghost small" type="button" data-action="archive-goal" data-id="${goal.id}">归档</button>`:''}<button class="icon-btn" type="button" data-action="delete-goal" data-id="${goal.id}" aria-label="删除目标">×</button></div></div><div><div class="progress" role="progressbar" aria-label="目标进度" aria-valuenow="${goal.progress}" aria-valuemin="0" aria-valuemax="100"><span style="width:${goal.progress}%"></span></div><div class="progress-copy"><span>${GOAL_STATUSES[goal.status]}${keyResults.length?` · ${keyResults.filter(x=>x.completed).length}/${keyResults.length} 项已达成`:''}</span><strong>${goal.progress}%</strong></div></div>${goal.archivedAt?'':`<form class="inline-form" data-form="goal-update" data-id="${goal.id}"><input class="input" name="progress" type="number" min="0" max="100" value="${goal.progress}" ${keyResults.length?'disabled title="已有拆解项时由系统自动计算"':''} aria-label="目标进度"><select class="select" name="status" aria-label="目标状态">${Object.entries(GOAL_STATUSES).map(([value,label])=>`<option value="${value}" ${goal.status===value?'selected':''}>${label}</option>`).join('')}</select><button class="btn small" type="submit">更新</button></form>`}<div class="kr-section"><div class="kr-heading"><strong>关键结果 / 待办拆解</strong><span class="section-note">${keyResults.length?`已拆解 ${keyResults.length} 项`:'添加第一项后自动计算进度'}</span></div><div class="kr-list">${krMarkup}</div>${goal.archivedAt?'':`<form class="kr-form" data-form="kr-add" data-id="${goal.id}"><input class="input" name="title" maxlength="200" required placeholder="关键结果或具体待办"><select class="select" name="kind" aria-label="拆解类型"><option value="kr">KR</option><option value="todo">Todo</option></select><input class="input" name="target" type="number" min="0.01" max="1000000000" step="any" value="100" aria-label="目标值" title="目标值"><input class="input" name="increment" type="number" min="0.01" max="1000000000" step="any" value="10" aria-label="单次推进量" title="同步任务每完成一次推进多少"><input class="input" name="unit" maxlength="20" value="%" aria-label="单位" placeholder="页 / 次 / %"><button class="btn small" type="submit">添加拆解</button></form>`}</div></article>`;
+  }
+
   function renderGoals(){
     const today=dateKey(),order={active:0,paused:1,completed:2};
     const goals=[...state.goals.items].sort((a,b)=>order[a.status]-order[b.status]||a.deadline.localeCompare(b.deadline)||String(b.updatedAt).localeCompare(String(a.updatedAt)));
-    const active=goals.filter(x=>x.status==='active').length,completed=goals.filter(x=>x.status==='completed').length;
-    const avg=goals.length?Math.round(goals.reduce((sum,x)=>sum+x.progress,0)/goals.length):0;
-    return `<section class="page color-plan">
-      ${pageHead('目标管理','用 SMART 的明确边界与 OKR 的层级视角，把方向拆成可执行进度。')}
-      <div class="summary-strip card"><div class="metric"><div class="metric-label">进行中</div><div class="metric-value">${active}</div><div class="metric-note">保持聚焦的目标</div></div><div class="metric"><div class="metric-label">平均进度</div><div class="metric-value">${avg}%</div><div class="metric-note">全部目标综合进度</div></div><div class="metric"><div class="metric-label">已完成</div><div class="metric-value">${completed}</div><div class="metric-note">累计完成目标</div></div></div>
-      <form class="card card-pad" id="objectiveForm" style="margin-bottom:20px"><div class="section-head"><div><h2 class="section-title">新增目标</h2><p class="section-note">写清目标、时间边界和当前进度，后续可持续更新。</p></div></div><div class="form-row"><div class="field span-4 mobile-wide"><label for="goalTitle">目标标题</label><input class="input" id="goalTitle" name="title" maxlength="200" required placeholder="例如：完成个人作品集上线"></div><div class="field span-2"><label for="goalLevel">目标层级</label><select class="select" id="goalLevel" name="level">${Object.entries(GOAL_LEVELS).map(([value,label])=>`<option value="${value}">${label}</option>`).join('')}</select></div><div class="field span-2"><label for="goalDeadline">截止日期</label><input class="input" id="goalDeadline" name="deadline" type="date" min="${today}" value="${shiftDay(today,30)}" required></div><div class="field span-2"><label for="goalProgress">当前进度</label><input class="input" id="goalProgress" name="progress" type="number" min="0" max="100" value="0" required></div><div class="field span-2"><label for="goalStatus">状态</label><select class="select" id="goalStatus" name="status">${Object.entries(GOAL_STATUSES).map(([value,label])=>`<option value="${value}">${label}</option>`).join('')}</select></div><div class="field span-12"><label for="goalParent">上级目标（可选）</label><select class="select" id="goalParent" name="parentId"><option value="">无，作为顶层目标</option>${goals.filter(x=>x.status!=='completed').map(x=>`<option value="${x.id}">${GOAL_LEVELS[x.level]} · ${esc(x.title)}</option>`).join('')}</select></div><button class="btn span-12" type="submit">添加目标</button></div></form>
-      <div class="grid-cards">${goals.length?goals.map(goal=>{const days=daysBetween(today,goal.deadline),deadlineCopy=goal.status==='completed'?'已完成':days<0?`已逾期 ${Math.abs(days)} 天`:days===0?'今天截止':`还剩 ${days} 天`,parent=goals.find(x=>x.id===goal.parentId);return `<article class="card card-pad"><div class="book-top"><div><span class="badge badge-${goal.status==='completed'?'low':goal.status==='paused'?'medium':'high'}">${GOAL_LEVELS[goal.level]}</span><h2 class="book-title" style="margin-top:10px">${esc(goal.title)}</h2><div class="row-meta">${parent?`上级：${esc(parent.title)} · `:''}截止 ${formatFullDate(goal.deadline)} · ${deadlineCopy}</div></div><button class="icon-btn" type="button" data-action="delete-goal" data-id="${goal.id}" aria-label="删除目标">×</button></div><div class="progress" role="progressbar" aria-label="目标进度" aria-valuenow="${goal.progress}" aria-valuemin="0" aria-valuemax="100"><span style="width:${goal.progress}%"></span></div><div class="progress-copy"><span>${GOAL_STATUSES[goal.status]}</span><strong>${goal.progress}%</strong></div><form class="inline-form" data-form="goal-update" data-id="${goal.id}"><input class="input" name="progress" type="number" min="0" max="100" value="${goal.progress}" aria-label="目标进度"><select class="select" name="status" aria-label="目标状态">${Object.entries(GOAL_STATUSES).map(([value,label])=>`<option value="${value}" ${goal.status===value?'selected':''}>${label}</option>`).join('')}</select><button class="btn small" type="submit">更新</button></form></article>`;}).join(''):emptyState('目','还没有目标','先写下一个足够具体、可以衡量并且有截止时间的目标。')}</div>
-    </section>`;
+    const currentGoals=goals.filter(x=>!x.archivedAt),archivedGoals=goals.filter(x=>x.archivedAt),visible=goalArchiveView?archivedGoals:currentGoals;
+    const active=currentGoals.filter(x=>x.status==='active').length,completed=currentGoals.filter(x=>x.status==='completed').length,avg=currentGoals.length?Math.round(currentGoals.reduce((sum,x)=>sum+x.progress,0)/currentGoals.length):0;
+    return `<section class="page color-plan">${pageHead('目标管理','用 SMART 的明确边界与 OKR 的层级视角，把方向拆成可执行进度。')}<div class="summary-strip card"><div class="metric"><div class="metric-label">进行中</div><div class="metric-value">${active}</div><div class="metric-note">保持聚焦的目标</div></div><div class="metric"><div class="metric-label">平均进度</div><div class="metric-value">${avg}%</div><div class="metric-note">当前目标综合进度</div></div><div class="metric"><div class="metric-label">已完成 / 归档</div><div class="metric-value">${completed} / ${archivedGoals.length}</div><div class="metric-note">完成后可收入归档</div></div></div><form class="card card-pad" id="objectiveForm" style="margin-bottom:20px"><div class="section-head"><div><h2 class="section-title">新增目标</h2><p class="section-note">先定目标边界，再在目标卡片中继续拆解 KR 或待办。</p></div></div><div class="form-row"><div class="field span-4 mobile-wide"><label for="goalTitle">目标标题</label><input class="input" id="goalTitle" name="title" maxlength="200" required placeholder="例如：完成个人作品集上线"></div><div class="field span-2"><label for="goalFramework">管理方法</label><select class="select" id="goalFramework" name="framework"><option value="okr">OKR</option><option value="smart">SMART</option></select></div><div class="field span-2"><label for="goalLevel">目标层级</label><select class="select" id="goalLevel" name="level">${Object.entries(GOAL_LEVELS).map(([value,label])=>`<option value="${value}">${label}</option>`).join('')}</select></div><div class="field span-2"><label for="goalDeadline">截止日期</label><input class="input" id="goalDeadline" name="deadline" type="date" min="${today}" value="${shiftDay(today,30)}" required></div><div class="field span-2"><label for="goalStatus">状态</label><select class="select" id="goalStatus" name="status">${Object.entries(GOAL_STATUSES).filter(([value])=>value!=='completed').map(([value,label])=>`<option value="${value}">${label}</option>`).join('')}</select></div><div class="field span-12"><label for="goalParent">上级目标（可选）</label><select class="select" id="goalParent" name="parentId"><option value="">无，作为顶层目标</option>${currentGoals.filter(x=>x.status!=='completed').map(x=>`<option value="${x.id}">${GOAL_LEVELS[x.level]} · ${esc(x.title)}</option>`).join('')}</select></div><button class="btn span-12" type="submit">添加并开始拆解</button></div></form><div class="goal-toolbar"><div><h2 class="section-title">${goalArchiveView?'目标归档':'当前目标'}</h2><p class="section-note">${goalArchiveView?'已归档目标只读保存，可随时恢复。':'完成关联的今日任务时，进度会自动回写。'}</p></div><div class="segmented" aria-label="目标列表范围"><button type="button" aria-pressed="${!goalArchiveView}" data-action="goal-view" data-view="current">当前 ${currentGoals.length}</button><button type="button" aria-pressed="${goalArchiveView}" data-action="goal-view" data-view="archived">归档 ${archivedGoals.length}</button></div></div><div class="grid-cards">${visible.length?visible.map(goal=>renderGoalCard(goal,goals,today)).join(''):emptyState(goalArchiveView?'档':'目',goalArchiveView?'归档还是空的':'还没有目标',goalArchiveView?'完成一个目标后，将它归档到这里。':'先写下一个足够具体、可以衡量并且有截止时间的目标。')}</div></section>`;
   }
 
   function renderDaily(){
     const today=dateKey();
     const items=state.daily.todos.filter(x=>x.date===today).sort((a,b)=>Number(a.done)-Number(b.done)||({high:0,medium:1,low:2}[a.priority]-{high:0,medium:1,low:2}[b.priority])||String(a.createdAt).localeCompare(String(b.createdAt)));
     const done=items.filter(x=>x.done).length, rate=items.length?Math.round(done/items.length*100):0;
-    const counts=p=>items.filter(x=>x.priority===p&&!x.done).length;
+    const counts=p=>items.filter(x=>x.priority===p&&!x.done).length,summary=buildDailySummary(today);
     const budget=budgetStatus(),budgetAlert=budget.limit&&budget.ratio>=.8?`<div class="system-alert ${budget.ratio>=1?'danger':''}"><span aria-hidden="true">${budget.ratio>=1?'!':'¥'}</span><strong>${budget.ratio>=1?`本月已超出每月预算 ${money(Math.abs(budget.remaining))}`:`本月预算已使用 ${Math.round(budget.ratio*100)}%，安排计划时可适当收紧非必要支出。`}</strong><button class="btn ghost small" type="button" data-module="ledger">查看账本</button></div>`:'';
     return `<section class="page color-plan">
       ${pageHead('每日计划',`${formatFullDate(today)}，把注意力留给真正重要的事。`)}
@@ -1300,14 +1523,14 @@
               <button class="btn span-12" type="submit">添加到今天</button>
             </div>
           </form>
-          <div class="list">${items.length?items.map(todo=>`<div class="todo-swipe" data-todo-swipe data-id="${todo.id}">
+          <div class="list">${items.length?items.map(todo=>{const goal=state.goals.items.find(x=>x.id===todo.goalId),kr=goal?.keyResults?.find(x=>x.id===todo.keyResultId);return `<div class="todo-swipe" data-todo-swipe data-id="${todo.id}">
             <div class="todo-swipe-underlay"><span class="todo-complete-cue">右滑完成</span><div class="todo-reveal-actions"><button class="todo-swipe-action defer" type="button" tabindex="-1" data-action="defer-todo" data-id="${todo.id}">明天</button><button class="todo-swipe-action delete" type="button" tabindex="-1" data-action="delete-todo" data-id="${todo.id}">删除</button></div></div>
             <div class="todo-swipe-content list-row ${todo.done?'completed':''}">
               <input class="check" type="checkbox" ${todo.done?'checked':''} data-action="toggle-todo" data-id="${todo.id}" aria-label="${todo.done?'标记未完成':'标记完成'}：${esc(todo.text)}">
-              <div class="row-main"><div class="row-title">${esc(todo.text)}</div><div class="row-meta"><span class="badge badge-${todo.priority}">${{high:'高优先级',medium:'中优先级',low:'低优先级'}[todo.priority]}</span></div></div><button class="icon-btn" type="button" data-action="defer-todo" data-id="${todo.id}" aria-label="延期到明天" title="延期到明天">→</button>
+              <div class="row-main"><div class="row-title">${esc(todo.text)}</div><div class="row-meta"><span class="badge badge-${todo.priority}">${{high:'高优先级',medium:'中优先级',low:'低优先级'}[todo.priority]}</span>${goal&&kr?`<span class="linked-goal">↗ ${esc(goal.title)} · +${todo.progressIncrement} ${esc(kr.unit)}</span>`:''}</div></div><button class="icon-btn" type="button" data-action="defer-todo" data-id="${todo.id}" aria-label="延期到明天" title="延期到明天">→</button>
               <button class="icon-btn" data-action="delete-todo" data-id="${todo.id}" aria-label="删除待办">×</button>
             </div>
-          </div>`).join(''):emptyState('✓','今天还没有计划','先添加一件最重要的事，让今天有一个清晰的起点。')}</div>
+          </div>`;}).join(''):emptyState('✓','今天还没有计划','先添加一件最重要的事，让今天有一个清晰的起点。')}</div>
         </div>
         <aside class="card card-pad">
           <h2 class="section-title">今日完成率</h2><p class="section-note">${items.length?'每一个小完成都在积累节奏。':'添加待办后，这里会显示进度。'}</p>
@@ -1322,6 +1545,7 @@
           </div>
         </aside>
       </div>
+      <article class="card card-pad daily-summary"><div class="section-head"><div><h2 class="section-title">自动每日小结</h2><p class="section-note">根据今天的待办、账本、运动、阅读和心情实时生成，无需手写复盘。</p></div><span class="badge badge-low">${formatDate(today)}</span></div><div class="daily-summary-grid"><div class="daily-summary-stat"><strong>${summary.todoDone}/${summary.todoTotal}</strong><span>完成待办</span></div><div class="daily-summary-stat"><strong>${money(summary.expense)}</strong><span>今日支出</span></div><div class="daily-summary-stat"><strong>${summary.minutes} 分钟</strong><span>运动</span></div><div class="daily-summary-stat"><strong>${summary.pages} 页</strong><span>阅读</span></div><div class="daily-summary-stat"><strong>${summary.moodScore?`${summary.moodEmoji} ${summary.moodScore}`:'—'}</strong><span>心情分数</span></div></div><p class="daily-summary-copy">${esc(summary.copy)}</p></article>
     </section>`;
   }
 
@@ -1329,29 +1553,41 @@
     const month=dateKey().slice(0,7);
     const monthly=state.ledger.entries.filter(x=>x.date.startsWith(month));
     const income=monthly.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0);
-    const expense=monthly.filter(x=>x.type==='expense').reduce((s,x)=>s+x.amount,0);
+    const expenses=monthly.filter(x=>x.type==='expense'),expense=expenses.reduce((s,x)=>s+x.amount,0);
+    const investment=expenses.filter(x=>x.isInvestment).reduce((s,x)=>s+x.amount,0),investmentRatio=expense?Math.round(investment/expense*100):0;
+    const limit=Number(state.settings.monthlyBudget)||0,remaining=limit-expense,ratio=limit?expense/limit:0;
+    const now=parseDay(dateKey()),daysRemaining=new Date(now.getFullYear(),now.getMonth()+1,0).getDate()-now.getDate()+1;
+    const dailySuggested=limit?Math.max(0,remaining/daysRemaining):0;
+    const categoryUsage=BUDGET_CATEGORIES.map(category=>{const categoryLimit=Number(state.settings.categoryBudgets?.[category])||0,spent=expenses.filter(x=>x.category===category).reduce((sum,x)=>sum+x.amount,0);return {category,limit:categoryLimit,spent,ratio:categoryLimit?spent/categoryLimit:0};}).filter(x=>x.limit>0);
+    const totalAlert=limit&&ratio>=.8?`<div class="system-alert ${ratio>=1?'danger':''}"><span aria-hidden="true">${ratio>=1?'!':'¥'}</span><strong>${ratio>=1?`本月总预算已超支 ${money(Math.abs(remaining))}`:`本月总预算已使用 ${Math.round(ratio*100)}%，请留意后续支出。`}</strong></div>`:'';
     const recent=[...state.ledger.entries].sort((a,b)=>b.date.localeCompare(a.date)||String(b.createdAt).localeCompare(String(a.createdAt))).slice(0,20);
     return `<section class="page color-ledger">
       ${pageHead('记账本',`${parseDay(dateKey()).getMonth()+1}月收支清晰可见，花钱更有分寸。`)}
+      ${totalAlert}
       <div class="summary-strip card">
-        <div class="metric"><div class="metric-label">本月收入</div><div class="metric-value money-income">${money(income)}</div><div class="metric-note">${monthly.filter(x=>x.type==='income').length} 笔收入</div></div>
-        <div class="metric"><div class="metric-label">本月支出</div><div class="metric-value money-expense">${money(expense)}</div><div class="metric-note">${monthly.filter(x=>x.type==='expense').length} 笔支出</div></div>
-        <div class="metric"><div class="metric-label">本月结余</div><div class="metric-value">${money(income-expense)}</div><div class="metric-note">收入减去支出</div></div>
+        <div class="metric"><div class="metric-label">本月支出</div><div class="metric-value money-expense">${money(expense)}</div><div class="metric-note">${expenses.length} 笔支出${limit?` · 预算 ${Math.round(ratio*100)}%`:''}</div></div>
+        <div class="metric"><div class="metric-label">每日建议可花</div><div class="metric-value">${limit?money(dailySuggested):'--'}</div><div class="metric-note">${limit?`剩余 ${daysRemaining} 天 · 预算余额 ${money(remaining)}`:'设置总预算后自动计算'}</div></div>
+        <div class="metric"><div class="metric-label">自我投资占比</div><div class="metric-value" style="color:var(--green)">${investmentRatio}%</div><div class="metric-note">投资 ${money(investment)} · 消费 ${money(expense-investment)}</div></div>
+      </div>
+      <div class="grid-two" style="margin-bottom:20px">
+        <form class="card card-pad" id="ledgerBudgetForm"><div class="section-head"><div><h2 class="section-title">预算设置</h2><p class="section-note">总预算用于计算每日建议额度，分类预算用于独立预警。</p></div></div><div class="field" style="margin-bottom:13px"><label for="ledgerMonthlyBudget">本月总预算</label><input class="input" id="ledgerMonthlyBudget" name="monthlyBudget" type="number" min="0" max="1000000000" step="0.01" value="${limit||''}" placeholder="例如 5000"></div><div class="budget-fields">${BUDGET_CATEGORIES.map(category=>`<div class="field"><label>${esc(category)}</label><input class="input" data-budget-category="${esc(category)}" type="number" min="0" max="1000000000" step="0.01" value="${state.settings.categoryBudgets?.[category]||''}" placeholder="不设置"></div>`).join('')}</div><button class="btn" type="submit" style="width:100%;margin-top:14px">保存预算</button></form>
+        <div class="card card-pad"><div class="section-head"><div><h2 class="section-title">分类预算进度</h2><p class="section-note">达到 80% 提醒，超过预算显示超支。</p></div></div>${categoryUsage.length?`<div class="budget-grid">${categoryUsage.map(x=>`<div class="budget-item ${x.ratio>=1?'over':x.ratio>=.8?'attention':''}"><div class="budget-item-head"><strong>${esc(x.category)}</strong><span>${Math.round(x.ratio*100)}%</span></div><div class="progress" role="progressbar" aria-label="${esc(x.category)}预算使用率" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.min(100,Math.round(x.ratio*100))}"><span style="width:${Math.min(100,x.ratio*100)}%"></span></div><div class="row-meta" style="margin-top:7px">${money(x.spent)} / ${money(x.limit)}${x.ratio>=1?` · 超支 ${money(x.spent-x.limit)}`:''}</div></div>`).join('')}</div>`:emptyState('¥','还没有分类预算','为餐饮、娱乐或学习等分类设置额度后，这里会显示进度。')}</div>
       </div>
       <form class="card card-pad" id="ledgerForm" style="margin-bottom:20px">
-        <div class="section-head"><div><h2 class="section-title">记一笔</h2><p class="section-note">金额会保留两位小数。</p></div></div>
+        <div class="section-head"><div><h2 class="section-title">记一笔</h2><p class="section-note">支出可以标记为自我投资，用于区分成长投入与日常消费。</p></div></div>
         <div class="form-row">
           <div class="field span-2"><label for="ledgerType">类型</label><select class="select" id="ledgerType" name="type"><option value="expense">支出</option><option value="income">收入</option></select></div>
           <div class="field span-2"><label for="ledgerAmount">金额</label><input class="input" id="ledgerAmount" name="amount" type="number" min="0.01" max="1000000000" step="0.01" required placeholder="0.00"></div>
           <div class="field span-2"><label for="ledgerCategory">分类</label><select class="select" id="ledgerCategory" name="category">${CATEGORIES.map(x=>`<option>${x}</option>`).join('')}</select></div>
-          <div class="field span-3"><label for="ledgerNote">备注</label><input class="input" id="ledgerNote" name="note" maxlength="200" placeholder="可选"></div>
+          <div class="field span-2"><label for="ledgerNote">备注</label><input class="input" id="ledgerNote" name="note" maxlength="200" placeholder="可选"></div>
           <div class="field span-2"><label for="ledgerDate">日期</label><input class="input" id="ledgerDate" name="date" type="date" value="${dateKey()}" required></div>
+          <label class="field span-1" style="justify-content:end"><span class="field-label">自我投资</span><input class="check" name="isInvestment" type="checkbox" value="1" aria-label="标记为自我投资"></label>
           <button class="btn span-1" type="submit">保存</button>
         </div>
       </form>
       <div class="grid-main-side">
         <div class="card card-pad"><div class="section-head"><div><h2 class="section-title">最近记录</h2><p class="section-note">显示最近 20 笔收支。</p></div></div>
-          <div class="list">${recent.length?recent.map(x=>`<div class="list-row"><div class="row-main"><div class="row-title">${esc(x.note||x.category)}</div><div class="row-meta">${esc(x.category)} · ${formatDate(x.date)}</div></div><strong class="${x.type==='income'?'money-income':'money-expense'}">${x.type==='income'?'+':'-'}${money(x.amount)}</strong><button class="icon-btn" data-action="delete-ledger" data-id="${x.id}" aria-label="删除记录">×</button></div>`).join(''):emptyState('¥','还没有收支记录','从记录第一笔开始，慢慢看见自己的消费习惯。')}</div>
+          <div class="list">${recent.length?recent.map(x=>`<div class="list-row"><div class="row-main"><div class="row-title">${esc(x.note||x.category)} ${x.isInvestment?'<span class="badge badge-low">自我投资</span>':''}</div><div class="row-meta">${esc(x.category)} · ${formatDate(x.date)}</div></div><strong class="${x.type==='income'?'money-income':'money-expense'}">${x.type==='income'?'+':'-'}${money(x.amount)}</strong><button class="icon-btn" data-action="delete-ledger" data-id="${x.id}" aria-label="删除记录">×</button></div>`).join(''):emptyState('¥','还没有收支记录','从记录第一笔开始，慢慢看见自己的消费习惯。')}</div>
         </div>
         <aside class="card card-pad"><div class="section-head"><div><h2 class="section-title">支出分类</h2><p class="section-note">本月各类支出占比。</p></div></div><div class="chart-wrap"><canvas id="ledgerChart" aria-label="本月支出分类图"></canvas><div class="chart-empty" id="ledgerChartEmpty" ${expense?'hidden':''}>本月还没有支出数据</div></div><div class="legend" id="ledgerLegend"></div></aside>
       </div>
@@ -1398,9 +1634,29 @@
     while(days.has(cursor)){count++;cursor=shiftDay(cursor,-1);} return count;
   }
 
+  function moodInsights(){
+    const entries=state.mood.entries.filter(x=>x.date>=shiftDay(dateKey(),-89)),byDate={};
+    entries.forEach(x=>(byDate[x.date]||(byDate[x.date]=[])).push(x.score));
+    const averageFor=date=>{const scores=byDate[date];return scores?.length?scores.reduce((sum,score)=>sum+score,0)/scores.length:null;};
+    const sportDates=[...new Set(entries.filter(x=>(x.tags||[]).includes('运动')).map(x=>x.date))];
+    const sportPairs=sportDates.map(date=>[averageFor(date),averageFor(shiftDay(date,-1))]).filter(pair=>pair.every(Number.isFinite));
+    const sportBetter=sportPairs.filter(([current,previous])=>current>previous).length;
+    const sleepNext=[...new Set(entries.filter(x=>(x.tags||[]).includes('熬夜')).map(x=>shiftDay(x.date,1)))].map(averageFor).filter(Number.isFinite);
+    const overall=entries.length?entries.reduce((sum,x)=>sum+x.score,0)/entries.length:null;
+    const sleepDelta=sleepNext.length&&overall!==null?sleepNext.reduce((sum,x)=>sum+x,0)/sleepNext.length-overall:null;
+    const tagStats=MOOD_TAGS.map(tag=>{const xs=entries.filter(x=>(x.tags||[]).includes(tag));return {tag,count:xs.length,average:xs.length?xs.reduce((sum,x)=>sum+x.score,0)/xs.length:0};}).filter(x=>x.count>=2).sort((a,b)=>b.average-a.average||b.count-a.count);
+    const positive=tagStats[0];
+    return [
+      {title:'运动后的变化',copy:sportPairs.length?`${sportPairs.length} 组可比较记录中，有 ${sportBetter} 次高于前一日，改善概率 ${Math.round(sportBetter/sportPairs.length*100)}%。`:'还需要“运动”标签与前一日心情记录，才能计算改善概率。'},
+      {title:'熬夜的次日影响',copy:sleepDelta===null?'还需要“熬夜”标签及次日心情记录，才能观察影响。':`熬夜后的次日心情平均比近 90 天均值${sleepDelta>=0?'高':'低'} ${Math.abs(sleepDelta).toFixed(1)} 分（${sleepNext.length} 个样本）。`},
+      {title:'高分关联因素',copy:positive?`#${positive.tag} 的平均心情为 ${positive.average.toFixed(1)} 分，共 ${positive.count} 条记录。`:'同一标签累计 2 条记录后，会显示与高分心情关联最强的因素。'}
+    ];
+  }
+
   function renderMood(){
     const recent=[...state.mood.entries].sort((a,b)=>b.date.localeCompare(a.date)||String(b.createdAt).localeCompare(String(a.createdAt))).slice(0,14);
     const moodDates=moodRange==='month'?monthDates():weekDates(),hasMood=state.mood.entries.some(x=>moodDates.includes(x.date));
+    const insights=moodInsights();
     return `<section class="page color-mood">
       ${pageHead('心情日记','给情绪一个名字，也给自己一点理解。')}
       <div class="grid-two">
@@ -1408,13 +1664,15 @@
           <div class="section-head"><div><h2 class="section-title">记录此刻</h2><p class="section-note">选择最贴近当前感受的表情。</p></div></div>
           <div class="mood-picker">${MOODS.map((m,i)=>`<div class="mood-option"><input type="radio" id="mood${i}" name="score" value="${m.score}" ${i===1?'checked':''}><label for="mood${i}" aria-label="${m.label}" title="${m.label}">${m.emoji}</label></div>`).join('')}</div>
           <div class="field" style="margin-top:16px"><label for="moodText">写下此刻的想法</label><textarea class="textarea" id="moodText" name="text" maxlength="5000" placeholder="发生了什么？你现在最需要什么？"></textarea></div>
+          <div class="field" style="margin-top:14px"><span class="field-label">可能的触发因素（可多选）</span><div class="tag-picker">${MOOD_TAGS.map((tag,i)=>`<span class="tag-choice"><input id="moodTag${i}" name="tags" type="checkbox" value="${esc(tag)}"><label for="moodTag${i}">#${esc(tag)}</label></span>`).join('')}</div></div>
           <div class="form-row" style="margin-top:12px"><div class="field span-6"><label for="moodDate">日期</label><input class="input" id="moodDate" name="date" type="date" value="${dateKey()}" required></div><button class="btn span-6" type="submit">保存心情</button></div>
         </form>
         <div class="card card-pad"><div class="section-head"><div><h2 class="section-title">${moodRange==='month'?'本月':'本周'}心情趋势</h2><p class="section-note">按每天记录的平均分展示，可悬停查看数据点。</p></div><div class="segmented"><button class="btn ghost small" type="button" data-action="mood-range" data-range="week" aria-pressed="${moodRange==='week'}">周</button><button class="btn ghost small" type="button" data-action="mood-range" data-range="month" aria-pressed="${moodRange==='month'}">月</button></div></div><div class="chart-wrap"><canvas id="moodChart" aria-label="${moodRange==='month'?'本月':'本周'}心情趋势图"></canvas><div class="chart-empty" id="moodChartEmpty" ${hasMood?'hidden':''}>${moodRange==='month'?'本月':'本周'}还没有心情记录</div></div></div>
       </div>
+      <div class="card card-pad" style="margin-top:20px"><div class="section-head"><div><h2 class="section-title">情绪标签洞察</h2><p class="section-note">基于最近 90 天的本地记录推算，样本越多越可靠。</p></div></div><div class="insight-grid">${insights.map(x=>`<div class="insight-item"><strong>${esc(x.title)}</strong><p>${esc(x.copy)}</p></div>`).join('')}</div></div>
       <div class="card card-pad" style="margin-top:20px"><div class="section-head"><div><h2 class="section-title">生活动态关联</h2><p class="section-note">运动、阅读和完成事项会自动出现在这里，帮助你回看情绪背景。</p></div></div><div class="list">${renderActivityList(5)}</div></div>
       <div class="card card-pad" style="margin-top:20px"><div class="section-head"><div><h2 class="section-title">最近日记</h2><p class="section-note">你的情绪会被认真保存在这台设备上。</p></div></div>
-        <div class="list">${recent.length?recent.map(x=>`<div class="list-row"><div style="font-size:27px" aria-label="${MOODS.find(m=>m.score===x.score)?.label||'心情'}">${x.emoji}</div><div class="row-main"><div class="row-title">${esc(x.text||'只记录了心情，没有写下文字。')}</div><div class="row-meta">${formatFullDate(x.date)}</div></div><button class="icon-btn" data-action="delete-mood" data-id="${x.id}" aria-label="删除心情日记">×</button></div>`).join(''):emptyState('心','还没有心情日记','不需要写很多，先选一个最贴近此刻的表情。')}</div>
+        <div class="list">${recent.length?recent.map(x=>`<div class="list-row"><div style="font-size:27px" aria-label="${MOODS.find(m=>m.score===x.score)?.label||'心情'}">${x.emoji}</div><div class="row-main"><div class="row-title">${esc(x.text||'只记录了心情，没有写下文字。')}</div><div class="row-meta">${formatFullDate(x.date)}${(x.tags||[]).length?` · ${(x.tags||[]).map(tag=>`<span class="mood-tag">#${esc(tag)}</span>`).join(' ')}`:''}</div></div><button class="icon-btn" data-action="delete-mood" data-id="${x.id}" aria-label="删除心情日记">×</button></div>`).join(''):emptyState('心','还没有心情日记','不需要写很多，先选一个最贴近此刻的表情。')}</div>
       </div>
     </section>`;
   }
@@ -1448,13 +1706,14 @@
   }
 
   function habitStreak(habit){
-    const days=new Set(habit.dates||[]);let cursor=days.has(dateKey())?dateKey():shiftDay(dateKey(),-1),count=0;
-    while(days.has(cursor)){count++;cursor=shiftDay(cursor,-1);}return count;
+    const days=new Set(habit.dates||[]),leave=new Set(habit.leaveDates||[]),active=new Set([...days,...leave]);
+    let cursor=active.has(dateKey())?dateKey():shiftDay(dateKey(),-1),count=0;
+    while(active.has(cursor)){if(days.has(cursor))count++;cursor=shiftDay(cursor,-1);}return count;
   }
 
   function renderHabits(){
     const dates=weekDates(),today=dateKey(),items=state.habits.items;
-    return `<div class="card card-pad" style="margin-bottom:20px"><div class="section-head"><div><h2 class="section-title">本周习惯矩阵</h2><p class="section-note">点击日期完成或取消打卡，连续记录会自动累计。</p></div></div><form class="inline-form" id="habitForm" style="margin:0 0 18px"><input class="input" name="name" maxlength="80" required placeholder="例如：早起、喝水、冥想"><button class="btn small" type="submit">添加习惯</button></form>${items.length?`<div class="habit-matrix"><span></span>${dates.map((d,i)=>`<span class="habit-day-label">${WEEK_NAMES[i]}<br>${parseDay(d).getDate()}</span>`).join('')}<span class="habit-day-label">连续</span>${items.map(h=>`<span class="habit-name" title="${esc(h.name)}">${esc(h.name)}</span>${dates.map(d=>{const done=h.dates.includes(d),future=d>today;return `<button class="habit-check ${done?'done':''}" type="button" data-action="toggle-habit" data-id="${h.id}" data-date="${d}" aria-pressed="${done}" aria-label="${esc(h.name)} ${formatDate(d)}${done?'已打卡':'未打卡'}" ${future?'disabled':''}>${done?'✓':d===today?'·':'○'}</button>`;}).join('')}<button class="habit-streak" type="button" data-action="delete-habit" data-id="${h.id}" title="删除习惯">${habitStreak(h)}天<br>×</button>`).join('')}</div>`:emptyState('行','还没有习惯','添加一个每天都值得重复的小行动。')}</div>`;
+    return `<div class="card card-pad" style="margin-bottom:20px"><div class="section-head"><div><h2 class="section-title">本周习惯矩阵</h2><p class="section-note">单击循环“打卡 → 请假 → 清除”；过去日期的打卡会记为补签，请假不会中断连续天数。</p></div></div><form class="inline-form" id="habitForm" style="margin:0 0 18px"><input class="input" name="name" maxlength="80" required placeholder="例如：早起、喝水、冥想"><button class="btn small" type="submit">添加习惯</button></form>${items.length?`<div class="habit-matrix"><span></span>${dates.map((d,i)=>`<span class="habit-day-label">${WEEK_NAMES[i]}<br>${parseDay(d).getDate()}</span>`).join('')}<span class="habit-day-label">连续</span>${items.map(h=>`<span class="habit-name" title="${esc(h.name)}">${esc(h.name)}</span>${dates.map(d=>{const done=(h.dates||[]).includes(d),leave=(h.leaveDates||[]).includes(d),makeup=done&&(h.makeupDates||[]).includes(d),future=d>today,status=done?(makeup?'已补签':'已打卡'):leave?'已请假':'未记录';return `<button class="habit-check ${done?'done':''} ${makeup?'makeup':''} ${leave?'leave':''}" type="button" data-action="cycle-habit" data-id="${h.id}" data-date="${d}" aria-label="${esc(h.name)} ${formatDate(d)}${status}" title="${status}${future?'':'；点击切换状态'}" ${future?'disabled':''}>${makeup?'补':done?'✓':leave?'假':d===today?'·':'○'}</button>`;}).join('')}<button class="habit-streak" type="button" data-action="delete-habit" data-id="${h.id}" title="删除习惯">${habitStreak(h)}天<br>×</button>`).join('')}</div><div class="habit-legend"><span><i></i>正常打卡</span><span><i class="makeup-key"></i>补签</span><span><i class="leave-key"></i>请假（不断链、不计天数）</span></div>`:emptyState('行','还没有习惯','添加一个每天都值得重复的小行动。')}</div>`;
   }
 
   function renderTravel(){
@@ -1495,7 +1754,7 @@
   }
 
   function renderEnglish(){
-    const today=dateKey(), words=[...state.english.words].sort((a,b)=>String(b.createdAt).localeCompare(String(a.createdAt)));
+    const today=dateKey(), words=[...state.english.words].sort((a,b)=>Number(a.nextReviewDate>today)-Number(b.nextReviewDate>today)||a.nextReviewDate.localeCompare(b.nextReviewDate)||String(b.createdAt).localeCompare(String(a.createdAt)));
     const todayIds=new Set(state.english.studyLogs.filter(x=>x.date===today).map(x=>x.wordId));
     const due=words.filter(x=>!x.mastered&&x.nextReviewDate<=today).length, goal=state.settings.dailyWordGoal;
     return `<section class="page color-english">
@@ -1509,8 +1768,8 @@
         <form class="card card-pad" id="wordForm"><div class="section-head"><div><h2 class="section-title">添加单词</h2><p class="section-note">英文与释义必填，音标可选。</p></div></div><div class="form-row"><div class="field span-4"><label for="wordName">英文</label><input class="input" id="wordName" name="word" maxlength="100" required placeholder="serendipity"></div><div class="field span-3"><label for="wordPhonetic">音标</label><input class="input" id="wordPhonetic" name="phonetic" maxlength="100" placeholder="/ˌserənˈdɪpəti/"></div><div class="field span-5 mobile-wide"><label for="wordMeaning">中文释义</label><input class="input" id="wordMeaning" name="meaning" maxlength="500" required placeholder="意外发现美好事物的能力"></div><button class="btn span-12" type="submit">加入词库</button></div></form>
         <div class="card card-pad"><div class="section-head"><div><h2 class="section-title">本周学习趋势</h2><p class="section-note">按每天接触的不重复单词统计。</p></div><form id="goalForm" class="inline-form" style="margin-top:0"><input class="input" name="goal" type="number" min="1" max="200" value="${goal}" aria-label="每日单词目标" style="width:84px"><button class="btn small secondary" type="submit">设目标</button></form></div><div class="chart-wrap"><canvas id="englishChart" aria-label="本周英语学习趋势图"></canvas></div></div>
       </div>
-      <div class="section-head"><div><h2 class="section-title">单词卡片</h2><p class="section-note">点击卡片翻转；待复习单词翻到背面时会记为一次复习。</p></div></div>
-      <div class="word-grid">${words.length?words.map(x=>`<article class="word-card"><button class="word-flip" data-action="flip-word" data-id="${x.id}" aria-label="翻转单词 ${esc(x.word)}" aria-pressed="false"><span class="word-card-inner"><span class="word-face word-front"><span class="word-hint">点击查看释义</span><span class="word-name">${esc(x.word)}</span><span class="phonetic">${esc(x.phonetic||'未填写音标')}</span></span><span class="word-face word-back"><span class="word-hint">${x.nextReviewDate<=today&&!x.mastered?'本次翻转将完成复习':'下次复习 '+formatDate(x.nextReviewDate)}</span><span class="meaning">${esc(x.meaning)}</span><span class="row-meta">已复习 ${x.reviewCount||0} 次</span></span></span></button><button class="icon-btn word-delete" data-action="delete-word" data-id="${x.id}" aria-label="删除单词">×</button></article>`).join(''):emptyState('Aa','词库还是空的','添加一个今天想记住的单词，然后点击卡片查看释义。')}</div>
+      <div class="section-head"><div><h2 class="section-title">单词卡片</h2><p class="section-note">翻卡只查看释义；到期后选择“简单、模糊、忘记”，系统才会动态安排下次复习。</p></div></div>
+      <div class="word-grid">${words.length?words.map(x=>{const isDue=!x.mastered&&x.nextReviewDate<=today;return `<article class="word-card"><button class="word-flip" data-action="flip-word" data-id="${x.id}" aria-label="翻转单词 ${esc(x.word)}" aria-pressed="false"><span class="word-card-inner"><span class="word-face word-front"><span class="word-hint">${isDue?'今天待复习':'点击查看释义'}</span><span class="word-name">${esc(x.word)}</span><span class="phonetic">${esc(x.phonetic||'未填写音标')}</span></span><span class="word-face word-back"><span class="word-hint">${isDue?'看完释义后，在下方选择掌握程度':'下次复习 '+formatDate(x.nextReviewDate)}</span><span class="meaning">${esc(x.meaning)}</span><span class="row-meta">已复习 ${x.reviewCount||0} 次 · 当前间隔 ${x.intervalDays||1} 天</span></span></span></button>${isDue?`<div class="word-review-actions" role="group" aria-label="${esc(x.word)} 掌握程度"><button class="btn ghost small" type="button" data-action="review-word" data-rating="forgot" data-id="${x.id}">忘记</button><button class="btn secondary small" type="button" data-action="review-word" data-rating="fuzzy" data-id="${x.id}">模糊</button><button class="btn small" type="button" data-action="review-word" data-rating="easy" data-id="${x.id}">简单</button></div>`:`<div class="word-schedule">下次复习：${formatDate(x.nextReviewDate)} · 难度系数 ${(x.easeFactor||2.5).toFixed(2)}</div>`}<button class="icon-btn word-delete" data-action="delete-word" data-id="${x.id}" aria-label="删除单词">×</button></article>`;}).join(''):emptyState('Aa','词库还是空的','添加一个今天想记住的单词，然后点击卡片查看释义。')}</div>
     </section>`;
   }
 
@@ -1691,7 +1950,7 @@
     if(gesture.moved)suppressTodoClickUntil=Date.now()+350;
     if(!cancelled&&gesture.baseX===0&&x>=72){
       const itemId=gesture.row.dataset.id,todo=state.daily.todos.find(item=>item.id===itemId);
-      if(todo&&!todo.done){haptic([12,24,18]);return mutate(s=>{const item=s.daily.todos.find(x=>x.id===itemId);if(item){item.done=true;item.completedAt=nowIso();}},{message:'已右滑完成一项计划。'});}
+      if(todo&&!todo.done){haptic([12,24,18]);return mutate(s=>setTodoDone(s,itemId,true),{message:todo.goalId?'已完成计划，目标进度已同步。':'已右滑完成一项计划。'});}
     }
     if(!cancelled&&(x<=-58||(gesture.baseX<0&&x<-72)))return settleTodoSwipe(gesture.row,-144);
     settleTodoSwipe(gesture.row,0);
@@ -1710,14 +1969,15 @@
     if(!title||!validDate(deadline)){toast('请填写目标标题和有效的截止日期。');return;}
     if(!Object.hasOwn(GOAL_STATUSES,status)) status='active';
     if(status==='completed'||progress===100){status='completed';progress=100;}
-    const level=Object.hasOwn(GOAL_LEVELS,fd.get('level'))?fd.get('level'):'long';
+    const level=Object.hasOwn(GOAL_LEVELS,fd.get('level'))?fd.get('level'):'long',framework=fd.get('framework')==='smart'?'smart':'okr';
     const parentId=state.goals.items.some(x=>x.id===fd.get('parentId'))?String(fd.get('parentId')):null;
-    mutate(s=>s.goals.items.push({id:id(),title,level,parentId,deadline,progress,status,createdAt:nowIso(),updatedAt:nowIso()}),{message:'目标已添加。'});
+    mutate(s=>s.goals.items.push({id:id(),title,framework,level,parentId,deadline,progress,status,keyResults:[],archivedAt:null,createdAt:nowIso(),updatedAt:nowIso()}),{message:'目标已添加，现在可以继续拆解。'});
   }
   function addLedger(form){
     const fd=new FormData(form),amount=Number(fd.get('amount')),date=String(fd.get('date'));
     if(!Number.isFinite(amount)||amount<=0||!validDate(date)){toast('请检查金额与日期。');return;}
-    mutate(s=>s.ledger.entries.push({id:id(),type:fd.get('type')==='income'?'income':'expense',amount:Number(amount.toFixed(2)),category:CATEGORIES.includes(fd.get('category'))?fd.get('category'):'其他',note:String(fd.get('note')||'').trim().slice(0,200),date,createdAt:nowIso()}),{message:'这笔收支已保存。'});
+    const type=fd.get('type')==='income'?'income':'expense';
+    mutate(s=>s.ledger.entries.push({id:id(),type,amount:Number(amount.toFixed(2)),category:CATEGORIES.includes(fd.get('category'))?fd.get('category'):'其他',note:String(fd.get('note')||'').trim().slice(0,200),isInvestment:type==='expense'&&fd.get('isInvestment')==='1',date,createdAt:nowIso()}),{message:'这笔收支已保存。'});
   }
   function addWorkout(form){
     const fd=new FormData(form),minutes=Math.round(Number(fd.get('minutes'))),calories=Math.max(0,Math.round(Number(fd.get('calories'))||0)),date=String(fd.get('date'));
@@ -1726,7 +1986,8 @@
   }
   function addMood(form){
     const fd=new FormData(form),score=Number(fd.get('score')),m=MOODS.find(x=>x.score===score),date=String(fd.get('date'));if(!m||!validDate(date)){toast('请选择心情和有效日期。');return;}
-    mutate(s=>s.mood.entries.push({id:id(),emoji:m.emoji,score,text:String(fd.get('text')||'').trim().slice(0,5000),date,createdAt:nowIso()}),{message:'此刻的心情已保存。'});
+    const tags=[...new Set(fd.getAll('tags').filter(tag=>MOOD_TAGS.includes(tag)))];
+    mutate(s=>s.mood.entries.push({id:id(),emoji:m.emoji,score,text:String(fd.get('text')||'').trim().slice(0,5000),tags,date,createdAt:nowIso()}),{message:'此刻的心情已保存。'});
   }
   function addBook(form){
     const fd=new FormData(form),title=String(fd.get('title')||'').trim(),totalPages=Math.round(Number(fd.get('totalPages')));if(!title||totalPages<1){toast('请填写书名和有效页数。');return;}
@@ -1741,7 +2002,7 @@
   function addWord(form){
     const fd=new FormData(form),word=String(fd.get('word')||'').trim(),meaning=String(fd.get('meaning')||'').trim();if(!word||!meaning){toast('请填写英文和中文释义。');return;}
     if(state.english.words.some(x=>x.word.toLowerCase()===word.toLowerCase())){toast('这个单词已在词库中。');return;}
-    const wordId=id(),today=dateKey();mutate(s=>{s.english.words.push({id:wordId,word,phonetic:String(fd.get('phonetic')||'').trim(),meaning,createdAt:nowIso(),lastReviewedAt:null,nextReviewDate:shiftDay(today,1),reviewCount:0,mastered:false});s.english.studyLogs.push({id:id(),wordId,date:today,action:'learn',createdAt:nowIso()});},{message:'单词已加入今日学习。'});
+    const wordId=id(),today=dateKey();mutate(s=>{s.english.words.push({id:wordId,word,phonetic:String(fd.get('phonetic')||'').trim().slice(0,100),meaning:meaning.slice(0,500),createdAt:nowIso(),lastReviewedAt:null,nextReviewDate:shiftDay(today,1),reviewCount:0,lapseCount:0,intervalDays:1,easeFactor:2.5,mastered:false});s.english.studyLogs.push({id:id(),wordId,date:today,action:'learn',rating:null,createdAt:nowIso()});},{message:'单词已加入今日学习。'});
   }
 
   document.addEventListener('submit',event=>{
@@ -1756,12 +2017,23 @@
     if(form.id==='objectiveForm') return addGoal(form);
     if(form.id==='habitForm'){
       const name=String(new FormData(form).get('name')||'').trim();if(!name)return;
-      return mutate(s=>s.habits.items.push({id:id(),name,dates:[],createdAt:nowIso()}),{message:'习惯已添加。'});
+      return mutate(s=>s.habits.items.push({id:id(),name,dates:[],leaveDates:[],makeupDates:[],createdAt:nowIso()}),{message:'习惯已添加。'});
     }
     if(form.id==='budgetForm'){
       const budget=Number(new FormData(form).get('budget'));
       if(!Number.isFinite(budget)||budget<0||budget>1e9) return toast('请输入有效的月度预算。');
       return mutate(s=>s.settings.monthlyBudget=Number(budget.toFixed(2)),{message:budget?'本月预算已更新。':'已清除月度预算。'});
+    }
+    if(form.id==='ledgerBudgetForm'){
+      const total=Number(new FormData(form).get('monthlyBudget'));
+      if(!Number.isFinite(total)||total<0||total>1e9)return toast('请输入有效的总预算。');
+      const categoryBudgets={};
+      for(const input of form.querySelectorAll('[data-budget-category]')){
+        const category=input.dataset.budgetCategory,value=Number(input.value||0);
+        if(!BUDGET_CATEGORIES.includes(category)||!Number.isFinite(value)||value<0||value>1e9)return toast('请检查分类预算金额。');
+        if(value>0)categoryBudgets[category]=Number(value.toFixed(2));
+      }
+      return mutate(s=>{s.settings.monthlyBudget=Number(total.toFixed(2));s.settings.categoryBudgets=categoryBudgets;},{message:'总预算和分类预算已保存。'});
     }
     if(form.id==='ledgerForm') return addLedger(form);
     if(form.id==='fitnessForm') return addWorkout(form);
@@ -1774,12 +2046,23 @@
       return mutate(s=>s.settings.dailyWordGoal=goal,{message:`每日目标已设为 ${goal} 个单词。`,undo:false});
     }
     const kind=form.dataset.form,itemId=form.dataset.id,fd=new FormData(form);
+    if(kind==='kr-add'){
+      const goal=state.goals.items.find(x=>x.id===itemId),title=String(fd.get('title')||'').trim();if(!goal||goal.archivedAt||!title)return;
+      const krKind=fd.get('kind')==='todo'?'todo':'kr';let target=Number(fd.get('target')),increment=Number(fd.get('increment')),unit=String(fd.get('unit')||'').trim().slice(0,20);
+      if(krKind==='todo'&&target===100&&increment===10&&unit==='%'){target=1;increment=1;unit='项';}
+      if(!Number.isFinite(target)||target<=0||target>1e9||!Number.isFinite(increment)||increment<=0||increment>target)return toast('请检查目标值和单次推进量。');
+      return mutate(s=>{const x=s.goals.items.find(x=>x.id===itemId);x.keyResults=x.keyResults||[];x.keyResults.push({id:id(),title:title.slice(0,200),kind:krKind,target,current:0,increment,unit:unit||(krKind==='todo'?'项':'%'),completed:false,createdAt:nowIso(),updatedAt:nowIso()});recalculateGoal(x);},{message:'拆解项已添加，可一键同步到今日计划。'});
+    }
+    if(kind==='kr-update'){
+      const goalId=form.dataset.goalId,goal=state.goals.items.find(x=>x.id===goalId),kr=goal?.keyResults?.find(x=>x.id===itemId),current=Number(fd.get('current'));if(!goal||!kr||!Number.isFinite(current)||current<0||current>kr.target)return toast('请输入有效的当前进度。');
+      return mutate(s=>{const x=s.goals.items.find(x=>x.id===goalId),item=x.keyResults.find(x=>x.id===itemId);item.current=current;item.completed=current>=item.target;item.updatedAt=nowIso();recalculateGoal(x);},{message:'关键结果进度已校准。'});
+    }
     if(kind==='goal-update'){
       const goal=state.goals.items.find(x=>x.id===itemId);if(!goal)return;
-      let progress=clamp(Math.round(Number(fd.get('progress'))||0),0,100),status=String(fd.get('status'));
+      let progress=goal.keyResults?.length?goal.progress:clamp(Math.round(Number(fd.get('progress'))||0),0,100),status=String(fd.get('status'));
       if(!Object.hasOwn(GOAL_STATUSES,status))status='active';
       if(status==='completed'||progress===100){status='completed';progress=100;}
-      return mutate(s=>{const x=s.goals.items.find(x=>x.id===itemId);x.progress=progress;x.status=status;x.updatedAt=nowIso();},{message:'目标进度已更新。'});
+      return mutate(s=>{const x=s.goals.items.find(x=>x.id===itemId);if(x.keyResults?.length&&status==='completed'){x.keyResults.forEach(kr=>{kr.current=kr.target;kr.completed=true;kr.updatedAt=nowIso();});recalculateGoal(x);}else{x.progress=progress;x.status=status;x.updatedAt=nowIso();}},{message:'目标进度已更新。'});
     }
     if(kind==='book-progress'){
       const book=state.reading.books.find(x=>x.id===itemId); if(!book)return;
@@ -1817,18 +2100,48 @@
     if(!event.target.closest('.todo-swipe'))closeTodoSwipes();
     const el=event.target.closest('[data-action]'); if(!el)return;
     const action=el.dataset.action,itemId=el.dataset.id,tripId=el.dataset.tripId,bookId=el.dataset.bookId;
+    if(action==='export-backup') return exportData();
+    if(action==='ai-deep-analysis') return openAnalysis('ai');
+    if(action==='analysis-overview') return openAnalysis('overview');
     if(action==='open-todo-sheet') return openTodoSheet();
+    if(action==='goal-view'){goalArchiveView=el.dataset.view==='archived';render();return;}
     if(action==='mood-range'){moodRange=el.dataset.range==='month'?'month':'week';localStorage.setItem('lifeWorkbench.moodRange',moodRange);render();return;}
     if(action==='toggle-todo'){
       if(el.checked)haptic(12);
-      return mutate(s=>{const x=s.daily.todos.find(x=>x.id===itemId);if(x){x.done=el.checked;x.completedAt=x.done?nowIso():null;}},{message:el.checked?'已完成一项计划。':'已恢复为待完成。'});
+      const linked=Boolean(state.daily.todos.find(x=>x.id===itemId)?.goalId);
+      return mutate(s=>setTodoDone(s,itemId,el.checked),{message:linked?(el.checked?'已完成计划，目标进度已同步。':'已恢复计划，目标进度已回退。'):(el.checked?'已完成一项计划。':'已恢复为待完成。')});
     }
     if(action==='defer-todo'){
       haptic(10);
-      return mutate(s=>{const x=s.daily.todos.find(x=>x.id===itemId);if(x){x.date=shiftDay(x.date||dateKey(),1);x.done=false;x.completedAt=null;}},{message:'待办已延期到明天。'});
+      return mutate(s=>{const x=s.daily.todos.find(x=>x.id===itemId);if(x){if(x.done)setTodoDone(s,itemId,false);x.date=shiftDay(x.date||dateKey(),1);}},{message:'待办已延期到明天。'});
     }
-    if(action==='delete-todo') return mutate(s=>removeOneById(s.daily.todos,itemId),{message:'待办已删除。'});
-    if(action==='delete-goal') return mutate(s=>{removeOneById(s.goals.items,itemId);s.goals.items.forEach(x=>{if(x.parentId===itemId)x.parentId=null;});},{message:'目标已删除。'});
+    if(action==='delete-todo'){
+      const linked=Boolean(state.daily.todos.find(x=>x.id===itemId)?.goalId);
+      return mutate(s=>{const todo=s.daily.todos.find(x=>x.id===itemId);if(todo?.done&&todo.krApplied)setTodoDone(s,itemId,false);removeOneById(s.daily.todos,itemId);},{message:linked?'待办已删除，关联目标进度已回退。':'待办已删除。'});
+    }
+    if(action==='sync-kr'){
+      const goalId=el.dataset.goalId,goal=state.goals.items.find(x=>x.id===goalId),kr=goal?.keyResults?.find(x=>x.id===itemId),today=dateKey();if(!goal||!kr||goal.archivedAt||goal.status==='paused'||kr.completed)return;
+      if(state.daily.todos.some(x=>x.date===today&&x.keyResultId===itemId))return toast('这项拆解今天已经同步过了。');
+      return mutate(s=>s.daily.todos.push({id:id(),text:kr.title,priority:'medium',date:today,done:false,createdAt:nowIso(),completedAt:null,goalId, keyResultId:itemId,progressIncrement:Math.min(kr.increment,kr.target-kr.current),krApplied:false}),{message:'已同步到今日计划。'});
+    }
+    if(action==='archive-goal'){
+      const goal=state.goals.items.find(x=>x.id===itemId);if(!goal||goal.status!=='completed')return toast('完成目标后才能归档。');
+      return mutate(s=>{const x=s.goals.items.find(x=>x.id===itemId);x.archivedAt=nowIso();x.status='completed';x.progress=100;x.updatedAt=nowIso();},{message:'目标已归档。'});
+    }
+    if(action==='restore-goal') return mutate(s=>{const x=s.goals.items.find(x=>x.id===itemId);if(x){x.archivedAt=null;x.updatedAt=nowIso();}},{message:'目标已恢复到当前列表。'});
+    if(action==='delete-kr'){
+      const goalId=el.dataset.goalId;
+      return mutate(s=>{const goal=s.goals.items.find(x=>x.id===goalId);if(!goal)return;goal.keyResults=goal.keyResults.filter(x=>x.id!==itemId);s.daily.todos.forEach(todo=>{if(todo.keyResultId===itemId){todo.goalId=null;todo.keyResultId=null;todo.progressIncrement=null;todo.krApplied=false;}});if(goal.keyResults.length)recalculateGoal(goal);else{goal.progress=0;if(goal.status==='completed')goal.status='active';goal.updatedAt=nowIso();}},{message:'拆解项已删除，已同步的待办会保留为普通待办。'});
+    }
+    if(action==='delete-goal') return mutate(s=>{removeOneById(s.goals.items,itemId);s.goals.items.forEach(x=>{if(x.parentId===itemId)x.parentId=null;});s.daily.todos.forEach(todo=>{if(todo.goalId===itemId){todo.goalId=null;todo.keyResultId=null;todo.progressIncrement=null;todo.krApplied=false;}});},{message:'目标已删除，关联待办已保留。'});
+    if(action==='cycle-habit'){
+      const habitDate=el.dataset.date;if(!validDate(habitDate)||habitDate>dateKey())return;
+      haptic(10);
+      const habit=state.habits.items.find(x=>x.id===itemId);if(!habit)return;
+      const done=(habit.dates||[]).includes(habitDate),leave=(habit.leaveDates||[]).includes(habitDate);
+      const nextStatus=!done&&!leave?(habitDate<dateKey()?'补签':'打卡'):done?'请假':'清除';
+      return mutate(s=>{const item=s.habits.items.find(x=>x.id===itemId);if(!item)return;item.leaveDates=item.leaveDates||[];item.makeupDates=item.makeupDates||[];item.dates=item.dates||[];item.dates=item.dates.filter(d=>d!==habitDate);item.leaveDates=item.leaveDates.filter(d=>d!==habitDate);item.makeupDates=item.makeupDates.filter(d=>d!==habitDate);if(!done&&!leave){item.dates.push(habitDate);if(habitDate<dateKey())item.makeupDates.push(habitDate);}else if(done)item.leaveDates.push(habitDate);},{message:`习惯状态已更新为${nextStatus}。`});
+    }
     if(action==='toggle-habit'){
       const habitDate=el.dataset.date;if(!validDate(habitDate))return;
       haptic(10);
@@ -1856,6 +2169,7 @@
       event.stopPropagation();
       return mutate(s=>{s.english.words=s.english.words.filter(x=>x.id!==itemId);s.english.studyLogs=s.english.studyLogs.filter(x=>x.wordId!==itemId);},{message:'单词已删除。'});
     }
+    if(action==='review-word')return reviewWord(itemId,el.dataset.rating);
     if(action==='flip-word') return flipWord(el,itemId);
   });
 
@@ -1876,11 +2190,19 @@
 
   function flipWord(card,wordId){
     const flipped=!card.classList.contains('flipped');card.classList.toggle('flipped',flipped);card.setAttribute('aria-pressed',String(flipped));
-    if(!flipped)return;
+  }
+
+  function reviewWord(wordId,rating){
+    if(!['easy','fuzzy','forgot'].includes(rating))return;
     const word=state.english.words.find(x=>x.id===wordId),today=dateKey();if(!word||word.mastered||word.nextReviewDate>today)return;
-    const already=state.english.studyLogs.some(x=>x.wordId===wordId&&x.date===today&&x.action==='review');if(already)return;
-    const intervals=[1,3,7,14,30],nextCount=(word.reviewCount||0)+1,nextDate=shiftDay(today,intervals[Math.min(nextCount-1,intervals.length-1)]);
-    mutate(s=>{const item=s.english.words.find(x=>x.id===wordId);item.reviewCount=nextCount;item.lastReviewedAt=nowIso();item.nextReviewDate=nextDate;s.english.studyLogs.push({id:id(),wordId,date:today,action:'review',createdAt:nowIso()});},{message:`已复习 ${word.word}，下次在 ${formatDate(nextDate)}。`});
+    const currentInterval=clamp(Math.round(Number(word.intervalDays)||1),1,3650),currentEase=clamp(Number(word.easeFactor)||2.5,1.3,3);
+    let intervalDays,easeFactor=currentEase;
+    if(rating==='forgot'){intervalDays=1;easeFactor=Math.max(1.3,currentEase-.2);}
+    else if(rating==='fuzzy'){intervalDays=currentInterval<=1?2:Math.max(2,Math.round(currentInterval*1.5));easeFactor=Math.max(1.3,currentEase-.05);}
+    else {intervalDays=(word.reviewCount||0)===0?3:(word.reviewCount||0)===1?7:Math.max(3,Math.round(currentInterval*currentEase));easeFactor=Math.min(3,currentEase+.1);}
+    intervalDays=clamp(intervalDays,1,3650);
+    const nextDate=shiftDay(today,intervalDays),ratingLabel={easy:'简单',fuzzy:'模糊',forgot:'忘记'}[rating];
+    mutate(s=>{const item=s.english.words.find(x=>x.id===wordId);if(!item)return;item.reviewCount=(item.reviewCount||0)+1;item.lapseCount=(item.lapseCount||0)+(rating==='forgot'?1:0);item.intervalDays=intervalDays;item.easeFactor=Number(easeFactor.toFixed(2));item.lastReviewedAt=nowIso();item.nextReviewDate=nextDate;item.mastered=false;s.english.studyLogs.push({id:id(),wordId,date:today,action:'review',rating,intervalDays,createdAt:nowIso()});},{message:`${word.word} 标记为“${ratingLabel}”，下次在 ${formatDate(nextDate)}复习。`});
   }
 
   function exportData(){
@@ -1913,14 +2235,14 @@
     const text=normalizeChinese(raw),today=dateKey();if(!text)return {error:'先输入一句想记录的内容。'};
     const ledgerCommand=text.match(/^(记账|支出|收入)\s*(?:¥|￥)?\s*(\d+(?:\.\d{1,2})?)\s*(?:元|块)?\s*(.*)$/i);
     if(ledgerCommand){
-      const type=ledgerCommand[1]==='收入'?'income':'expense',amount=Number(ledgerCommand[2]),note=ledgerCommand[3].trim(),category=inferCategory(note||text);
+      const type=ledgerCommand[1]==='收入'?'income':'expense',amount=Number(ledgerCommand[2]),note=ledgerCommand[3].trim(),category=inferCategory(note||text),isInvestment=type==='expense'&&/自我投资|买书|报课|课程|培训/.test(note);
       if(!Number.isFinite(amount)||amount<=0)return {error:'金额需要大于 0，例如“记账 30 晚餐”。'};
-      return {message:`已记录${type==='income'?'收入':'支出'} ${money(amount)}，分类为${category}。`,module:'ledger',apply:s=>s.ledger.entries.push({id:id(),type,amount:Number(amount.toFixed(2)),category,note:note||category,date:today,createdAt:nowIso()})};
+      return {message:`已记录${type==='income'?'收入':'支出'} ${money(amount)}，分类为${category}${isInvestment?'，并标记为自我投资':''}。`,module:'ledger',apply:s=>s.ledger.entries.push({id:id(),type,amount:Number(amount.toFixed(2)),category,note:note||category,isInvestment,date:today,createdAt:nowIso()})};
     }
     const moodCommand=text.match(/^心情\s*([1-6])(?:\s*分)?\s*(.*)$/);
     if(moodCommand){
       const score=Number(moodCommand[1]),m=MOODS.find(x=>x.score===score),note=moodCommand[2].trim();
-      return {message:`已记录今天的心情 ${m.emoji}（${score} 分）。`,module:'mood',apply:s=>s.mood.entries.push({id:id(),emoji:m.emoji,score,text:note,date:today,createdAt:nowIso()})};
+      return {message:`已记录今天的心情 ${m.emoji}（${score} 分）。`,module:'mood',apply:s=>s.mood.entries.push({id:id(),emoji:m.emoji,score,text:note,tags:[],date:today,createdAt:nowIso()})};
     }
     const todoCommand=text.match(/^(?:待办|提醒我|记得|今天要|计划)\s*[:：]?\s*(.+)$/);
     if(todoCommand){
@@ -1934,9 +2256,9 @@
     }
     const amountMatch=text.match(/(?:¥|￥)?\s*(\d+(?:\.\d{1,2})?)\s*(?:元|块|rmb|人民币)?/i);
     if(amountMatch&&/(花了|支出|消费|付款|买了|花费|收入|赚了|到账|工资|奖金|收了)/.test(text)){
-      const amount=Number(amountMatch[1]),type=/(收入|赚了|到账|工资|奖金|收了)/.test(text)?'income':'expense',category=inferCategory(text);
+      const amount=Number(amountMatch[1]),type=/(收入|赚了|到账|工资|奖金|收了)/.test(text)?'income':'expense',category=inferCategory(text),isInvestment=type==='expense'&&/自我投资|买书|报课|课程|培训/.test(text);
       if(amount<=0)return {error:'金额需要大于 0。'};
-      return {message:`已记录${type==='income'?'收入':'支出'} ${money(amount)}，分类为${category}。`,module:'ledger',apply:s=>s.ledger.entries.push({id:id(),type,amount:Number(amount.toFixed(2)),category,note:text,date:today,createdAt:nowIso()})};
+      return {message:`已记录${type==='income'?'收入':'支出'} ${money(amount)}，分类为${category}${isInvestment?'，并标记为自我投资':''}。`,module:'ledger',apply:s=>s.ledger.entries.push({id:id(),type,amount:Number(amount.toFixed(2)),category,note:text,isInvestment,date:today,createdAt:nowIso()})};
     }
     const sport=SPORTS.find(x=>text.includes(x));
     if(sport){
@@ -1947,13 +2269,13 @@
     }
     if(/[😄😊😐😔😤😢]|心情|感觉|今天很|开心|高兴|难过|生气|烦躁|低落|郁闷|平静|还行|想哭/.test(text)){
       let m;if(/[😢]|崩溃|想哭|伤心/.test(text))m=MOODS.find(x=>x.score===1);else if(/[😤]|生气|烦躁|压力大/.test(text))m=MOODS.find(x=>x.score===2);else if(/[😔]|不开心|难过|低落|郁闷/.test(text))m=MOODS.find(x=>x.score===3);else if(/[😐]|一般|还行|平淡|平静/.test(text))m=MOODS.find(x=>x.score===4);else if(/[😊]|不错|愉快/.test(text))m=MOODS.find(x=>x.score===5);else m=MOODS.find(x=>x.score===6);
-      return {message:`已记录今天的心情 ${m.emoji}。`,module:'mood',apply:s=>s.mood.entries.push({id:id(),emoji:m.emoji,score:m.score,text,date:today,createdAt:nowIso()})};
+      return {message:`已记录今天的心情 ${m.emoji}。`,module:'mood',apply:s=>s.mood.entries.push({id:id(),emoji:m.emoji,score:m.score,text,tags:[],date:today,createdAt:nowIso()})};
     }
     const wordMatch=text.match(/(?:单词|学单词)\s+([a-zA-Z][a-zA-Z\-']*)\s+(?:\/([^/]+)\/\s+)?(.+)/i);
     if(wordMatch){
       const word=wordMatch[1],phonetic=wordMatch[2]?`/${wordMatch[2]}/`:'',meaning=wordMatch[3].trim();if(!meaning)return {error:'请补充中文释义。'};
       if(state.english.words.some(x=>x.word.toLowerCase()===word.toLowerCase()))return {error:'这个单词已经在词库里。'};
-      const wordId=id();return {message:`已把 ${word} 加入词库。`,module:'english',apply:s=>{s.english.words.push({id:wordId,word,phonetic,meaning,createdAt:nowIso(),lastReviewedAt:null,nextReviewDate:shiftDay(today,1),reviewCount:0,mastered:false});s.english.studyLogs.push({id:id(),wordId,date:today,action:'learn',createdAt:nowIso()});}};
+      const wordId=id();return {message:`已把 ${word} 加入词库。`,module:'english',apply:s=>{s.english.words.push({id:wordId,word,phonetic,meaning,createdAt:nowIso(),lastReviewedAt:null,nextReviewDate:shiftDay(today,1),reviewCount:0,lapseCount:0,intervalDays:1,easeFactor:2.5,mastered:false});s.english.studyLogs.push({id:id(),wordId,date:today,action:'learn',rating:null,createdAt:nowIso()});}};
     }
     const readingTo=text.match(/(?:读|看)《([^》]+)》到\s*(\d+)\s*页/),readingMore=text.match(/《([^》]+)》(?:读|看)了\s*(\d+)\s*页/);
     if(readingTo||readingMore){
@@ -1973,8 +2295,19 @@
     return {error:'暂时没识别出来。试试“记账 30 晚餐”“待办 晚上8点跑步”或“心情 5 今天很高效”。'};
   }
 
+  function recognizeSmartBatch(raw){
+    const normalized=normalizeChinese(raw),clauses=normalized.split(/(?:[,;；。！!\n·]+|然后|并且|同时|顺便|另外|还有)/).map(x=>x.trim()).filter(Boolean);
+    if(clauses.length<=1)return recognizeSmart(normalized);
+    const actions=clauses.map(clause=>({clause,result:recognizeSmart(clause)})),failed=actions.findIndex(x=>x.result.error);
+    if(failed>=0)return {error:`第 ${failed+1} 段“${actions[failed].clause}”未写入：${actions[failed].result.error} 本次没有保存任何记录。`};
+    return {
+      message:`已原子写入 ${actions.length} 条记录：${actions.map(x=>x.result.message.replace(/[。.]$/,'')).join('；')}。`,
+      apply:s=>actions.forEach(x=>x.result.apply(s))
+    };
+  }
+
   function submitSmart(){
-    const input=document.getElementById('smartInput'),result=document.getElementById('smartResult'),recognized=recognizeSmart(input.value);
+    const input=document.getElementById('smartInput'),result=document.getElementById('smartResult'),recognized=recognizeSmartBatch(input.value);
     result.hidden=false;
     if(recognized.error){result.textContent=recognized.error;return;}
     if(mutate(recognized.apply,{message:recognized.message,undo:true})){result.textContent=recognized.message;input.value='';}
@@ -2025,12 +2358,17 @@
   function weeklyAnalysis(){
     const dates=weekDates(),weekSet=new Set(dates),today=dateKey();
     const todos=state.daily.todos.filter(x=>weekSet.has(x.date)),todoDone=todos.filter(x=>x.done).length,todoRate=todos.length?Math.round(todoDone/todos.length*100):0;
-    const ledger=state.ledger.entries.filter(x=>weekSet.has(x.date)),income=ledger.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0),expense=ledger.filter(x=>x.type==='expense').reduce((s,x)=>s+x.amount,0),catTotals={};ledger.filter(x=>x.type==='expense').forEach(x=>catTotals[x.category]=(catTotals[x.category]||0)+x.amount);const topCat=Object.keys(catTotals).sort((a,b)=>catTotals[b]-catTotals[a])[0];
+    const ledger=state.ledger.entries.filter(x=>weekSet.has(x.date)),income=ledger.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0),expenseEntries=ledger.filter(x=>x.type==='expense'),expense=expenseEntries.reduce((s,x)=>s+x.amount,0),investment=expenseEntries.filter(x=>x.isInvestment).reduce((s,x)=>s+x.amount,0),investmentRatio=expense?Math.round(investment/expense*100):0,catTotals={};expenseEntries.forEach(x=>catTotals[x.category]=(catTotals[x.category]||0)+x.amount);const topCat=Object.keys(catTotals).sort((a,b)=>catTotals[b]-catTotals[a])[0];
     const workouts=state.fitness.workouts.filter(x=>weekSet.has(x.date)),workoutDays=new Set(workouts.map(x=>x.date)).size,workoutMinutes=workouts.reduce((s,x)=>s+x.minutes,0),workoutCal=workouts.reduce((s,x)=>s+x.calories,0);
     const moods=state.mood.entries.filter(x=>weekSet.has(x.date)),moodDays=new Set(moods.map(x=>x.date)).size,moodAvg=moods.length?moods.reduce((s,x)=>s+x.score,0)/moods.length:null;
     const readingLogs=state.reading.progressLogs.filter(x=>weekSet.has(x.date)),pages=readingLogs.reduce((s,x)=>s+Math.max(0,Number(x.delta)||0),0),activeBooks=new Set(readingLogs.map(x=>x.bookId)).size,notes=state.reading.books.reduce((s,b)=>s+b.notes.filter(n=>weekSet.has(n.date)).length,0);
     const upcoming=state.travel.trips.filter(x=>x.startDate>=today&&x.startDate<=shiftDay(today,30)),nearest=[...upcoming].sort((a,b)=>a.startDate.localeCompare(b.startDate))[0];const packingRate=nearest&&nearest.packing.length?Math.round(nearest.packing.filter(x=>x.done).length/nearest.packing.length*100):null;
     const study=state.english.studyLogs.filter(x=>weekSet.has(x.date)),studyWords=new Set(study.map(x=>x.wordId)).size,todayWords=new Set(state.english.studyLogs.filter(x=>x.date===today).map(x=>x.wordId)).size,due=state.english.words.filter(x=>!x.mastered&&x.nextReviewDate<=today).length;
+    const moodByDate=new Map();moods.forEach(x=>{const values=moodByDate.get(x.date)||[];values.push(x.score);moodByDate.set(x.date,values);});
+    const dayMood=[...moodByDate].map(([date,values])=>({date,score:values.reduce((s,x)=>s+x,0)/values.length})),workoutDateSet=new Set(workouts.map(x=>x.date));
+    const average=values=>values.length?values.reduce((s,x)=>s+x,0)/values.length:null,activeMood=average(dayMood.filter(x=>workoutDateSet.has(x.date)).map(x=>x.score)),restMood=average(dayMood.filter(x=>!workoutDateSet.has(x.date)).map(x=>x.score));
+    const lowestMood=[...dayMood].sort((a,b)=>a.score-b.score)[0],lowDayTodos=lowestMood?todos.filter(x=>x.date===lowestMood.date):[],lowDayExpense=lowestMood?ledger.filter(x=>x.date===lowestMood.date&&x.type==='expense').reduce((s,x)=>s+x.amount,0):0;
+    const spendByDate={};ledger.filter(x=>x.type==='expense').forEach(x=>spendByDate[x.date]=(spendByDate[x.date]||0)+x.amount);const highSpendDate=Object.keys(spendByDate).sort((a,b)=>spendByDate[b]-spendByDate[a])[0],highSpendMood=dayMood.find(x=>x.date===highSpendDate)?.score;
     const advice=[];
     if(todos.length>=3&&todoRate<60)advice.push('本周计划完成率偏低。下周每天只保留 1 到 3 件关键事项，会更容易形成正反馈。');
     if(expense>income&&ledger.length)advice.push('本周支出高于收入，可以先回看支出最多的分类，找一个最容易调整的小项。');
@@ -2041,7 +2379,7 @@
     if(todayWords<state.settings.dailyWordGoal||due>10)advice.push('今天的英语学习还有空间，优先清理待复习单词，再添加新词。');
     const rows=[
       ['每日计划',todos.length?`${todoDone}/${todos.length} 完成，${todoRate}%`:'本周暂无记录',todos.length?(todoRate>=70?'执行节奏不错。':'适当减少计划数量。'):'先从一件小事开始。'],
-      ['记账本',ledger.length?`收入 ${money(income)}，支出 ${money(expense)}`:'本周暂无记录',topCat?`支出最多：${topCat}`:'还没有可分析的支出。'],
+      ['记账本',ledger.length?`收入 ${money(income)}，支出 ${money(expense)}`:'本周暂无记录',expense?`自我投资 ${money(investment)}（${investmentRatio}%）${topCat?` · 支出最多：${topCat}`:''}`:'还没有可分析的支出。'],
       ['运动打卡',workouts.length?`${workoutDays} 天，${workoutMinutes} 分钟`:'本周暂无记录',workouts.length?`${workouts.length} 次运动，约 ${workoutCal} 千卡。`:'安排一次轻松散步。'],
       ['心情日记',moods.length?`${moodDays} 天，平均 ${moodAvg.toFixed(1)} 分`:'本周暂无记录',moods.length?`本周记录了 ${moods.length} 次感受。`:'记录本身就是照顾自己。'],
       ['读书收获',readingLogs.length?`${pages} 页，${activeBooks} 本书`:'本周暂无进度',notes?`新增 ${notes} 条笔记。`:'读到有感触的地方就记一句。'],
@@ -2049,18 +2387,44 @@
       ['英语学习',`${studyWords} 个词，待复习 ${due}`,`今日 ${todayWords}/${state.settings.dailyWordGoal}，按自己的节奏完成。`]
     ];
     const lead=advice.length?'本周数据已经形成一些清晰线索，先挑一条最容易执行的建议。':'本周整体节奏稳定，继续保持现在的记录习惯。';
-    return {subtitle:`${formatFullDate(dates[0])} 至 ${formatFullDate(dates[6])}`,html:`<div class="analysis-lead">${esc(lead)}</div><div class="advice-list">${(advice.slice(0,4).length?advice.slice(0,4):['目前没有需要特别调整的项目，保持真实记录就很好。']).map(x=>`<div class="advice">${esc(x)}</div>`).join('')}</div><div class="analysis-rows">${rows.map(r=>`<div class="analysis-row"><div class="analysis-name">${r[0]}</div><div class="analysis-metric">${r[1]}</div><div class="analysis-note">${r[2]}</div></div>`).join('')}</div>`};
+    const coach=[];
+    const executionEvidence=todos.length?`计划完成 ${todoDone}/${todos.length}（${todoRate}%），运动 ${workoutDays} 天 / ${workoutMinutes} 分钟${moodAvg!==null?`，心情均值 ${moodAvg.toFixed(1)} 分`:''}。`:`本周还没有计划记录；运动 ${workoutDays} 天 / ${workoutMinutes} 分钟${moodAvg!==null?`，心情均值 ${moodAvg.toFixed(1)} 分`:''}。`;
+    let executionSuggestion='下周先安排 1 件关键任务，并给它预留一个明确时间段。';
+    if(todos.length&&todoRate>=80&&workoutDays<2)executionSuggestion='执行率很高，但活动恢复偏少；建议在高负荷日后固定加入 20 分钟低强度运动。';
+    else if(todos.length&&todoRate<60)executionSuggestion='计划量可能超过当前可用精力；把每天关键事项收敛到 1–3 件，再观察完成率。';
+    else if(todos.length&&todoRate>=60)executionSuggestion='当前执行节奏可维持；下周不要同步增加任务数量和强度。';
+    coach.push({symbol:'计',title:'执行与恢复',evidence:executionEvidence,suggestion:executionSuggestion});
+    if(activeMood!==null&&restMood!==null){
+      const diff=activeMood-restMood;
+      coach.push({symbol:'心',title:'运动与情绪线索',evidence:`有运动记录日的心情均值 ${activeMood.toFixed(1)} 分，无运动记录日 ${restMood.toFixed(1)} 分，相差 ${Math.abs(diff).toFixed(1)} 分。`,suggestion:`这只是本周小样本相关，不代表因果。${diff>=.3?'可以优先复用本周运动日的作息安排。':diff<=-.3?'运动日情绪反而更低，建议检查强度、睡眠或当天工作负荷。':'目前差异很小，继续记录 2–3 周再判断。'}`});
+    } else if(lowestMood){
+      coach.push({symbol:'心',title:'情绪低点回看',evidence:`${formatFullDate(lowestMood.date)}心情最低，为 ${lowestMood.score.toFixed(1)} 分；当天安排 ${lowDayTodos.length} 项任务、支出 ${money(lowDayExpense)}，${workoutDateSet.has(lowestMood.date)?'有':'没有'}运动记录。`,suggestion:'单日不能证明触发因素；下次低点可同时记录工作量、睡眠或运动标签，帮助形成可比较样本。'});
+    } else coach.push({symbol:'心',title:'情绪关联暂不可判定',evidence:'本周没有足够的心情记录，无法比较运动日、任务量与情绪变化。',suggestion:'下周任选 3 天记录心情即可，不需要写长日记。'});
+    const topRatio=topCat&&expense?Math.round(catTotals[topCat]/expense*100):0,spendEvidence=ledger.length?`本周支出 ${money(expense)}，其中自我投资 ${money(investment)}（${investmentRatio}%）${topCat?`，${topCat}占 ${topRatio}%`:''}${highSpendDate?`；${formatFullDate(highSpendDate)}单日支出最高，为 ${money(spendByDate[highSpendDate])}${highSpendMood!==undefined?`，当日心情 ${highSpendMood.toFixed(1)} 分`:''}`:''}。`:'本周没有收支记录，暂时无法识别消费结构。';
+    coach.push({symbol:'账',title:'消费结构与状态',evidence:spendEvidence,suggestion:topCat&&topRatio>=45?`先检查${topCat}中金额最高的一笔；只调整一个可控项目，比泛化地“少花钱”更可执行。`:'维持记录即可；数据较少时不对消费与情绪做因果推断。'});
+    const learningEvidence=`阅读 ${pages} 页${notes?`、新增 ${notes} 条笔记`:''}；英语接触 ${studyWords} 个词，当前待复习 ${due} 个。`;
+    let learningSuggestion='把输入目标缩小为每天阅读 5 页，并优先清理到期单词。';
+    if(pages>0&&studyWords>0)learningSuggestion='阅读与英语都有实际输入；下周保持当前频率，不必同时提高两项指标。';
+    else if(pages>0)learningSuggestion='阅读已启动；英语先安排一个 10 分钟复习窗口，避免新词继续积压。';
+    else if(studyWords>0)learningSuggestion='英语已启动；把阅读绑定在已有习惯后，先从 5 页开始。';
+    coach.push({symbol:'学',title:'阅读与英语投入',evidence:learningEvidence,suggestion:learningSuggestion});
+    const summary=`本地规则综合了 ${todos.length} 项计划、${workouts.length} 次运动、${ledger.length} 笔收支、${moods.length} 条心情、${readingLogs.length} 条阅读进度和 ${study.length} 条英语学习记录。`;
+    const coachHtml=`<div class="analysis-toolbar"><div class="analysis-local-note"><strong>AI 深度点评 · 本地规则</strong><br>数据仅在浏览器内计算，没有调用联网模型。</div><button class="btn small secondary" type="button" data-action="analysis-overview">返回数据概览</button></div><div class="analysis-lead">${esc(summary)}</div><div class="coach-grid">${coach.map(x=>`<article class="coach-insight"><span class="coach-insight-symbol" aria-hidden="true">${x.symbol}</span><div><strong>${esc(x.title)}</strong><p><em>${esc(x.evidence)}</em> ${esc(x.suggestion)}</p></div></article>`).join('')}</div><div class="analysis-local-note">提示：点评展示的是数据关联与可执行假设，不是医疗、财务或心理诊断。</div>`;
+    const overviewHtml=`<div class="analysis-toolbar"><div class="analysis-local-note">先看本周事实指标，再进入跨模块关联分析。</div><button class="btn small" type="button" data-action="ai-deep-analysis">AI 深度点评</button></div><div class="analysis-lead">${esc(lead)}</div><div class="advice-list">${(advice.slice(0,4).length?advice.slice(0,4):['目前没有需要特别调整的项目，保持真实记录就很好。']).map(x=>`<div class="advice">${esc(x)}</div>`).join('')}</div><div class="analysis-rows">${rows.map(r=>`<div class="analysis-row"><div class="analysis-name">${r[0]}</div><div class="analysis-metric">${r[1]}</div><div class="analysis-note">${r[2]}</div></div>`).join('')}</div>`;
+    return {subtitle:`${formatFullDate(dates[0])} 至 ${formatFullDate(dates[6])}`,html:overviewHtml,aiHtml:coachHtml};
   }
 
-  function openAnalysis(){
-    const report=weeklyAnalysis();lastFocus=document.activeElement;document.getElementById('modalTitle').textContent='周度数据分析';document.getElementById('modalSubtitle').textContent=report.subtitle;document.getElementById('modalBody').innerHTML=report.html;document.getElementById('overlay').hidden=false;document.getElementById('modal').hidden=false;document.body.classList.add('modal-open');setBackgroundInert(true);document.getElementById('modal').inert=false;setTimeout(()=>document.getElementById('modalClose').focus(),30);
+  function openAnalysis(view='overview'){
+    const report=weeklyAnalysis(),modal=document.getElementById('modal'),opening=modal.hidden;if(opening)lastFocus=document.activeElement;
+    document.getElementById('modalTitle').textContent=view==='ai'?'AI 深度点评':'周度数据分析';document.getElementById('modalSubtitle').textContent=report.subtitle;document.getElementById('modalBody').innerHTML=view==='ai'?report.aiHtml:report.html;
+    document.getElementById('overlay').hidden=false;modal.hidden=false;document.body.classList.add('modal-open');setBackgroundInert(true);modal.inert=false;if(opening)setTimeout(()=>document.getElementById('modalClose').focus(),30);
   }
   function closeModal(){document.getElementById('overlay').hidden=true;document.getElementById('modal').hidden=true;document.body.classList.remove('modal-open');setBackgroundInert(false);syncSidebarAccessibility();if(lastFocus?.focus)lastFocus.focus();}
   function openSidebar(){const btn=document.getElementById('menuBtn'),sidebar=document.getElementById('sidebar');sidebar.classList.add('open');sidebar.inert=false;sidebar.setAttribute('aria-hidden','false');document.getElementById('mobileOverlay').hidden=false;btn.setAttribute('aria-expanded','true');btn.setAttribute('aria-label','关闭导航');btn.textContent='×';document.getElementById('mobileMoreBtn').setAttribute('aria-expanded','true');document.body.classList.add('drawer-open');}
   function closeSidebar(){const btn=document.getElementById('menuBtn');document.getElementById('sidebar').classList.remove('open');document.getElementById('mobileOverlay').hidden=true;btn.setAttribute('aria-expanded','false');btn.setAttribute('aria-label','打开导航');btn.textContent='☰';document.getElementById('mobileMoreBtn').setAttribute('aria-expanded','false');document.body.classList.remove('drawer-open');syncSidebarAccessibility();}
   function toggleSidebar(){document.getElementById('sidebar').classList.contains('open')?closeSidebar():openSidebar();}
 
-  document.getElementById('analysisBtn').addEventListener('click',openAnalysis);
+  document.getElementById('analysisBtn').addEventListener('click',()=>openAnalysis());
   document.getElementById('quickActionBtn').addEventListener('click',()=>toggleSmart(true));
   document.getElementById('exportBtn').addEventListener('click',exportData);
   document.getElementById('importBtn').addEventListener('click',()=>document.getElementById('importFile').click());
