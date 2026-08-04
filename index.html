@@ -847,8 +847,15 @@
   const mondayOf = s => shiftDay(s, -((parseDay(s).getDay()+6)%7));
   const weekDates = (base=dateKey()) => Array.from({length:7}, (_,i)=>shiftDay(mondayOf(base),i));
   const inThisWeek = s => weekDates().includes(s);
-  const id = () => crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  let idSequence = 0;
+  const id = () => {
+    if(typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') return crypto.randomUUID();
+    idSequence += 1;
+    return `${Date.now().toString(36)}-${idSequence.toString(36)}-${Math.random().toString(36).slice(2)}`;
+  };
   const safeId = value => /^[A-Za-z0-9_-]{1,100}$/.test(String(value||'')) ? String(value) : id();
+  const claimId = (seen,value) => { let next=safeId(value); while(seen.has(next)) next=id(); seen.add(next); return next; };
+  const removeOneById = (items,itemId) => { const index=items.findIndex(x=>x.id===itemId); if(index>=0) items.splice(index,1); };
   const nowIso = () => new Date().toISOString();
   const clamp = (n,min,max) => Math.min(max,Math.max(min,n));
   const money = n => new Intl.NumberFormat('zh-CN',{style:'currency',currency:'CNY',minimumFractionDigits:2}).format(Number(n)||0);
@@ -877,7 +884,8 @@
     const next=defaultState();
     next.meta = {...next.meta, ...(src.meta||{})};
     next.settings.dailyWordGoal = clamp(Number(src.settings?.dailyWordGoal)||10,1,200);
-    next.daily.todos = Array.isArray(src.daily?.todos) ? src.daily.todos.filter(x=>x&&x.text).map(x=>({...x,id:safeId(x.id),text:String(x.text).slice(0,200),priority:['high','medium','low'].includes(x.priority)?x.priority:'medium',date:validDate(x.date)?x.date:dateKey(),done:Boolean(x.done)})) : [];
+    const todoIds=new Set();
+    next.daily.todos = Array.isArray(src.daily?.todos) ? src.daily.todos.filter(x=>x&&x.text).map(x=>({...x,id:claimId(todoIds,x.id),text:String(x.text).slice(0,200),priority:['high','medium','low'].includes(x.priority)?x.priority:'medium',date:validDate(x.date)?x.date:dateKey(),done:Boolean(x.done)})) : [];
     next.ledger.entries = Array.isArray(src.ledger?.entries) ? src.ledger.entries.filter(x=>x&&Number(x.amount)>0&&validDate(x.date)).map(x=>({...x,id:safeId(x.id),type:x.type==='income'?'income':'expense',amount:clamp(Number(x.amount),.01,1e9),category:CATEGORIES.includes(x.category)?x.category:'其他',note:String(x.note||'').slice(0,200)})) : [];
     next.fitness.workouts = Array.isArray(src.fitness?.workouts) ? src.fitness.workouts.filter(x=>x&&SPORTS.includes(x.type)&&validDate(x.date)).map(x=>({...x,id:safeId(x.id),minutes:clamp(Math.round(Number(x.minutes)||0),1,1440),calories:clamp(Math.round(Number(x.calories)||0),0,100000),note:String(x.note||'').slice(0,200)})) : [];
     next.mood.entries = Array.isArray(src.mood?.entries) ? src.mood.entries.filter(x=>x&&validDate(x.date)).map(x=>{const score=clamp(Number(x.score)||4,1,6);return {...x,id:safeId(x.id),score,emoji:MOODS.find(m=>m.score===score).emoji,text:String(x.text||'').slice(0,5000)};}) : [];
@@ -1311,7 +1319,7 @@
     const el=event.target.closest('[data-action]'); if(!el)return;
     const action=el.dataset.action,itemId=el.dataset.id,tripId=el.dataset.tripId,bookId=el.dataset.bookId;
     if(action==='toggle-todo') return mutate(s=>{const x=s.daily.todos.find(x=>x.id===itemId);x.done=el.checked;x.completedAt=x.done?nowIso():null;},{message:el.checked?'已完成一项计划。':'已恢复为待完成。'});
-    if(action==='delete-todo') return mutate(s=>s.daily.todos=s.daily.todos.filter(x=>x.id!==itemId),{message:'待办已删除。'});
+    if(action==='delete-todo') return mutate(s=>removeOneById(s.daily.todos,itemId),{message:'待办已删除。'});
     if(action==='delete-ledger') return mutate(s=>s.ledger.entries=s.ledger.entries.filter(x=>x.id!==itemId),{message:'收支记录已删除。'});
     if(action==='delete-workout') return mutate(s=>s.fitness.workouts=s.fitness.workouts.filter(x=>x.id!==itemId),{message:'运动记录已删除。'});
     if(action==='delete-mood') return mutate(s=>s.mood.entries=s.mood.entries.filter(x=>x.id!==itemId),{message:'心情日记已删除。'});
