@@ -114,6 +114,8 @@
     .section-title { margin: 0; font-size: 17px; letter-spacing: -.25px; }
     .section-note { margin: 5px 0 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
     .section-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .section-head > :first-child { min-width: 0; }
+    .section-head > div:first-child { flex: 1; }
     .stack { display: grid; gap: 16px; }
     .grid-main-side { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(285px, .72fr); gap: 20px; }
     .grid-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
@@ -189,7 +191,11 @@
     .check:checked::after { transform: scale(1); }
     .completed .row-title { color: var(--muted-2); text-decoration: line-through; }
 
-    .badge { display: inline-flex; align-items: center; min-height: 24px; padding: 0 9px; border-radius: 999px; font-size: 11px; font-weight: 650; }
+    .badge {
+      display: inline-flex; align-items: center; min-height: 24px; padding: 0 9px;
+      flex: 0 0 auto; border-radius: 999px; font-size: 11px; font-weight: 650;
+      font-variant-numeric: tabular-nums; line-height: 1; white-space: nowrap;
+    }
     .badge-high { color: #c9342e; background: #fff0f0; }
     .badge-medium { color: #a55c00; background: #fff5e6; }
     .badge-low { color: #26783a; background: #ebf9ee; }
@@ -433,7 +439,7 @@
       .mobile-overlay { position: fixed; inset: 0; z-index: 9; display: block; background: rgba(20,20,25,.28); }
       .main { margin-left: 0; }
       .mobile-topbar { position: sticky; top: 0; z-index: 20; height: 60px; padding: 0 14px; display: flex; align-items: center; gap: 10px; background: rgba(245,245,247,.92); border-bottom: 1px solid rgba(0,0,0,.05); backdrop-filter: blur(18px); }
-      .mobile-topbar strong { flex: 1; font-size: 15px; }
+      .mobile-topbar strong { min-width: 0; flex: 1; overflow: hidden; font-size: 15px; text-overflow: ellipsis; white-space: nowrap; }
       .content { padding: 20px 16px calc(136px + env(safe-area-inset-bottom)); }
       .page-head { display: none; }
       .page-identity { display: none; }
@@ -474,11 +480,14 @@
       .modal { left: 0; right: 0; bottom: 0; top: auto; width: 100%; max-height: 92dvh; transform: none; border-radius: 22px 22px 0 0; animation-name: sheet-in; }
       @keyframes sheet-in { from { opacity: 0; transform: translateY(30px); } }
       .mobile-tabbar {
-        position: fixed; left: 10px; right: 10px; bottom: 8px; z-index: 28;
+        position: fixed; left: 0; right: 0; bottom: 0; z-index: 28;
+        width: auto;
         min-height: calc(62px + env(safe-area-inset-bottom));
-        padding: 6px 5px calc(6px + env(safe-area-inset-bottom));
+        padding-block: 6px calc(6px + env(safe-area-inset-bottom));
+        padding-inline-start: max(5px, env(safe-area-inset-left));
+        padding-inline-end: max(5px, env(safe-area-inset-right));
         display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: start;
-        border: 1px solid rgba(255,255,255,.82); border-radius: 21px;
+        border: 1px solid rgba(255,255,255,.82); border-bottom: 0; border-radius: 21px 21px 0 0;
         background: rgba(250,252,255,.92); box-shadow: 0 16px 42px rgba(39,50,72,.18);
         backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%);
         transition: opacity .2s ease, transform .2s ease;
@@ -493,8 +502,8 @@
         border-radius: 9px; font-size: 14px; font-weight: 760; line-height: 1;
       }
       .mobile-tab-label { max-width: 100%; overflow: hidden; font-size: 10px; font-weight: 610; text-overflow: ellipsis; white-space: nowrap; }
-      .mobile-tab-btn[aria-current="page"] { color: var(--primary); background: var(--primary-soft); }
-      .mobile-tab-btn[aria-current="page"] .mobile-tab-icon { background: rgba(0,113,227,.1); }
+      .mobile-tab-btn[aria-current="page"], .mobile-tab-btn.is-current { color: var(--primary); background: var(--primary-soft); }
+      .mobile-tab-btn[aria-current="page"] .mobile-tab-icon, .mobile-tab-btn.is-current .mobile-tab-icon { background: rgba(0,113,227,.1); }
       .mobile-tab-ai {
         position: relative; z-index: 1; color: #303541;
         transition: opacity .2s ease, transform .2s cubic-bezier(.2,.75,.25,1);
@@ -946,6 +955,7 @@
     .analysis-rows { border-radius: 20px; box-shadow: var(--shadow); }
 
     .home-metric-card { min-width: 0; }
+    .home-metric-card[data-dashboard-card="reading"]:not([data-card-state="empty"]) .home-card-primary { font-size: 20px; font-weight: 700; }
     .home-card-body { min-width: 0; }
     .home-card-actions { margin-top: 18px; }
     .home-card-actions.inline-form { align-items: center; }
@@ -1020,7 +1030,7 @@
         min-height: 64px;
         padding: 12px 13px;
         display: grid;
-        grid-template-columns: 30px minmax(0, 1fr) auto auto;
+        grid-template-columns: 30px minmax(0, 1fr) 58px 50px;
         align-items: center;
         gap: 8px;
       }
@@ -1030,14 +1040,35 @@
       .home-metric-card[data-card-state="empty"] .home-card-heading .section-note,
       .home-metric-card[data-card-state="empty"] .home-card-detail { display: none; }
       .home-metric-card[data-card-state="empty"] .home-card-symbol { grid-column: 1; grid-row: 1; width: 30px; height: 30px; margin: 0; font-size: 12px; }
-      .home-metric-card[data-card-state="empty"] .home-card-body { grid-column: 3; grid-row: 1; }
-      .home-metric-card[data-card-state="empty"] .home-card-primary { margin: 0; color: var(--muted); font-size: 13px; font-weight: 660; letter-spacing: -.15px; white-space: nowrap; }
+      .home-metric-card[data-card-state="empty"] .home-card-body {
+        grid-column: 3; grid-row: 1; width: 100%; min-width: 0;
+        justify-self: end; text-align: right;
+      }
+      .home-metric-card[data-card-state="empty"] .home-card-primary {
+        margin: 0; display: flex; align-items: baseline; justify-content: flex-end; gap: 3px;
+        color: var(--muted); font-size: 13px; font-weight: 660; letter-spacing: -.15px;
+        font-variant-numeric: tabular-nums; line-height: 1.2; white-space: nowrap;
+      }
       .home-metric-card[data-card-state="empty"] .home-card-primary small { font-size: 11px !important; }
-      .home-metric-card[data-card-state="empty"] .home-card-actions { grid-column: 4; grid-row: 1; margin: 0; flex-wrap: nowrap; }
+      .home-metric-card[data-card-state="empty"] .home-card-actions {
+        grid-column: 4; grid-row: 1; width: 100%; margin: 0;
+        display: flex; justify-content: flex-end; flex-wrap: nowrap;
+      }
       .home-metric-card[data-card-state="empty"] .home-card-actions > form { display: none; }
-      .home-metric-card[data-card-state="empty"] .home-card-actions .btn { width: auto; min-height: 34px; padding-inline: 10px; font-size: 12px; }
+      .home-metric-card[data-card-state="empty"] .home-card-actions .btn { width: 100%; min-height: 34px; padding-inline: 8px; font-size: 12px; }
       .home-metric-card[data-card-state="empty"] .home-action-full { display: none; }
       .home-metric-card[data-card-state="empty"] .home-action-short { display: inline; }
+      .achievement-list {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 7px;
+      }
+      .achievement-badge {
+        min-width: 0; padding-inline: 6px; justify-content: center; gap: 4px;
+        overflow: hidden; font-size: 10.5px; text-overflow: ellipsis; white-space: nowrap;
+      }
+      .level-number { flex: 0 0 auto; display: grid; justify-items: end; white-space: nowrap; }
+      .level-number small { display: block; margin-top: 7px; white-space: nowrap; }
       .activity-row { align-items: flex-start; padding: 12px 7px; }
       .activity-copy { grid-template-columns: 1fr; gap: 3px; padding-top: 2px; }
       .activity-date { color: #969ba6; font-size: 11px; }
@@ -1047,6 +1078,24 @@
       .fab { display: none; }
       .fab-label { display: none; }
       .smart-panel { left: 12px; right: 12px; bottom: calc(86px + env(safe-area-inset-bottom)); transform-origin: bottom center; }
+    }
+
+    @media (max-width: 359px) {
+      .content { padding-inline: 12px; }
+      .card-pad { padding: 17px; }
+      .section-head { gap: 10px; }
+      .home-metric-card[data-card-state="empty"] {
+        padding-inline: 11px;
+        grid-template-columns: 30px minmax(0, 1fr) 52px 46px;
+        gap: 6px;
+      }
+      .home-metric-card[data-card-state="empty"] .home-card-actions .btn { padding-inline: 6px; }
+      .achievement-list { gap: 5px; }
+      .achievement-badge { padding-inline: 4px; gap: 3px; font-size: 10px; }
+      .mobile-tabbar {
+        padding-inline-start: max(3px, env(safe-area-inset-left));
+        padding-inline-end: max(3px, env(safe-area-inset-right));
+      }
     }
 
     @media (prefers-reduced-transparency: reduce) {
@@ -1174,7 +1223,8 @@
   const WEEK_NAMES = ['周一','周二','周三','周四','周五','周六','周日'];
   const chartInstances = new Map();
   let chartFrame = 0;
-  let activeModule = localStorage.getItem('lifeWorkbench.active') || 'home';
+  // Every fresh page load starts from the dashboard; navigation remains client-side afterwards.
+  let activeModule = 'home';
   let moodRange = localStorage.getItem('lifeWorkbench.moodRange') === 'month' ? 'month' : 'week';
   let activeTripId = '';
   let goalArchiveView = false;
@@ -1464,7 +1514,7 @@
       {key:'todos',state:pending?'attention':'empty',priority:0,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="todos" data-card-state="${pending?'attention':'empty'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">今日待办</h2><p class="section-note">${todos.length?`${todoDone}/${todos.length} 项已完成`:'今天还没有安排'}</p></div><span class="nav-icon home-card-symbol" style="--icon:#0071e3">计</span></div><div class="home-card-body"><div class="metric-value home-card-primary">${pending} <small style="font-size:13px;color:var(--muted)">项</small></div></div><div class="home-card-actions"><button class="btn small secondary" type="button" data-module="daily"><span class="home-action-full">查看今日计划</span><span class="home-action-short">计划</span></button></div></article>`},
       {key:'budget',state:!budget?'empty':budgetRatio>=.8?'attention':'populated',priority:2,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="budget" data-card-state="${!budget?'empty':budgetRatio>=.8?'attention':'populated'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">每月预算</h2><p class="section-note">已支出 ${money(expense)}${budget?` · ${Math.round(budgetRatio*100)}%`:''}</p></div><span class="nav-icon home-card-symbol" style="--icon:#34c759">账</span></div><div class="home-card-body"><div class="metric-value home-card-primary ${budget&&remaining<0?'money-expense':''}">${budget?money(remaining):'未设置'}</div><div class="metric-note home-card-detail">${budget?(remaining>=0?'预算剩余':'已超出预算，计划页会同步提醒'):'可先设置每月预算'}</div></div><div class="home-card-actions inline-form"><button class="btn small secondary" type="button" data-module="ledger"><span class="home-action-full">查看账本</span><span class="home-action-short">设置</span></button><form class="inline-form" id="budgetForm" style="margin-top:0;flex:1"><input class="input" name="budget" type="number" min="0" max="1000000000" step="0.01" value="${budget||''}" aria-label="每月预算" placeholder="设置预算"><button class="btn small" type="submit">保存</button></form></div></article>`},
       {key:'mood',state:latestMood?'populated':'empty',priority:3,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="mood" data-card-state="${latestMood?'populated':'empty'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">最近心情</h2><p class="section-note">${latestMood?formatFullDate(latestMood.date):'等待第一次记录'}</p></div>${latestMood?`<span class="home-card-symbol" style="font-size:31px" aria-hidden="true">${latestMood.emoji}</span>`:'<span class="nav-icon home-card-symbol" style="--icon:#ff375f">心</span>'}</div><div class="home-card-body"><div class="metric-value home-card-primary">${latestMood?`${latestMood.score} 分`:'暂无'}</div><div class="metric-note home-card-detail">${latestMood?esc(moodLabel||'已记录'):'记录一下此刻的感受'}</div></div><div class="home-card-actions"><button class="btn small secondary" type="button" data-module="mood"><span class="home-action-full">记录心情</span><span class="home-action-short">记录</span></button></div></article>`},
-      {key:'reading',state:currentBook?'populated':'empty',priority:4,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="reading" data-card-state="${currentBook?'populated':'empty'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">正在阅读</h2><p class="section-note">${currentBook?esc(currentBook.author||'未填写作者'):'书架里暂无在读书籍'}</p></div><span class="nav-icon home-card-symbol" style="--icon:#af52de">读</span></div><div class="home-card-body"><div class="row-title home-card-primary" style="font-size:20px;font-weight:700">${currentBook?esc(currentBook.title):'暂无'}</div>${currentBook?`<div class="progress" role="progressbar" aria-valuenow="${bookProgress}" aria-valuemin="0" aria-valuemax="100"><span style="width:${bookProgress}%"></span></div><div class="progress-copy home-card-detail"><span>第 ${currentBook.currentPage} / ${currentBook.totalPages} 页</span><strong>${bookProgress}%</strong></div>`:'<div class="metric-note home-card-detail" style="margin-top:10px">添加书籍后会在这里显示进度</div>'}</div><div class="home-card-actions"><button class="btn small secondary" type="button" data-module="reading"><span class="home-action-full">打开书架</span><span class="home-action-short">书架</span></button></div></article>`},
+      {key:'reading',state:currentBook?'populated':'empty',priority:4,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="reading" data-card-state="${currentBook?'populated':'empty'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">正在阅读</h2><p class="section-note">${currentBook?esc(currentBook.author||'未填写作者'):'书架里暂无在读书籍'}</p></div><span class="nav-icon home-card-symbol" style="--icon:#af52de">读</span></div><div class="home-card-body"><div class="row-title home-card-primary">${currentBook?esc(currentBook.title):'暂无'}</div>${currentBook?`<div class="progress" role="progressbar" aria-valuenow="${bookProgress}" aria-valuemin="0" aria-valuemax="100"><span style="width:${bookProgress}%"></span></div><div class="progress-copy home-card-detail"><span>第 ${currentBook.currentPage} / ${currentBook.totalPages} 页</span><strong>${bookProgress}%</strong></div>`:'<div class="metric-note home-card-detail" style="margin-top:10px">添加书籍后会在这里显示进度</div>'}</div><div class="home-card-actions"><button class="btn small secondary" type="button" data-module="reading"><span class="home-action-full">打开书架</span><span class="home-action-short">书架</span></button></div></article>`},
       {key:'fitness',state:workedOutToday||streakDays?'populated':'empty',priority:5,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="fitness" data-card-state="${workedOutToday||streakDays?'populated':'empty'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">运动连续打卡</h2><p class="section-note">稳定积累比一次满分更重要</p></div><span class="nav-icon home-card-symbol" style="--icon:#ff9500">动</span></div><div class="home-card-body"><div class="metric-value home-card-primary" style="color:var(--orange)">${streakDays} <small style="font-size:13px;color:var(--muted)">天</small></div><div class="metric-note home-card-detail">${workedOutToday?'今天已完成打卡':'今天还可以动一动'}</div></div><div class="home-card-actions"><button class="btn small secondary" type="button" data-module="fitness"><span class="home-action-full">去运动打卡</span><span class="home-action-short">打卡</span></button></div></article>`},
       {key:'words',state:dueWords?'attention':'empty',priority:1,markup:`<article class="card card-pad home-metric-card" data-dashboard-card="words" data-card-state="${dueWords?'attention':'empty'}"><div class="section-head home-card-header"><div class="home-card-heading"><h2 class="section-title">待复习单词</h2><p class="section-note">按照间隔重复计划复习</p></div><span class="nav-icon home-card-symbol" style="--icon:#5856d6">词</span></div><div class="home-card-body"><div class="metric-value home-card-primary">${dueWords} <small style="font-size:13px;color:var(--muted)">个</small></div><div class="metric-note home-card-detail">${dueWords?'翻卡后选择掌握程度':'今天的复习已清空'}</div></div><div class="home-card-actions"><button class="btn small secondary" type="button" data-module="english"><span class="home-action-full">开始复习</span><span class="home-action-short">开始</span></button></div></article>`}
     ].sort((a,b)=>stateRank[a.state]-stateRank[b.state]||a.priority-b.priority);
@@ -1885,7 +1935,10 @@
 
   function syncMobileTabbar(){
     document.querySelectorAll('#mobileTabbar [data-module]').forEach(btn=>btn.setAttribute('aria-current',btn.dataset.module===activeModule?'page':'false'));
-    document.getElementById('mobileMoreBtn').setAttribute('aria-current',mobileCoreModules.has(activeModule)?'false':'page');
+    const moreBtn=document.getElementById('mobileMoreBtn'),secondaryActive=!mobileCoreModules.has(activeModule),current=MODULES.find(x=>x.id===activeModule);
+    moreBtn.classList.toggle('is-current',secondaryActive);
+    moreBtn.removeAttribute('aria-current');
+    moreBtn.setAttribute('aria-label',secondaryActive?`打开更多功能，当前页面：${current?.label||''}`:'打开更多功能');
   }
 
   function updateTodoSheetViewport(){
