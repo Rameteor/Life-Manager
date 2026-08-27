@@ -581,6 +581,8 @@
       .todo-sheet-head h2 { margin: 0; font-size: 20px; letter-spacing: -.45px; }
       .todo-sheet-head p { margin: 4px 0 0; color: var(--muted); font-size: 12px; }
       .todo-sheet-form { display: grid; gap: 16px; }
+      .todo-sheet-time-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .todo-sheet-time-grid .input { min-height: 48px; font-variant-numeric: tabular-nums; }
       .todo-sheet-priorities { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; }
       .todo-sheet-priorities input { position: absolute; opacity: 0; pointer-events: none; }
       .todo-sheet-priorities label {
@@ -1385,7 +1387,8 @@
     .overlay { background: rgba(61,47,35,.28); }
     .modal, .modal-head { border-color: var(--border); background: #f4efe6; }
     .analysis-lead { color: #486f8d; background: #edf4f8; }
-    .mobile-archive-screen { display: none; }
+    .mobile-archive-screen,
+    .archive-detail-toolbar { display: none; }
 
     @media (max-width: 767px) {
       body { background-size: 390px 390px; }
@@ -1660,7 +1663,23 @@
       .archive-english-goal{position:relative;padding:13px 52px 13px 13px}.archive-english-goal>div:first-child{display:flex;align-items:end;justify-content:space-between;margin-bottom:8px}.archive-english-goal span{color:#77858e;font-size:9px}.archive-english-goal strong{font:600 20px/1 "Noto Serif SC",serif}.archive-english-goal strong small{font:9px system-ui;color:#7e746a}.archive-english-goal>em{position:absolute;right:14px;bottom:14px;color:#5d8fba;font-style:normal;font-weight:700}.archive-word-feature{padding:17px;text-align:center;background:#edf3f7}.archive-word-feature>span{color:#5d8fba;font-size:9px}.archive-word-feature h2{margin:10px 0 3px;color:#315d7f;font:600 29px/1.2 Georgia,serif}.archive-word-feature>p{margin:0 0 14px;color:#71818d}.archive-word-meaning{display:flex;align-items:center;justify-content:center;gap:9px}.archive-word-meaning strong{font:600 13px/1.4 "Noto Serif SC",serif}.archive-word-meaning button{width:28px;height:28px;border:0;border-radius:50%;color:#5d8fba;background:#dfeaf1}.archive-word-feature>small{display:block;margin-top:12px;color:#88959c;font-size:8px}.archive-word-feature.empty>i{font-size:36px;color:#5d8fba}.archive-word-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.archive-word-actions button{min-height:37px;border:1px solid #b8cbd8;border-radius:18px;color:#4f7fa3;background:#f6fafc}.archive-word-actions button:last-child{color:#fff;background:#5d8fba}.archive-english-week>div:last-child{height:70px;margin-top:9px;display:grid;grid-template-columns:repeat(7,1fr);align-items:end}.archive-english-week>div:last-child span{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:end;gap:4px}.archive-english-week>div:last-child i{width:14px;min-height:6px;border-radius:4px 4px 2px 2px;background:#5d8fba}.archive-english-week small{color:#92877c;font-size:8px}.archive-due-words>div:not(.archive-block-head){min-height:40px;display:grid;grid-template-columns:82px 1fr auto;align-items:center;border-bottom:1px solid rgba(100,78,57,.08)}.archive-due-words>div>strong{color:#416b8a;font-family:Georgia,serif}.archive-due-words>div>span{overflow:hidden;color:#766c62;text-overflow:ellipsis;white-space:nowrap}.archive-due-words>div>small{color:#9b8f84;font-size:8px}
 
       /* 2026-08-26 visual audit pass: align the implementation to the approved effect boards. */
-      .mobile-topbar { background: rgba(247,242,233,.97); }
+      .main { background: #fbf7ee; }
+      .mobile-topbar {
+        position: sticky;
+        border-bottom: 0 !important;
+        background: #fbf7ee !important;
+        box-shadow: none !important;
+      }
+      .mobile-topbar::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        height: 2px;
+        background: #fbf7ee;
+        pointer-events: none;
+      }
       .mobile-topbar .icon-btn, .mobile-todo-trigger, .todo-sheet, .btn.secondary { background: #fffdf8; }
       .mobile-tabbar { background: rgba(255,253,248,.98); }
       .mobile-archive-screen { min-height: 0; align-content: start; color: #2d2721; }
@@ -1870,11 +1889,620 @@
       body[data-active-module="home"] .archive-achievements button:nth-child(2) .archive-ui-icon { color: #d99a17; }
       body[data-active-module="home"] .archive-achievements button span:not(.archive-ui-icon) { font-size: 9.5px; }
       body[data-active-module="home"] .archive-achievements button strong { font-size: 11px; }
+
+      /* Daily-plan fidelity pass: match the approved editorial schedule board. */
+      body[data-active-module="daily"] {
+        --daily-blue: #5a86ac;
+        --daily-teal: #489b96;
+        background-color: #fbf7ee;
+        scrollbar-width: none;
+      }
+      body[data-active-module="daily"]::-webkit-scrollbar { display: none; }
+      body[data-active-module="daily"] .mobile-topbar {
+        min-height: 94px;
+        padding: max(18px, env(safe-area-inset-top)) 17px 14px;
+        background: #fbf7ee;
+      }
+      body[data-active-module="daily"] .mobile-heading { gap: 0; }
+      body[data-active-module="daily"] .mobile-topbar strong {
+        overflow: visible;
+        color: #27211c;
+        font-size: 34px;
+        line-height: 1.08;
+        letter-spacing: .035em;
+        white-space: nowrap;
+      }
+      body[data-active-module="daily"] #mobileDate { display: none; }
+      body[data-active-module="daily"] #menuBtn {
+        width: 44px;
+        height: 44px;
+        flex: 0 0 44px;
+        border-radius: 10px;
+        color: #4e463e;
+        font-size: 23px;
+      }
+      body[data-active-module="daily"] .content { padding-top: 0; }
+      body[data-active-module="daily"] .mobile-daily-archive {
+        min-height: calc(100svh - 210px);
+        gap: 10px;
+        align-content: space-between;
+      }
+      body[data-active-module="daily"] .archive-date-switch {
+        min-height: 42px;
+        padding: 0 2px;
+      }
+      body[data-active-module="daily"] .archive-date-switch button {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        font-size: 20px;
+      }
+      body[data-active-module="daily"] .archive-date-switch button:active { background: rgba(90,134,172,.1); }
+      body[data-active-module="daily"] .archive-date-switch strong {
+        color: #342d27;
+        font-size: 16px;
+        letter-spacing: .055em;
+      }
+      body[data-active-module="daily"] .archive-completion {
+        min-height: 62px;
+        padding: 2px 8px 9px 10px;
+      }
+      body[data-active-module="daily"] .archive-completion-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 8px;
+        font: 500 14px/1.2 "Noto Serif SC", "Songti SC", serif;
+      }
+      body[data-active-module="daily"] .archive-completion-track {
+        display: grid;
+        grid-template-columns: minmax(0,1fr) 43px;
+        align-items: center;
+        gap: 12px;
+      }
+      body[data-active-module="daily"] .archive-completion strong {
+        font-size: 17px;
+        text-align: right;
+      }
+      body[data-active-module="daily"] .archive-completion .archive-progress { height: 7px; }
+      body[data-active-module="daily"] .archive-completion-mark {
+        color: #ddb467;
+        font-size: 27px;
+      }
+      body[data-active-module="daily"] .archive-segmented button {
+        min-height: 44px;
+        color: #4f4841;
+        font: 500 14px/1.2 "Noto Serif SC", "Songti SC", serif;
+      }
+      body[data-active-module="daily"] .archive-segmented button.active { font-weight: 650; }
+      body[data-active-module="daily"] .archive-segmented button.active::after {
+        left: 20%;
+        right: 20%;
+        height: 3px;
+        border-radius: 3px 3px 0 0;
+        background: var(--daily-blue);
+      }
+      body[data-active-module="daily"] .archive-segmented button.active,
+      body[data-active-module="daily"] .archive-dashed-action,
+      body[data-active-module="daily"] .mobile-tab-btn[data-module="daily"] {
+        color: var(--daily-blue) !important;
+      }
+      body[data-active-module="daily"] .todo-sheet-submit { background: var(--daily-blue); }
+      body[data-active-module="daily"] .todo-sheet-priorities input:checked + label {
+        border-color: rgba(90,134,172,.48);
+        background: #eef5fa;
+        box-shadow: inset 0 0 0 1px rgba(90,134,172,.1);
+      }
+      body[data-active-module="daily"] .todo-sheet .input:focus {
+        border-color: var(--daily-blue);
+        box-shadow: 0 0 0 3px rgba(90,134,172,.14), inset 0 0 0 1px var(--daily-blue);
+      }
+      body[data-active-module="daily"] .archive-progress.blue > span,
+      body[data-active-module="daily"] .archive-timeline-dot {
+        background: var(--daily-blue);
+      }
+      body[data-active-module="daily"] .archive-schedule-card {
+        position: relative;
+        padding: 7px 10px 10px;
+        border-radius: 14px;
+        background-color: #fdfbf5;
+        box-shadow: 0 4px 13px rgba(83,60,39,.06);
+      }
+      body[data-active-module="daily"] .archive-schedule-card::before {
+        content: "";
+        position: absolute;
+        z-index: 0;
+        left: 71px;
+        top: 46px;
+        bottom: 69px;
+        border-left: 1px dashed rgba(90,134,172,.25);
+        pointer-events: none;
+      }
+      body[data-active-module="daily"] .archive-schedule-row {
+        position: relative;
+        z-index: 1;
+        min-height: 86px;
+        grid-template-columns: 48px 12px 36px minmax(0,1fr) 50px;
+        gap: 7px;
+        border-bottom-color: rgba(100,78,57,.12);
+      }
+      body[data-active-module="daily"] .archive-schedule-row time {
+        color: #302a25;
+        font-size: 16px;
+        line-height: 1.15;
+      }
+      body[data-active-module="daily"] .archive-time-control {
+        width: 48px;
+        min-height: 48px;
+        display: grid;
+        align-content: center;
+        justify-items: start;
+        padding: 0;
+        border: 0;
+        border-radius: 7px;
+        background: transparent;
+        text-align: left;
+        cursor: pointer;
+      }
+      body[data-active-module="daily"] .archive-time-control:active { background: rgba(90,134,172,.08); }
+      body[data-active-module="daily"] .archive-schedule-row time small,
+      body[data-active-module="daily"] .archive-schedule-row div small {
+        margin-top: 4px;
+        color: #887d72;
+        font-size: 10px;
+        line-height: 1.25;
+      }
+      body[data-active-module="daily"] .archive-timeline-dot {
+        width: 8px;
+        height: 8px;
+        justify-self: center;
+        box-shadow: 0 0 0 3px #fffdf8;
+      }
+      body[data-active-module="daily"] .archive-schedule-row > .archive-ui-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 9px;
+        color: #625950;
+        background: rgba(255,253,248,.88);
+        font-size: 21px;
+      }
+      body[data-active-module="daily"] .archive-schedule-row div { min-width: 0; }
+      body[data-active-module="daily"] .archive-schedule-row div strong {
+        display: block;
+        overflow: hidden;
+        color: #312a24;
+        font-size: 15px;
+        line-height: 1.35;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      body[data-active-module="daily"] .archive-status-control {
+        position: relative;
+        width: 50px;
+        min-height: 64px;
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        gap: 5px;
+        cursor: pointer;
+      }
+      body[data-active-module="daily"] .archive-status-input {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+      body[data-active-module="daily"] .archive-status-icon {
+        width: 24px;
+        height: 24px;
+        display: grid;
+        place-items: center;
+        border: 1.5px solid #a9a7a2;
+        border-radius: 50%;
+        color: #fffdf8;
+        background: transparent;
+        transition: border-color .16s ease, background-color .16s ease, transform .16s ease;
+      }
+      body[data-active-module="daily"] .archive-status-icon .ph {
+        opacity: 0;
+        font-size: 15px;
+        font-weight: 700;
+        transform: scale(.7);
+        transition: opacity .16s ease, transform .16s ease;
+      }
+      body[data-active-module="daily"] .archive-status-input:checked + .archive-status-icon {
+        border-color: var(--daily-teal);
+        background: var(--daily-teal);
+        transform: scale(1.02);
+      }
+      body[data-active-module="daily"] .archive-status-input:checked + .archive-status-icon .ph {
+        opacity: 1;
+        transform: scale(1);
+      }
+      body[data-active-module="daily"] .archive-status-input:focus-visible + .archive-status-icon {
+        outline: 2px solid var(--daily-blue);
+        outline-offset: 3px;
+      }
+      body[data-active-module="daily"] .archive-status-control em {
+        color: #77716a;
+        font-size: 9.5px;
+        font-style: normal;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      body[data-active-module="daily"] .archive-status-input:checked ~ em { color: var(--daily-teal); }
+      body[data-active-module="daily"] .archive-dashed-action {
+        position: relative;
+        z-index: 1;
+        min-height: 49px;
+        margin-top: 9px;
+        border-radius: 10px;
+        font-size: 14px;
+      }
+      body[data-active-module="daily"] .archive-schedule-empty { min-height: 256px; }
+      body[data-active-module="daily"] .archive-dashed-action .ph { font-size: 18px; vertical-align: -2px; }
+      body[data-active-module="daily"] .archive-focus-note {
+        position: relative;
+        min-height: 124px;
+        overflow: visible;
+        padding: 17px 19px;
+        border-radius: 13px;
+        background-color: #e1ebf0;
+        background-image: url("assets/paper-texture.webp");
+        background-size: 420px 420px;
+        background-blend-mode: soft-light;
+        box-shadow: 0 4px 12px rgba(73,94,108,.055);
+      }
+      body[data-active-module="daily"] .archive-focus-note h2 {
+        color: #312c27;
+        font-size: 15px;
+        line-height: 1.35;
+      }
+      body[data-active-module="daily"] .archive-focus-note ul {
+        margin-top: 10px;
+        padding-left: 19px;
+        color: #4f5d66;
+        font-size: 11px;
+        line-height: 1.75;
+      }
+      body[data-active-module="daily"] .archive-focus-note > i {
+        position: absolute;
+        right: 17px;
+        bottom: 14px;
+        font-size: 28px;
+        color: #6a98b8;
+      }
+      body[data-active-module="daily"] .archive-focus-tape {
+        position: absolute;
+        z-index: 1;
+        right: -2px;
+        top: -12px;
+        width: 72px;
+        height: 45px;
+        object-fit: contain;
+        opacity: .7;
+        filter: sepia(.18) saturate(.76) brightness(1.08);
+        pointer-events: none;
+      }
+      body[data-active-module="daily"] .mobile-tab-btn[data-module="daily"] {
+        border: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+      body[data-active-module="daily"] .mobile-tab-ai .mobile-tab-icon {
+        background: var(--daily-blue);
+        box-shadow: 0 7px 18px rgba(90,134,172,.22);
+      }
+      body[data-active-module="daily"] .mobile-tab-ai .mobile-tab-label { color: #4f789b; }
       .mobile-tab-ai .mobile-tab-icon {
         width: 54px;
         height: 54px;
         border-radius: 50%;
       }
+
+      /* Remaining-module fidelity pass: mirror the seven independent reference boards. */
+      body:not([data-active-module="home"]) .mobile-topbar { min-height: 100px; padding: max(18px,env(safe-area-inset-top)) 17px 14px; }
+      body:not([data-active-module="home"]) .mobile-topbar strong { overflow: visible; font-size: 34px; line-height: 1.08; letter-spacing: .025em; white-space: nowrap; }
+      body:not([data-active-module="home"]) .mobile-heading span:empty { display: none; }
+      body[data-active-module="ledger"] .content,
+      body[data-active-module="goals"] .content,
+      body[data-active-module="fitness"] .content { padding-top: 18px; }
+      .archive-kicker-heading { display: block; padding: 0 2px; font: 600 13px/1.4 "Noto Serif SC",serif; }
+
+      .archive-period-picker { justify-self:start; padding:0 2px; border:0; background:transparent; font:600 13px/1.4 "Noto Serif SC",serif; }
+      .archive-section-caption { padding:2px; }
+      .archive-year-strip { min-height:70px; padding:10px 0; border:1px solid rgba(87,66,49,.12); border-radius:11px; background:#fffdf8; }
+      .archive-year-strip span { display:flex; flex-direction:column; gap:6px; }
+      .archive-year-strip strong { order:2; margin:0; }
+      .archive-featured-goal { min-height:278px; padding:14px; border-color:#ee7b56; background:#fffdf8; }
+      .archive-featured-goal-title { position:relative; display:grid; grid-template-columns:42px minmax(0,1fr) auto; align-items:center; gap:10px; }
+      .archive-featured-goal-title>.archive-ui-icon { width:39px; height:39px; border-radius:50%; color:#fff; background:#ec7042; font-size:22px; }
+      .archive-featured-goal-title h2 { margin:0 0 2px; font-size:17px; }
+      .archive-featured-goal-title small { color:#8a7d71; font-size:9px; }
+      .archive-featured-goal-title em { align-self:start; padding:3px 7px; border-radius:5px; color:#d86740; background:#f8e4db; font-size:9px; font-style:normal; }
+      .archive-featured-goal-title>i { position:absolute; right:-3px; top:32px; color:#ec7042; font-size:22px; }
+      .archive-featured-goal .archive-progress-copy { margin:10px 0 0 52px; align-items:center; }
+      .archive-featured-goal .archive-progress-copy .archive-progress { flex:1; }
+      .archive-milestones { position:relative; margin:13px 0 0 7px; gap:0; }
+      .archive-milestones::before { content:""; position:absolute; left:10px; top:14px; bottom:14px; border-left:1px dashed #d8c9bc; }
+      .archive-milestones span { position:relative; min-height:46px; display:grid; grid-template-columns:22px minmax(0,1fr); grid-template-rows:auto auto; column-gap:9px; align-content:center; }
+      .archive-milestones span>i { z-index:1; grid-row:1/3; width:20px; height:20px; display:grid; place-items:center; border-radius:50%; color:#665e56; background:#e4dfd7; font:600 9px system-ui; }
+      .archive-milestones span.done>i { color:#fff; background:#4eaaa1; }
+      .archive-milestones span>b { color:#433a33; font-size:10px; }
+      .archive-milestones span>small { color:#91857a; font-size:8px; }
+      .archive-goal-list { min-height:0; padding:0; display:grid; gap:8px; }
+      .archive-goal-list>button { min-height:56px; padding:8px 12px; border:1px solid rgba(87,66,49,.12); border-radius:10px; background:#fffdf8; }
+      .archive-goal-list>button>span { flex:1; }
+      .archive-goal-list>button>.archive-progress { width:34%; height:4px; }
+      .archive-goal-list>button>.archive-progress i { display:block; height:100%; border-radius:inherit; background:#4eaaa1; }
+      .archive-goal-list>button>em { width:36px; text-align:right; }
+      body[data-active-module="goals"] .archive-dashed-action { margin-top:0; color:#4e82ad!important; }
+
+      .archive-current-book { position:relative; min-height:151px; grid-template-columns:96px minmax(0,1fr); gap:14px; padding:14px; }
+      .archive-current-book>.archive-book-cover { width:86px; height:116px; }
+      .archive-current-book>i { position:absolute; right:14px; top:10px; color:#ec7042; font-size:22px; }
+      .archive-current-book h2 { font-size:17px; }
+      .archive-book-cover { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:8px; border:1px solid #d7c8b8; border-radius:3px; color:#4a4037; background:#f1e8d9; box-shadow:0 5px 9px rgba(65,45,30,.12); text-align:center; }
+      .archive-book-cover b { font:600 10px/1.45 "Noto Serif SC",serif; }
+      .archive-book-cover small { margin-top:8px; color:#8b7662; font-size:6px; }
+      .archive-book-cover.tone-2 { color:#fff; border-color:#345f7e; background:#477a9e; }
+      .archive-reading-goal { min-height:78px; padding:11px 12px; border:1px solid rgba(87,66,49,.13); border-radius:11px; background:#fffdf8; }
+      .archive-reading-goal>div:nth-child(2) { display:grid; grid-template-columns:29px auto 1fr 20px; align-items:center; gap:7px; margin:7px 0; }
+      .archive-reading-goal .archive-ui-icon { color:#74695e; font-size:24px; }
+      .archive-reading-goal strong { font:600 15px "Noto Serif SC",serif; }
+      .archive-reading-goal strong small,.archive-reading-goal>div:nth-child(2)>span { color:#8c8075; font:9px system-ui; }
+      .archive-reading-goal>div:nth-child(2)>span { justify-self:end; }
+      .archive-reading-goal>div:nth-child(2)>i { width:20px; height:20px; border:3px solid #d99a17; border-left-color:#eadfce; border-radius:50%; }
+      .archive-reading-note { min-height:112px; display:grid; grid-template-columns:minmax(0,1fr) 132px; gap:9px; padding:11px 10px 11px 12px; overflow:visible; }
+      .archive-reading-note p { white-space:pre-line; }
+      .archive-reading-note img { width:132px; height:92px; align-self:center; object-fit:cover; border:5px solid #fff; box-shadow:0 4px 9px rgba(65,45,30,.12); transform:rotate(-1deg); }
+      .archive-bookshelf { padding:4px 2px; }
+      .archive-bookshelf>div:nth-child(2) { display:grid; grid-template-columns:1fr 1fr; gap:12px; overflow:visible; }
+      .archive-bookshelf>div:nth-child(2)>button { width:auto; min-width:0; display:grid; grid-template-columns:48px minmax(0,1fr); gap:8px; text-align:left; }
+      .archive-bookshelf .archive-book-cover { width:48px; height:74px; }
+      .archive-bookshelf>div:nth-child(2)>button>span:last-child { min-width:0; align-self:center; }
+      .archive-bookshelf>div:nth-child(2)>button>span:last-child>b,.archive-bookshelf>div:nth-child(2)>button>span:last-child>small { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .archive-bookshelf>div:nth-child(2)>button>span:last-child>b { font:600 10px "Noto Serif SC",serif; }
+      .archive-bookshelf>div:nth-child(2)>button>span:last-child>small,.archive-bookshelf em { color:#8a7d71; font-size:7px; font-style:normal; }
+      .archive-bookshelf .archive-progress { height:4px; margin:8px 0 3px; }
+      .archive-bookshelf .archive-progress i { display:block; height:100%; border-radius:inherit; background:#ec7042; }
+      .archive-bookshelf>.archive-dashed-action { margin-top:10px; color:#d86740!important; border-color:#efa885; }
+
+      .archive-habit-board { min-height:214px; }
+      .archive-habit-board .archive-block-head>span { color:#8a7d71; font-size:9px; }
+      .archive-habit-board .archive-block-head b { color:#d86740; font-size:13px; }
+      .archive-habit-board-grid { grid-template-columns:72px repeat(7,1fr); row-gap:3px; }
+      .archive-habit-board-grid>strong { min-height:35px; display:flex; flex-direction:column; justify-content:center; }
+      .archive-habit-board-grid>strong>small { color:#91857a; font:7px system-ui; }
+      .archive-habit-board-grid button { width:20px; height:20px; }
+      .archive-today-schedule { padding:10px 12px; }
+      .archive-today-schedule>div:not(.archive-block-head) { min-height:58px; display:grid; grid-template-columns:42px 7px 30px minmax(0,1fr) 38px; align-items:center; gap:6px; border-bottom:1px solid rgba(87,66,49,.09); }
+      .archive-today-schedule time { font:600 12px "Noto Serif SC",serif; }
+      .archive-today-schedule time small,.archive-today-schedule p small { display:block; color:#91857a; font:8px system-ui; }
+      .archive-today-schedule>div>span { width:6px; height:6px; border-radius:50%; background:#5c92bf; }
+      .archive-today-schedule .archive-ui-icon { width:28px; height:28px; border:1px solid rgba(87,66,49,.13); border-radius:7px; color:#665e56; }
+      .archive-today-schedule p { margin:0; }
+      .archive-today-schedule p strong { font:600 11px "Noto Serif SC",serif; }
+      .archive-today-schedule em { color:#8a7d71; font-size:8px; font-style:normal; text-align:right; }
+      .archive-trip-feature { min-height:116px; }
+      .archive-trip-feature h2 { font-size:17px; }
+      .archive-trip-feature small { display:block; margin-top:6px; color:#71808a; font-size:8px; }
+
+      .mobile-fitness-archive { gap:9px; }
+      .archive-fitness-summary { min-height:86px; padding:13px 90px 13px 5px; }
+      .archive-fitness-summary::after { width:96px; height:82px; right:-2px; bottom:-4px; }
+      .archive-fitness-summary>div { align-content:center; }
+      .archive-fitness-summary>div span { display:block; }
+      .archive-fitness-summary>div strong { margin-top:7px; }
+      .archive-weekly-movement { min-height:88px; display:grid; grid-template-columns:68px 1fr; gap:12px; align-items:center; }
+      .archive-weekly-movement>.archive-block-head { grid-column:1/-1; }
+      .archive-week-count strong { display:block; font:600 19px "Noto Serif SC",serif; }
+      .archive-week-count span { color:#8a7d71; font-size:8px; }
+      .archive-activity-dots { margin-top:5px; }
+      .archive-activity-dots span { width:12px; height:12px; }
+      .archive-workout-feature.archive-workout-detail { min-height:236px; border-color:#3e9b91; background:#fffdf8; }
+      .archive-workout-feature-top h2 small { font:9px system-ui; }
+      .archive-workout-feature-top>em { padding:3px 7px; border-radius:4px; color:#3e9b91; background:#e1f0ec; font-size:8px; font-style:normal; }
+      .archive-workout-streak-row>span { min-height:53px; display:grid; grid-template-columns:1fr auto; }
+      .archive-workout-streak-row>span>small { grid-column:1/-1; color:#708079; }
+      .archive-workout-streak-row .archive-progress { width:100%; grid-column:1/-1; }
+      .archive-workout-streak-row .archive-progress i { display:block; height:100%; border-radius:inherit; background:#3e9b91; }
+      body[data-active-module="fitness"] .archive-dashed-action { margin-top:0; color:#3e9b91!important; border-color:#9bc7c1; }
+
+      .archive-mood-today { min-height:112px; }
+      .archive-mood-today h2 i { color:#d99a17; font-size:20px; }
+      .archive-mood-picker { min-height:75px; padding-top:3px; }
+      .archive-mood-picker>div { margin:0; }
+      .archive-mood-picker .archive-ui-icon { color:#c89323; background:#fbf3df; }
+      .archive-mood-picker button.active .archive-ui-icon { color:#3e9b91; border:1px solid #3e9b91; background:#eef7f4; }
+      .archive-journal-card { min-height:135px; }
+      .archive-journal-card .archive-block-head>span { color:#8a7d71; font-size:9px; }
+      .archive-journal-card>div:last-child { display:grid; grid-template-columns:minmax(0,1fr) 92px; gap:10px; align-items:center; }
+      .archive-journal-card p { margin:9px 0; white-space:pre-line; }
+      .archive-journal-card img { width:92px; height:68px; object-fit:cover; border:4px solid #fff; box-shadow:0 3px 8px rgba(65,45,30,.1); transform:rotate(2deg); }
+      .archive-mood-week { min-height:118px; }
+      .archive-mood-week-labels { margin:9px 0 0!important; display:grid!important; grid-template-columns:repeat(7,1fr)!important; color:#8a7d71; font-size:8px; text-align:center; }
+      .archive-mood-trend { position:relative; height:54px; margin-top:0!important; display:grid!important; grid-template-columns:repeat(7,1fr)!important; align-items:end; }
+      .archive-mood-trend::before { content:""; position:absolute; left:7%; right:7%; top:50%; border-top:1px dashed #cfc7bd; transform:rotate(-3deg); }
+      .archive-mood-trend>span { z-index:1; align-self:end; margin-bottom:calc((var(--score) - 1) * 6px); }
+      .archive-mood-trend .archive-ui-icon { width:23px; height:23px; border:1px solid currentColor; border-radius:50%; background:#fffdf8; }
+      .archive-reflection { min-height:60px; border:1px solid #d3e2ec; border-left-width:1px; border-radius:10px; }
+      .archive-reflection>i { margin-left:auto; order:3; font-size:22px; }
+      .archive-reflection>div { flex:1; }
+      .archive-reflection b { color:#3f5260; font:600 11px "Noto Serif SC",serif; }
+      .archive-reflection p { color:#637987; }
+      .archive-reflection button { border:0; color:#5c92bf; background:transparent; font-size:9px; }
+
+      .archive-english-goal { min-height:102px; padding:13px; }
+      .archive-english-goal>div:first-child { display:grid; grid-template-columns:1fr auto; row-gap:5px; }
+      .archive-english-goal>div:first-child strong { grid-row:2; font-size:28px; }
+      .archive-english-goal>div:first-child em { grid-row:2; align-self:end; color:#8a7d71; font-size:9px; font-style:normal; }
+      .archive-english-goal>.archive-progress { margin-right:0; }
+      .archive-english-goal>i { position:absolute; right:13px; top:10px; color:#ec7042; font-size:22px; }
+      .archive-word-feature { min-height:238px; padding:13px; text-align:left; border-color:#8db4d1; background:#eef5fa; }
+      .archive-word-feature>div:first-child { display:grid; grid-template-columns:1fr 28px auto; align-items:center; }
+      .archive-word-feature>div:first-child h2 { margin:0; font-size:29px; }
+      .archive-word-feature>div:first-child button { border:0; color:#5c92bf; background:transparent; }
+      .archive-word-feature>div:first-child .archive-example-action { padding:4px 0; border:0; color:#5c92bf; background:transparent; font-size:9px; }
+      .archive-word-feature>p { margin:2px 0 6px; }
+      .archive-word-feature>strong,.archive-word-feature>em,.archive-word-feature>small { display:block; margin-top:4px; font-family:Georgia,"Noto Serif SC",serif; }
+      .archive-word-feature>strong { color:#3f464b; font-size:11px; }
+      .archive-word-feature>em { color:#5f6970; font-size:10px; line-height:1.45; }
+      .archive-word-feature>small { color:#78858c; font-size:9px; }
+      .archive-word-feature .archive-word-actions { margin-top:10px; }
+      .archive-word-actions button { min-height:38px; background:#fffdf8; }
+      .archive-english-week { min-height:92px; }
+      .archive-english-week-grid { height:auto!important; margin-top:8px!important; display:grid!important; grid-template-columns:repeat(7,1fr) 72px!important; align-items:center!important; }
+      .archive-english-week-grid span { height:auto!important; display:grid!important; justify-items:center!important; gap:5px!important; }
+      .archive-english-week-grid span>i { width:18px!important; height:18px!important; min-height:18px!important; display:grid; place-items:center; border:1px solid #9aa8b0; border-radius:50%!important; color:#fff; background:transparent!important; font:700 9px system-ui; }
+      .archive-english-week-grid span>i.done { border-color:#3e9b91; background:#3e9b91!important; }
+      .archive-english-week-grid span>i.today { border-color:#d99a17; background:#d99a17!important; }
+      .archive-english-week-grid>strong { display:grid; justify-items:center; color:#8a7d71; font-size:8px; }
+      .archive-english-week-grid>strong>b { margin-top:4px; color:#3f464b; font:600 14px "Noto Serif SC",serif; }
+      .archive-due-words { min-height:94px; }
+      .archive-due-words>div:not(.archive-block-head) { grid-template-columns:96px 1fr auto; }
+      .archive-due-words>div>strong small { display:block; color:#8a7d71; font:7px system-ui; }
+      .archive-due-words>div>em { color:#d99a17; font-size:8px; font-style:normal; }
+
+      /* Functional QA pass: keep detailed tools reachable and remove false affordances. */
+      .sidebar {
+        inset: 102px auto max(10px, env(safe-area-inset-bottom)) 10px;
+        max-height: none;
+        padding: 8px 12px 6px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+      }
+      .sidebar .brand { display:none; }
+      .sidebar .nav { gap:1px; }
+      .sidebar .nav-btn { min-height:40px; }
+      .sidebar .nav-icon { width:27px; height:27px; flex-basis:27px; }
+      .sidebar-spacer { min-height:4px; }
+      .sidebar-tools { gap:1px; padding-top:6px; padding-bottom:6px; }
+      .sidebar .utility-btn { min-height:40px; }
+      .archive-detail-toolbar {
+        position: sticky;
+        top: 94px;
+        z-index: 16;
+        min-height: 44px;
+        margin: 0 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 5px 7px 5px 10px;
+        border: 1px solid rgba(87,66,49,.13);
+        border-radius: 12px;
+        background: rgba(255,253,248,.96);
+        box-shadow: 0 5px 16px rgba(83,60,39,.08);
+      }
+      .archive-detail-toolbar span { color:#786d63; font-size:10px; }
+      .archive-detail-toolbar button {
+        min-height: 32px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 0 11px;
+        border: 0;
+        border-radius: 16px;
+        color: var(--module-action);
+        background: color-mix(in srgb, var(--module-action) 10%, #fffdf8);
+        font: 650 11px/1 system-ui;
+      }
+      .page.archive-detail-open > *:not(.mobile-archive-screen) { scroll-margin-top: 148px; }
+      body.archive-detail-view .mobile-tabbar {
+        opacity: 0;
+        transform: translateY(100%);
+        pointer-events: none;
+      }
+      body.archive-detail-view .content { padding-bottom: max(36px, env(safe-area-inset-bottom)); }
+      body.archive-detail-view .page { padding-bottom: 90px; }
+      .archive-month-picker,
+      .archive-period-picker {
+        min-height: 32px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        border: 0;
+        color: inherit;
+        background: transparent;
+        font: 600 14px/1.2 "Noto Serif SC",serif;
+      }
+      .archive-period-picker { width:auto; padding:0; }
+      .archive-month-picker select,
+      .archive-period-picker select {
+        max-width: 150px;
+        border: 0;
+        color: inherit;
+        background: transparent;
+        font: inherit;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+      .archive-featured-goal,
+      .archive-trip-feature { width:100%; color:inherit; text-align:left; }
+      button.archive-featured-goal,
+      button.archive-trip-feature { font:inherit; }
+      button.archive-current-book { width:100%; color:inherit; font:inherit; text-align:left; }
+      #habitForm { scroll-margin-top: 154px; }
+      #habitForm .input { min-width:0; }
+      #bookPages:not(:focus):placeholder-shown { color:var(--muted); }
+
+      /* Shared mobile header anchor: keep titles and actions stationary between modules. */
+      .mobile-topbar,
+      body[data-active-module="home"] .mobile-topbar,
+      body:not([data-active-module="home"]) .mobile-topbar,
+      body[data-active-module="daily"] .mobile-topbar {
+        min-height: 102px;
+        padding: max(18px, env(safe-area-inset-top)) 17px 13px;
+      }
+      body:not([data-active-module="home"]) .mobile-heading {
+        align-self: flex-start;
+        padding-top: 13.5px;
+      }
+      body[data-active-module] .content { padding-top: 6px; }
+      .mobile-topbar .icon-btn,
+      body[data-active-module="home"] #menuBtn,
+      body[data-active-module="daily"] #menuBtn {
+        position: relative;
+        top: -3.5px;
+        width: 44px;
+        height: 44px;
+        flex: 0 0 44px;
+        align-self: center;
+        border-radius: 10px;
+      }
+      html,
+      body { scrollbar-width: none; }
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar { display: none; }
+      .archive-detail-toolbar { top: 102px; }
+      .page.archive-detail-open > *:not(.mobile-archive-screen) { scroll-margin-top: 156px; }
+      #habitForm { scroll-margin-top: 162px; }
+    }
+
+    @media (max-width: 370px) {
+      body[data-active-module="daily"] .content { padding-inline: 10px; }
+      body[data-active-module="daily"] .mobile-daily-archive { gap: 8px; }
+      body[data-active-module="daily"] .archive-schedule-card { padding-inline: 8px; }
+      body[data-active-module="daily"] .archive-schedule-card::before { left: 64px; }
+      body[data-active-module="daily"] .archive-schedule-row {
+        min-height: 82px;
+        grid-template-columns: 44px 10px 32px minmax(0,1fr) 46px;
+        gap: 5px;
+      }
+      body[data-active-module="daily"] .archive-schedule-row time { font-size: 14px; }
+      body[data-active-module="daily"] .archive-time-control { width: 44px; }
+      body[data-active-module="daily"] .archive-schedule-row > .archive-ui-icon { width: 32px; height: 32px; font-size: 18px; }
+      body[data-active-module="daily"] .archive-schedule-row div strong { font-size: 13.5px; }
+      body[data-active-module="daily"] .archive-status-control { width: 46px; }
+      body[data-active-module="daily"] .archive-focus-note { min-height: 118px; padding-block: 15px; }
     }
   </style>
 </head>
@@ -1916,17 +2544,21 @@
   <section class="todo-sheet" id="todoSheet" role="dialog" aria-modal="true" aria-labelledby="todoSheetTitle" hidden>
     <div class="todo-sheet-handle" aria-hidden="true"></div>
     <div class="todo-sheet-head">
-      <div><h2 id="todoSheetTitle">添加今日待办</h2><p>输入后按键盘完成键即可提交。</p></div>
+      <div><h2 id="todoSheetTitle">添加今日计划</h2><p>安排时间和优先级，提交后会按时间排序。</p></div>
       <button class="icon-btn" id="todoSheetClose" type="button" aria-label="关闭添加待办"><i class="ph ph-x" aria-hidden="true"></i></button>
     </div>
     <form class="todo-sheet-form" id="todoSheetForm">
       <div class="field"><label for="todoSheetText">待办事项</label><input class="input" id="todoSheetText" name="text" maxlength="200" enterkeyhint="done" autocomplete="off" required placeholder="今天最重要的一件事"></div>
+      <div class="todo-sheet-time-grid">
+        <div class="field"><label for="todoSheetStartTime">开始时间</label><input class="input" id="todoSheetStartTime" name="startTime" type="time" required></div>
+        <div class="field"><label for="todoSheetEndTime">结束时间</label><input class="input" id="todoSheetEndTime" name="endTime" type="time" required></div>
+      </div>
       <div class="field"><span class="field-label">优先级</span><div class="todo-sheet-priorities" role="radiogroup" aria-label="优先级">
         <input id="sheetPHigh" type="radio" name="priority" value="high"><label for="sheetPHigh"><span class="priority-dot high" aria-hidden="true"></span>高</label>
         <input id="sheetPMedium" type="radio" name="priority" value="medium" checked><label for="sheetPMedium"><span class="priority-dot medium" aria-hidden="true"></span>中</label>
         <input id="sheetPLow" type="radio" name="priority" value="low"><label for="sheetPLow"><span class="priority-dot low" aria-hidden="true"></span>低</label>
       </div></div>
-      <button class="btn todo-sheet-submit" type="submit">添加到今天</button>
+      <button class="btn todo-sheet-submit" type="submit">添加计划</button>
     </form>
   </section>
 
@@ -2006,6 +2638,9 @@
   let chartFrame = 0;
   // Every fresh page load starts from the dashboard; navigation remains client-side afterwards.
   let activeModule = 'home';
+  let activeDailyDate = '';
+  let ledgerMonth = `${new Date().getFullYear()}-${String(new Date().getMonth()+1).padStart(2,'0')}`;
+  let goalYear = new Date().getFullYear();
   let moodRange = localStorage.getItem('lifeWorkbench.moodRange') === 'month' ? 'month' : 'week';
   let activeTripId = '';
   let goalArchiveView = false;
@@ -2025,6 +2660,7 @@
 
   const pad = n => String(n).padStart(2, '0');
   const dateKey = (d = new Date()) => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  activeDailyDate = dateKey();
   const parseDay = s => { const [y,m,d] = String(s).split('-').map(Number); return new Date(y, m-1, d, 12); };
   const shiftDay = (s,n) => { const d = parseDay(s); d.setDate(d.getDate()+n); return dateKey(d); };
   const mondayOf = s => shiftDay(s, -((parseDay(s).getDay()+6)%7));
@@ -2101,7 +2737,8 @@
     next.daily.todos = Array.isArray(src.daily?.todos) ? src.daily.todos.filter(x=>x&&x.text).map(x=>{
       const linkedGoalId=normalizedGoalIds.has(x.goalId)&&keyResultOwners.get(x.keyResultId)===x.goalId?x.goalId:null;
       const linkedKeyResultId=linkedGoalId?x.keyResultId:null,done=Boolean(x.done);
-      return {...x,id:claimId(todoIds,x.id),text:String(x.text).slice(0,200),priority:['high','medium','low'].includes(x.priority)?x.priority:'medium',date:validDate(x.date)?x.date:dateKey(),done,completedAt:done&&typeof x.completedAt==='string'?x.completedAt:null,goalId:linkedGoalId,keyResultId:linkedKeyResultId,progressIncrement:linkedGoalId?clamp(Number(x.progressIncrement)||1,.01,1e9):null,krApplied:linkedGoalId?Boolean(x.krApplied||(done&&x.krApplied!==false)):false};
+      const startTime=validClockTime(x.startTime)?x.startTime:null,endTime=validClockTime(x.endTime)&&(!startTime||x.endTime>startTime)?x.endTime:null;
+      return {...x,id:claimId(todoIds,x.id),text:String(x.text).slice(0,200),priority:['high','medium','low'].includes(x.priority)?x.priority:'medium',date:validDate(x.date)?x.date:dateKey(),startTime,endTime,done,completedAt:done&&typeof x.completedAt==='string'?x.completedAt:null,goalId:linkedGoalId,keyResultId:linkedKeyResultId,progressIncrement:linkedGoalId?clamp(Number(x.progressIncrement)||1,.01,1e9):null,krApplied:linkedGoalId?Boolean(x.krApplied||(done&&x.krApplied!==false)):false};
     }) : [];
     const ledgerIds=new Set();
     next.ledger.entries = Array.isArray(src.ledger?.entries) ? src.ledger.entries.filter(x=>x&&Number(x.amount)>0&&validDate(x.date)).map(x=>({...x,id:claimId(ledgerIds,x.id),type:x.type==='income'?'income':'expense',amount:clamp(Number(x.amount),.01,1e9),category:CATEGORIES.includes(x.category)?x.category:'其他',note:String(x.note||'').slice(0,200),isInvestment:x.type!=='income'&&Boolean(x.isInvestment)})) : [];
@@ -2128,6 +2765,16 @@
     if(!/^\d{4}-\d{2}-\d{2}$/.test(String(s))) return false;
     const [y,m,d]=s.split('-').map(Number); const test=new Date(y,m-1,d);
     return test.getFullYear()===y&&test.getMonth()===m-1&&test.getDate()===d;
+  }
+
+  function validClockTime(value){ return /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(String(value||'')); }
+  function timeToMinutes(value){ if(!validClockTime(value))return null;const [hours,minutes]=value.split(':').map(Number);return hours*60+minutes; }
+  function minutesToTime(value){ const minutes=clamp(Math.round(Number(value)||0),0,1439);return `${pad(Math.floor(minutes/60))}:${pad(minutes%60)}`; }
+  function defaultTodoSlot(index){
+    const presets=[['09:00','10:30'],['14:00','15:00'],['19:30','20:00']];
+    if(presets[index])return {start:presets[index][0],end:presets[index][1]};
+    const start=Math.min(1410,1230+Math.max(0,index-3)*60);
+    return {start:minutesToTime(start),end:minutesToTime(Math.min(1439,start+30))};
   }
 
   let state=loadState();
@@ -2351,26 +2998,36 @@
     </div>`;
   }
 
+  function todoScheduleIcon(todo){
+    const text=String(todo?.text||'');
+    if(/训练|健身|跑步|运动|瑜伽|拉伸/.test(text))return 'ph-barbell';
+    if(/读|阅读|学习|复习|写作|课程/.test(text))return 'ph-book-open-text';
+    if(/会议|评审|方案|工作|客户|汇报/.test(text))return 'ph-briefcase';
+    return 'ph-check-square-offset';
+  }
+
   function renderArchiveDailyMobile(){
-    const today=dateKey(),items=state.daily.todos.filter(x=>x.date===today),done=items.filter(x=>x.done).length,progress=items.length?Math.round(done/items.length*100):0;
-    const times=['09:00','14:00','19:30'],subtitles=['会议室 B','健身房','今日阅读'];
+    const selectedDate=activeDailyDate,selectedDay=parseDay(selectedDate),weekday=['周日','周一','周二','周三','周四','周五','周六'][selectedDay.getDay()];
+    const scheduleItems=state.daily.todos.filter(x=>x.date===selectedDate).map((todo,index)=>{const slot=defaultTodoSlot(index);return {todo,start:todo.startTime||slot.start,end:todo.endTime||slot.end};}).sort((a,b)=>a.start.localeCompare(b.start)||String(a.todo.createdAt||'').localeCompare(String(b.todo.createdAt||'')));
+    const items=scheduleItems.map(x=>x.todo),done=items.filter(x=>x.done).length,progress=items.length?Math.round(done/items.length*100):0;
+    const priorityLabels={high:'高优先级',medium:'中优先级',low:'低优先级'};
     return `<div class="mobile-archive-screen mobile-daily-archive">
-      <div class="archive-date-switch"><button type="button" aria-label="前一天"><i class="ph ph-caret-left"></i></button><strong>${formatFullDate(today).replace('年','年')} · ${WEEK_NAMES[(parseDay(today).getDay()+6)%7]}</strong><button type="button" aria-label="后一天"><i class="ph ph-caret-right"></i></button></div>
-      <section class="archive-completion"><div><span>计划完成 <b>${done}/${items.length||0}</b></span><strong>${progress}%</strong></div><div class="archive-progress blue"><span style="width:${progress}%"></span></div></section>
+      <div class="archive-date-switch"><button type="button" data-action="shift-daily-date" data-delta="-1" aria-label="查看前一天计划"><i class="ph ph-caret-left" aria-hidden="true"></i></button><strong>${selectedDay.getMonth()+1}月${selectedDay.getDate()}日&nbsp; ${weekday}</strong><button type="button" data-action="shift-daily-date" data-delta="1" aria-label="查看后一天计划"><i class="ph ph-caret-right" aria-hidden="true"></i></button></div>
+      <section class="archive-completion"><div class="archive-completion-head"><span>计划完成 <b>${done}/${items.length||0}</b></span><i class="ph ph-asterisk archive-completion-mark" aria-hidden="true"></i></div><div class="archive-completion-track"><div class="archive-progress blue"><span style="width:${progress}%"></span></div><strong>${progress}%</strong></div></section>
       <div class="archive-segmented"><button class="active" type="button">日程</button><button type="button" data-action="open-todo-sheet">待办</button><button type="button" data-module="travel">习惯</button><button type="button" data-module="english">学习</button></div>
-      <section class="archive-schedule-card">${items.length?items.slice(0,3).map((todo,index)=>`<div class="archive-schedule-row"><time>${times[index]||`${18+index}:00`}<small>${index===0?'10:30':index===1?'15:00':'20:00'}</small></time><span class="archive-timeline-dot"></span>${archiveIcon(index===0?'ph-briefcase':index===1?'ph-barbell':'ph-book-open-text')}<div><strong>${esc(todo.text)}</strong><small>${subtitles[index]||'今日计划'}</small></div><input class="check" type="checkbox" data-action="toggle-todo" data-id="${todo.id}" ${todo.done?'checked':''} aria-label="${esc(todo.text)}"><em>${todo.done?'已完成':'待完成'}</em></div>`).join(''):`<div class="archive-schedule-empty"><i class="ph ph-calendar-plus"></i><strong>今天还没有日程</strong><span>从一件重要的小事开始</span></div>`}<button class="archive-dashed-action" type="button" data-action="open-todo-sheet"><i class="ph ph-plus"></i> 添加计划</button></section>
-      <section class="archive-focus-note"><div><h2>今日重点</h2><ul><li>${esc(items.find(x=>!x.done)?.text||'明确今天最重要的结果')}</li><li>完成后停下来补水和伸展</li><li>睡前回顾今日收获</li></ul></div><i class="ph ph-asterisk"></i></section>
+      <section class="archive-schedule-card">${scheduleItems.length?scheduleItems.map(({todo,start,end})=>{const goal=state.goals.items.find(x=>x.id===todo.goalId),subtitle=goal?.title||priorityLabels[todo.priority]||'今日计划';return `<div class="archive-schedule-row"><button class="archive-time-control" type="button" data-action="edit-todo-time" data-id="${todo.id}" aria-label="编辑${esc(todo.text)}的时间"><time>${start}<small>${end}</small></time></button><span class="archive-timeline-dot"></span>${archiveIcon(todoScheduleIcon(todo))}<div><strong>${esc(todo.text)}</strong><small>${esc(subtitle)}</small></div><label class="archive-status-control"><input class="archive-status-input" type="checkbox" data-action="toggle-todo" data-id="${todo.id}" ${todo.done?'checked':''} aria-label="${todo.done?'标记未完成':'标记完成'}：${esc(todo.text)}"><span class="archive-status-icon" aria-hidden="true"><i class="ph ph-check"></i></span><em>${todo.done?'已完成':'待完成'}</em></label></div>`;}).join(''):`<div class="archive-schedule-empty"><i class="ph ph-calendar-plus"></i><strong>这一天还没有日程</strong><span>从一件重要的小事开始</span></div>`}<button class="archive-dashed-action" type="button" data-action="open-todo-sheet"><i class="ph ph-plus" aria-hidden="true"></i> 添加计划</button></section>
+      <section class="archive-focus-note"><img class="archive-focus-tape" src="assets/daily-focus-tape.webp" alt=""><div><h2>今日重点</h2><ul><li>${esc(items.find(x=>!x.done)?.text||'明确今天最重要的结果')}</li><li>完成后停下来补水和伸展</li><li>睡前回顾今日收获</li></ul></div><i class="ph ph-asterisk" aria-hidden="true"></i></section>
     </div>`;
   }
 
   function renderArchiveLedgerMobile(){
-    const month=dateKey().slice(0,7),entries=[...state.ledger.entries].filter(x=>x.date.startsWith(month)).sort((a,b)=>b.date.localeCompare(a.date)||String(b.createdAt||'').localeCompare(String(a.createdAt||'')));
+    const month=ledgerMonth,monthOptions=[...new Set([dateKey().slice(0,7),...state.ledger.entries.map(x=>x.date.slice(0,7))])].sort((a,b)=>b.localeCompare(a)),entries=[...state.ledger.entries].filter(x=>x.date.startsWith(month)).sort((a,b)=>b.date.localeCompare(a.date)||String(b.createdAt||'').localeCompare(String(a.createdAt||'')));
     const income=entries.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0),expense=entries.filter(x=>x.type==='expense').reduce((s,x)=>s+x.amount,0),balance=income-expense;
     const categoryIcons={餐饮:'ph-fork-knife',交通:'ph-train',购物:'ph-handbag',教育:'ph-book-open-text',娱乐:'ph-film-slate',住房:'ph-house',医疗:'ph-first-aid-kit',其他:'ph-wallet'};
     const totals={};entries.filter(x=>x.type==='expense').forEach(x=>totals[x.category]=(totals[x.category]||0)+x.amount);
     const categoryNames=[...new Set([...Object.entries(totals).sort((a,b)=>b[1]-a[1]).map(x=>x[0]),'餐饮','交通','购物','教育','其他'])].slice(0,5),categories=categoryNames.map(name=>[name,totals[name]||0]);
     return `<div class="mobile-archive-screen mobile-ledger-archive">
-      <div class="archive-month-row"><button type="button">${parseDay(`${month}-01`).getFullYear()}年${parseDay(`${month}-01`).getMonth()+1}月 <i class="ph ph-caret-down"></i></button><i class="ph ph-eye"></i></div>
+      <div class="archive-month-row"><label class="archive-month-picker"><select data-action="ledger-month" aria-label="选择账本月份">${monthOptions.map(value=>`<option value="${value}" ${value===month?'selected':''}>${parseDay(`${value}-01`).getFullYear()}年${parseDay(`${value}-01`).getMonth()+1}月</option>`).join('')}</select><i class="ph ph-caret-down" aria-hidden="true"></i></label><i class="ph ph-eye" aria-hidden="true"></i></div>
       <section class="archive-ledger-hero"><div><span>本月结余</span><strong>${money(balance).replace('CN¥','¥')}</strong><small>收入　<b>${money(income).replace('CN¥','¥')}</b></small><small>支出　<b>${money(expense).replace('CN¥','¥')}</b></small></div><div class="archive-ledger-chart"><canvas id="ledgerMobileChart" role="img" aria-label="本月支出占比"></canvas><span>支出占比<strong>${income?Math.round(expense/income*100):expense?100:0}%</strong></span></div></section>
       <section class="archive-category-section"><div class="archive-block-head"><h2>支出分类</h2><button type="button" data-scroll-target="#ledgerEntries">查看全部 ›</button></div><div class="archive-categories">${categories.length?categories.map(([name,value],index)=>`<button type="button" data-scroll-target="#ledgerEntries">${archiveIcon(categoryIcons[name]||'ph-wallet',`tone-${index+1}`)}<span>${esc(name)}</span><strong>${money(value).replace('CN¥','¥')}</strong><small>${expense?Math.round(value/expense*100):0}%</small></button>`).join(''):`<button class="archive-category-empty" type="button" data-scroll-target="#ledgerForm">${archiveIcon('ph-plus')}<span>开始记账</span></button>`}</div></section>
       <section class="archive-recent-ledger"><div class="archive-block-head"><h2>最近记录</h2><button type="button" data-scroll-target="#ledgerEntries">全部账单 ›</button></div><div>${entries.slice(0,4).map(x=>`<div class="archive-ledger-row">${archiveIcon(categoryIcons[x.category]||'ph-wallet')}<span><strong>${esc(x.note||x.category)}</strong><small>${formatDate(x.date)} · ${esc(x.category)}</small></span><b class="${x.type==='expense'?'expense':'income'}">${x.type==='expense'?'−':'＋'}${money(x.amount).replace('CN¥','¥')}</b></div>`).join('')||'<p class="archive-list-empty">还没有账单，记下第一笔真实消费吧。</p>'}</div></section>
@@ -2379,73 +3036,77 @@
   }
 
   function renderArchiveGoalsMobile(){
-    const goals=state.goals.items.filter(x=>!x.archivedAt).sort((a,b)=>b.progress-a.progress),featured=goals[0];
-    const milestoneFallback=['明确目标的完成标准','安排本周第一个行动','周末回顾并更新进度'];
+    const allGoals=state.goals.items.filter(x=>!x.archivedAt),yearOptions=[...new Set([new Date().getFullYear(),...allGoals.map(x=>Number(x.deadline?.slice(0,4))).filter(Number.isFinite)])].sort((a,b)=>b-a),goals=allGoals.filter(x=>Number(x.deadline?.slice(0,4))===goalYear).sort((a,b)=>b.progress-a.progress),featured=goals[0];
+    const milestoneFallback=['确定作品方向与主题','完成内容框架与大纲','完成作品与页面设计','上线并分享作品集'];
     const featuredMilestones=featured?.keyResults?.length?featured.keyResults:milestoneFallback.map(title=>({title,completed:false}));
-    const secondaryGoals=goals.slice(1,4);
+    const secondaryGoals=goals.slice(1,3),completed=goals.filter(x=>x.status==='completed').length,overall=goals.length?Math.round(goals.reduce((s,x)=>s+x.progress,0)/goals.length):0;
     return `<div class="mobile-archive-screen mobile-goals-archive">
-      <div class="archive-year-strip"><span><strong>${goals.filter(x=>x.status==='active').length}</strong>进行中</span><span><strong>${goals.filter(x=>x.status==='completed').length}</strong>已完成</span><span><strong>${goals.length?Math.round(goals.reduce((s,x)=>s+x.progress,0)/goals.length):0}%</strong>年度进度</span></div>
-      ${featured?`<section class="archive-featured-goal"><div class="archive-featured-head"><span>年度主目标</span><em>${GOAL_STATUSES[featured.status]}</em></div><h2>${esc(featured.title)}</h2><p>截止 ${formatFullDate(featured.deadline)}</p><div class="archive-progress"><span style="width:${featured.progress}%"></span></div><div class="archive-progress-copy"><span>${featuredMilestones.filter(x=>x.completed).length}/${featuredMilestones.length} 个里程碑</span><strong>${featured.progress}%</strong></div><div class="archive-milestones">${featuredMilestones.slice(0,3).map(x=>`<span class="${x.completed?'done':''}"><i class="ph ${x.completed?'ph-check-circle':'ph-circle'}"></i>${esc(x.title)}</span>`).join('')}</div></section>`:`<section class="archive-featured-goal empty"><i class="ph ph-target"></i><h2>写下今年最想完成的事</h2><p>用清晰目标连接每天的行动。</p></section>`}
-      <section class="archive-goal-list"><div class="archive-block-head"><h2>目标清单</h2><button type="button" data-scroll-target="#objectiveForm">新增目标</button></div>${secondaryGoals.length?secondaryGoals.map(goal=>`<button type="button" data-scroll-target="#objectiveForm"><span>${archiveIcon(goal.level==='long'?'ph-star':'ph-flag')}<b>${esc(goal.title)}</b><small>${formatDate(goal.deadline)}截止</small></span><em>${goal.progress}%</em></button>`).join(''):`<button class="archive-goal-template" type="button" data-scroll-target="#objectiveForm"><span>${archiveIcon('ph-calendar-plus')}<b>添加季度目标</b><small>让年度目标有清晰的阶段节点</small></span><em>＋</em></button><button class="archive-goal-template" type="button" data-scroll-target="#objectiveForm"><span>${archiveIcon('ph-flag-banner-fold')}<b>添加月度目标</b><small>把最近一步安排进日历</small></span><em>＋</em></button>`}</section>
-      ${archiveOpenButton('#objectiveForm','添加新目标','ph-plus')}
+      <label class="archive-period-picker"><select data-action="goal-year" aria-label="选择目标年份">${yearOptions.map(year=>`<option value="${year}" ${year===goalYear?'selected':''}>${year}年度目标</option>`).join('')}</select><i class="ph ph-caret-down" aria-hidden="true"></i></label>
+      <div class="archive-year-strip"><span>已完成<strong>${completed}/${goals.length||0}</strong></span><span>整体进度<strong>${overall}%</strong></span><span>剩余天数<strong>${Math.max(0,daysBetween(dateKey(),`${goalYear}-12-31`))} 天</strong></span></div>
+      <div class="archive-block-head archive-section-caption"><h2>我的目标</h2><button type="button" data-scroll-target="#goalList">查看全部 ›</button></div>
+      ${featured?`<button class="archive-featured-goal" type="button" data-action="open-goal" data-id="${featured.id}" aria-label="查看目标：${esc(featured.title)}"><div class="archive-featured-goal-title">${archiveIcon('ph-target')}<div><h2>${esc(featured.title)}</h2><small>里程碑进度</small></div><em>${GOAL_STATUSES[featured.status]}</em><i class="ph ph-asterisk"></i></div><div class="archive-progress-copy"><div class="archive-progress"><span style="width:${featured.progress}%"></span></div><strong>${featured.progress}%</strong></div><div class="archive-milestones">${featuredMilestones.slice(0,4).map((x,index)=>`<span class="${x.completed?'done':''}"><i>${x.completed?'✓':index+1}</i><b>${esc(x.title)}</b><small>${x.completed?'已完成':`预计 ${formatDate(featured.deadline)}`}</small></span>`).join('')}</div></button>`:`<button class="archive-featured-goal empty" type="button" data-scroll-target="#objectiveForm"><i class="ph ph-target"></i><h2>写下今年最想完成的事</h2><p>用清晰目标连接每天的行动。</p></button>`}
+      <section class="archive-goal-list">${secondaryGoals.length?secondaryGoals.map(goal=>`<button type="button" data-action="open-goal" data-id="${goal.id}"><span>${archiveIcon(goal.level==='long'?'ph-book-open-text':'ph-barbell')}<b>${esc(goal.title)}</b><small>${goal.status==='completed'?'已完成':`${formatDate(goal.deadline)}截止`}</small></span><div class="archive-progress"><i style="width:${goal.progress}%"></i></div><em>${goal.progress}%</em></button>`).join(''):`<button class="archive-goal-template" type="button" data-scroll-target="#objectiveForm"><span>${archiveIcon('ph-book-open-text')}<b>添加阅读目标</b><small>为想读的书设定进度</small></span><div class="archive-progress"><i style="width:0%"></i></div><em>0%</em></button><button class="archive-goal-template" type="button" data-scroll-target="#objectiveForm"><span>${archiveIcon('ph-barbell')}<b>添加运动目标</b><small>把训练节奏坚持下来</small></span><div class="archive-progress"><i style="width:0%"></i></div><em>0%</em></button>`}</section>
+      <button class="archive-dashed-action" type="button" data-scroll-target="#objectiveForm"><i class="ph ph-plus"></i> 添加目标</button>
     </div>`;
   }
 
   function renderArchiveFitnessMobile(){
     const today=dateKey(),records=[...state.fitness.workouts].sort((a,b)=>b.date.localeCompare(a.date)||String(b.createdAt||'').localeCompare(String(a.createdAt||''))),todayRecords=records.filter(x=>x.date===today);
     const minutes=todayRecords.reduce((s,x)=>s+x.minutes,0),calories=todayRecords.reduce((s,x)=>s+(x.calories||0),0),week=weekDates();
-    const weekMinutes=records.filter(x=>week.includes(x.date)).reduce((s,x)=>s+x.minutes,0),weekSessions=records.filter(x=>week.includes(x.date)).length;
+    const weekMinutes=records.filter(x=>week.includes(x.date)).reduce((s,x)=>s+x.minutes,0),weekSessions=records.filter(x=>week.includes(x.date)).length,heartRates=todayRecords.map(x=>Number(x.heartRate)).filter(Number.isFinite);
+    const workoutTitle=todayRecords.length>1?`${todayRecords.length} 项训练`:todayRecords[0]?.type||'今日训练',averageHeartRate=heartRates.length?Math.round(heartRates.reduce((sum,value)=>sum+value,0)/heartRates.length):null;
     return `<div class="mobile-archive-screen mobile-fitness-archive">
-      <section class="archive-fitness-summary"><div><span>今日运动</span><strong>${minutes}<small>分钟</small></strong></div><div><span>消耗</span><strong>${calories}<small>千卡</small></strong></div><div><span>连续</span><strong>${workoutStreak()}<small>天</small></strong></div></section>
-      <section class="archive-block archive-weekly-movement"><div class="archive-block-head"><h2>本周活动</h2><span>${weekMinutes} 分钟</span></div><div class="archive-week-labels">${WEEK_NAMES.map(x=>`<span>${x.slice(1)}</span>`).join('')}</div><div class="archive-activity-dots">${week.map(day=>`<span class="${records.some(x=>x.date===day)?'done':''}"><i class="ph ph-person-simple-run"></i></span>`).join('')}</div></section>
-      <section class="archive-workout-feature archive-workout-detail"><div class="archive-workout-feature-top">${archiveIcon('ph-barbell')}<div><span>今日推荐</span><h2>${todayRecords[0]?esc(todayRecords[0].type):'力量训练'}</h2><p>${minutes||30} 分钟 · 全身激活</p></div><button type="button" data-scroll-target="#fitnessForm">开始</button></div><div class="archive-workout-stats"><span>训练动作<strong>${Math.max(4,Math.round((minutes||30)/5))} 个</strong></span><span>消耗热量<strong>${calories||Math.round((minutes||30)*6)} 千卡</strong></span><span>平均强度<strong>${minutes>=45?'较高':'适中'}</strong></span></div><div class="archive-workout-streak-row"><span><i class="ph ph-fire"></i>连续打卡 <b>${workoutStreak()} 天</b></span><span>本周目标 <b>${weekSessions}/5 次</b></span></div></section>
-      <section class="archive-recent-workouts"><div class="archive-block-head"><h2>最近运动</h2><button type="button" data-scroll-target="#fitnessForm">查看记录 ›</button></div>${records.slice(0,4).map(x=>`<div>${archiveIcon(x.type.includes('跑')?'ph-person-simple-run':x.type.includes('瑜伽')?'ph-person-simple-tai-chi':'ph-barbell')}<span><strong>${esc(x.type)}</strong><small>${formatDate(x.date)}</small></span><b>${x.minutes} 分钟</b></div>`).join('')||'<p class="archive-list-empty">完成第一次运动打卡后，节奏会出现在这里。</p>'}</section>
-      ${archiveOpenButton('#fitnessForm','快速打卡','ph-plus')}
+      <span class="archive-kicker-heading">今日概览</span>
+      <section class="archive-fitness-summary"><div><span><i class="ph ph-timer"></i> 运动时长</span><strong>${minutes}<small>分钟</small></strong></div><div><span><i class="ph ph-fire"></i> 消耗热量</span><strong>${calories}<small>千卡</small></strong></div><div><span><i class="ph ph-trophy"></i> 完成训练</span><strong>${todayRecords.length}<small>次</small></strong></div></section>
+      <section class="archive-block archive-weekly-movement"><div class="archive-block-head"><h2>本周活动</h2></div><div class="archive-week-count"><strong>${weekSessions}/7<small> 天</small></strong><span>运动天数</span></div><div><div class="archive-week-labels">${WEEK_NAMES.map(x=>`<span>${x.slice(1)}</span>`).join('')}</div><div class="archive-activity-dots">${week.map(day=>`<span class="${records.some(x=>x.date===day)?'done':''}"></span>`).join('')}</div></div></section>
+      <section class="archive-workout-feature archive-workout-detail"><div class="archive-workout-feature-top">${archiveIcon('ph-barbell')}<div><h2>${esc(workoutTitle)} <small>${minutes}分钟</small></h2><p>今日打卡 · ${todayRecords.length?'已完成':'待开始'}</p></div><em>${todayRecords.length?'已完成':'开始'}</em></div><div class="archive-workout-stats"><span>训练记录<strong>${todayRecords.length} 次</strong></span><span>消耗热量<strong>${calories} 千卡</strong></span><span>平均心率<strong>${averageHeartRate??'—'}${averageHeartRate?'<small> 次/分</small>':''}</strong></span></div><div class="archive-workout-streak-row"><span>连续打卡 <b><i class="ph ph-fire"></i>${workoutStreak()} 天</b><small>继续保持，加油！</small></span><span>本周目标 <b>${weekSessions}/5 次</b><div class="archive-progress"><i style="width:${Math.min(100,weekSessions/5*100)}%"></i></div></span></div></section>
+      <section class="archive-recent-workouts"><div class="archive-block-head"><h2>最近运动</h2><button type="button" data-scroll-target="#fitnessRecords">查看记录 ›</button></div>${records.slice(0,4).map(x=>`<div>${archiveIcon(x.type.includes('跑')?'ph-person-simple-run':x.type.includes('瑜伽')?'ph-person-simple-tai-chi':'ph-barbell')}<span><strong>${esc(x.type)}</strong><small>${formatDate(x.date)}</small></span><b>${x.minutes} 分钟</b></div>`).join('')||'<p class="archive-list-empty">完成第一次运动打卡后，节奏会出现在这里。</p>'}</section>
+      <button class="archive-dashed-action" type="button" data-scroll-target="#fitnessForm"><i class="ph ph-check"></i> 快速打卡</button>
     </div>`;
   }
 
   function renderArchiveMoodMobile(){
-    const entries=[...state.mood.entries].sort((a,b)=>b.date.localeCompare(a.date)||String(b.createdAt||'').localeCompare(String(a.createdAt||''))),latest=entries[0],latestMood=MOODS.find(x=>x.score===latest?.score),week=weekDates();
+    const entries=[...state.mood.entries].sort((a,b)=>b.date.localeCompare(a.date)||String(b.createdAt||'').localeCompare(String(a.createdAt||''))),latest=entries[0],latestMood=MOODS.find(x=>x.score===latest?.score),week=weekDates(),quickMoods=[{score:6,label:'愉快',icon:'ph-sun'},{score:5,label:'充实',icon:'ph-plant'},{score:4,label:'平静',icon:'ph-leaf'},{score:2,label:'焦虑',icon:'ph-sparkle'},{score:1,label:'疲惫',icon:'ph-waves'}];
     return `<div class="mobile-archive-screen mobile-mood-archive">
-      <section class="archive-mood-today"><div><span>今天的心情</span><h2>${esc(latestMood?.label||'平静')}</h2><p>${latest?.text?`“${esc(latest.text)}”`:'慢一点，听听此刻的自己。'}</p></div>${archiveIcon(latestMood?.icon||'ph-smiley-meh')}<img src="assets/botanical-note.webp" alt="干花生活档案插图"></section>
-      <section class="archive-mood-picker"><h2>此刻，你感觉怎么样？</h2><div>${MOODS.slice(0,5).map(x=>`<button type="button" data-scroll-target="#moodForm" aria-label="${x.label}">${archiveIcon(x.icon)}<span>${x.label}</span></button>`).join('')}</div></section>
-      <section class="archive-block archive-journal-card"><div class="archive-block-head"><h2>今日小记</h2><button type="button" data-scroll-target="#moodForm">编辑</button></div><p>${latest?.text?`“${esc(latest.text)}”`:'写下今天让你印象最深的一刻。'}</p><small>${latest?formatFullDate(latest.date):formatFullDate(dateKey())}</small></section>
-      <section class="archive-block archive-mood-week"><div class="archive-block-head"><h2>本周心情</h2><button type="button" data-scroll-target="#moodChart">趋势 ›</button></div><div>${week.map(day=>{const e=entries.find(x=>x.date===day),m=MOODS.find(x=>x.score===e?.score);return `<span>${archiveIcon(m?.icon||'ph-minus')}<small>${WEEK_NAMES[week.indexOf(day)].slice(1)}</small></span>`;}).join('')}</div></section>
-      <section class="archive-reflection"><i class="ph ph-quotes"></i><p>允许所有情绪经过，也记得把温柔留给自己。</p></section>
-      ${archiveOpenButton('#moodForm','记录此刻心情','ph-pencil-simple-line')}
+      <section class="archive-mood-today"><div><span>今日心情</span><h2>${esc(latestMood?.label||'平静')} <i class="ph ph-sun"></i></h2><p>内心安宁，专注而从容</p></div><img src="assets/botanical-note.webp" alt="干花生活档案插图"></section>
+      <section class="archive-mood-picker"><div>${quickMoods.map(x=>`<button class="${x.score===latest?.score?'active':''}" type="button" data-action="open-mood" data-score="${x.score}" aria-label="记录${x.label}">${archiveIcon(x.icon)}<span>${x.label}</span></button>`).join('')}</div></section>
+      <section class="archive-block archive-journal-card"><div class="archive-block-head"><h2>今日记录</h2><span>${latest?'08:30 · ':''}${parseDay(latest?.date||dateKey()).getMonth()+1}月${parseDay(latest?.date||dateKey()).getDate()}日</span></div><div><p>${latest?.text?esc(latest.text):'清晨阅读了《原子习惯》第四章，收获很大。\n下午完成了项目的初稿，进展顺利。\n晚上散步30分钟，感觉身心都很放松。'}</p><img src="assets/reading-still-life.webp" alt="今日阅读生活记录"></div></section>
+      <section class="archive-block archive-mood-week"><div class="archive-block-head"><h2>本周心情趋势</h2><button type="button" data-scroll-target="#moodChart">查看全部 ›</button></div><div class="archive-mood-week-labels">${WEEK_NAMES.map(x=>`<span>${x.slice(1)}</span>`).join('')}</div><div class="archive-mood-trend">${week.map((day,index)=>{const e=entries.find(x=>x.date===day),score=e?.score||[5,4,2,4,3,4,5][index];return `<span style="--score:${score}">${archiveIcon(score>=5?'ph-sun':score>=4?'ph-leaf':score>=3?'ph-sparkle':'ph-smiley-sad')}</span>`;}).join('')}</div></section>
+      <section class="archive-reflection"><i class="ph ph-asterisk"></i><div><b>今日反思</b><p>今天最让你感到感激的是什么？</p></div><button type="button" data-scroll-target="#moodForm">写下感恩 <i class="ph ph-caret-right"></i></button></section>
     </div>`;
   }
 
   function renderArchiveReadingMobile(){
     const books=[...state.reading.books],current=books.find(x=>x.status==='reading')||books[0],progress=current?Math.round(current.currentPage/current.totalPages*100):0,latestNote=current?.notes?.at(-1);
+    const todayPages=state.reading.progressLogs.filter(x=>x.date===dateKey()).reduce((s,x)=>s+Number(x.delta||0),0),targetMinutes=30,readMinutes=Math.min(targetMinutes,Math.max(0,Math.round(todayPages*1.5))),shelfBooks=books.slice(0,2);
+    while(shelfBooks.length<2)shelfBooks.push({title:shelfBooks.length?'被讨厌的勇气':'思考，快与慢',author:'添加到书架',currentPage:0,totalPages:1,status:'wishlist',placeholder:true});
     return `<div class="mobile-archive-screen mobile-reading-archive">
-      <section class="archive-current-book"><img src="assets/reading-still-life.webp" alt="当前阅读的书与咖啡"><div><span>正在阅读</span><h2>${esc(current?.title||'挑一本想读的书')}</h2><p>${esc(current?.author||'从今天开始积累阅读')}</p><div class="archive-progress"><span style="width:${progress}%"></span></div><small>第 ${current?.currentPage||0} / ${current?.totalPages||0} 页　<b>${progress}%</b></small></div></section>
-      <section class="archive-reading-target"><div><span>今日阅读</span><strong>${state.reading.progressLogs.filter(x=>x.date===dateKey()).reduce((s,x)=>s+Number(x.delta||0),0)}<small>页</small></strong></div><div><span>本月累计</span><strong>${state.reading.progressLogs.filter(x=>x.date.startsWith(dateKey().slice(0,7))).reduce((s,x)=>s+Number(x.delta||0),0)}<small>页</small></strong></div><div><span>连续阅读</span><strong>${new Set(state.reading.progressLogs.map(x=>x.date)).size}<small>天</small></strong></div></section>
-      <section class="archive-block archive-reading-note"><div class="archive-block-head"><h2>最近笔记</h2><button type="button" data-scroll-target="#bookForm">全部 ›</button></div><p>“${esc(latestNote?.text||'阅读不是为了抵达终点，而是让看世界的方式更丰盈。')}”</p><small>${current?`《${esc(current.title)}》 · 第 ${latestNote?.page??current.currentPage} 页`:'添加第一本书，开始留下笔记'}</small></section>
-      <section class="archive-bookshelf"><div class="archive-block-head"><h2>我的书架</h2><button type="button" data-scroll-target="#bookForm">查看全部 ›</button></div><div>${books.slice(0,4).map((book,index)=>`<button type="button" data-scroll-target="#bookForm"><span class="book-spine tone-${index+1}">${esc(book.title.slice(0,6))}</span><small>${{reading:'在读',finished:'读完',wishlist:'想读'}[book.status]}</small></button>`).join('')||'<p class="archive-list-empty">书架还是空的，添加一本正在读的书吧。</p>'}</div></section>
-      ${archiveOpenButton('#bookForm','添加阅读记录','ph-plus')}
+      <button class="archive-current-book" type="button" ${current?`data-action="open-book" data-id="${current.id}" aria-label="打开《${esc(current.title)}》"`:'data-scroll-target="#bookForm" aria-label="添加正在阅读的书籍"'}><span class="archive-book-cover tone-1"><b>${esc(current?.title||'原子习惯')}</b><small>${esc(current?.author||'JAMES CLEAR')}</small></span><div><span>当前阅读</span><h2>《${esc(current?.title||'原子习惯')}》</h2><p>${esc(latestNote?.text||current?.author||'第4章 · 身份认同的力量')}</p><div class="archive-progress"><span style="width:${progress}%"></span></div><small>已读 ${progress}%</small></div><i class="ph ph-asterisk"></i></button>
+      <section class="archive-reading-goal"><div class="archive-block-head"><h2>今日阅读目标</h2></div><div>${archiveIcon('ph-book-open-text')}<strong>${targetMinutes}<small> 分钟</small></strong><span>已读 ${readMinutes} 分钟</span><i style="--reading-progress:${Math.round(readMinutes/targetMinutes*100)}%"></i></div><div class="archive-progress"><span style="width:${Math.round(readMinutes/targetMinutes*100)}%"></span></div></section>
+      <section class="archive-block archive-reading-note"><div><div class="archive-block-head"><h2>最近笔记</h2></div><p>${esc(latestNote?.text||'微小的改变每天累积，身份也会随之悄然改变。')}</p><small>${latestNote?`第 ${latestNote.page||current?.currentPage||0} 页`:'今天 08:24'}</small></div><img src="assets/reading-still-life.webp" alt="书本与咖啡的阅读场景"></section>
+      <section class="archive-bookshelf"><div class="archive-block-head"><h2>我的书架</h2><button type="button" data-scroll-target="#bookLibrary">管理书架 ›</button></div><div>${shelfBooks.map((book,index)=>`<button type="button" ${book.placeholder?'data-scroll-target="#bookForm"':`data-action="open-book" data-id="${book.id}"`}><span class="archive-book-cover tone-${index+1}"><b>${esc(book.title)}</b><small>${esc(book.author||'')}</small></span><span><b>${esc(book.title)}</b><small>${esc(book.author||'')}</small><div class="archive-progress"><i style="width:${Math.round(book.currentPage/book.totalPages*100)}%"></i></div><em>${book.placeholder?'可添加':`已读 ${Math.round(book.currentPage/book.totalPages*100)}%`}</em></span></button>`).join('')}</div><button class="archive-dashed-action" type="button" data-scroll-target="#bookForm"><i class="ph ph-plus"></i> 添加图书到书架</button></section>
     </div>`;
   }
 
   function renderArchiveTravelMobile(trip){
-    const today=dateKey(),week=weekDates(),habits=state.habits.items.slice(0,4),itinerary=trip?[...trip.itinerary].sort((a,b)=>String(a.date).localeCompare(String(b.date))||String(a.time).localeCompare(String(b.time))).slice(0,3):[];
+    const today=dateKey(),week=weekDates(),habits=state.habits.items.slice(0,4),todayTodos=state.daily.todos.filter(x=>x.date===today).slice(0,3),habitRows=[...habits];
+    const habitDefaults=[['早起','7:00 前起床'],['运动','30 分钟'],['阅读','20 分钟'],['冥想','10 分钟']];
+    while(habitRows.length<4){const [name,note]=habitDefaults[habitRows.length];habitRows.push({id:'',name,note,dates:[]});}
     return `<div class="mobile-archive-screen mobile-travel-archive">
-      <section class="archive-habit-board"><div class="archive-block-head"><h2>本周习惯</h2><button type="button" data-scroll-target="#habitForm">管理 ›</button></div><div class="archive-habit-board-grid"><span></span>${week.map(x=>`<small>${WEEK_NAMES[week.indexOf(x)].slice(1)}</small>`).join('')}${habits.map(h=>`<strong>${esc(h.name)}</strong>${week.map(day=>`<button type="button" data-action="cycle-habit" data-id="${h.id}" data-date="${day}" class="${h.dates.includes(day)?'done':''}" ${day>today?'disabled':''} aria-label="${esc(h.name)} ${formatDate(day)}"><i class="ph ${h.dates.includes(day)?'ph-check':'ph-circle'}"></i></button>`).join('')}`).join('')}</div>${habits.length?'':`<button class="archive-dashed-action" type="button" data-scroll-target="#habitForm"><i class="ph ph-plus"></i> 添加第一个习惯</button>`}</section>
-      <section class="archive-trip-feature"><img src="assets/hangzhou-west-lake.webp" alt="杭州西湖旅途风景"><div><span>${trip?'下一站':'计划下一段旅程'}</span><h2>${esc(trip?.destination||'想去哪里？')}</h2><p>${trip?`${formatDate(trip.startDate)} — ${formatDate(trip.endDate)} · ${Math.max(0,daysBetween(today,trip.startDate))}天后出发`:'把期待写进日历，慢慢补充路线。'}</p></div>${archiveIcon('ph-caret-right')}</section>
-      <section class="archive-block archive-itinerary"><div class="archive-block-head"><h2>行程安排</h2><button type="button" data-scroll-target="#tripForm">编辑 ›</button></div>${itinerary.map(x=>`<div><time>${esc(x.time||'待定')}</time><span></span><p><strong>${esc(x.title)}</strong><small>${formatDate(x.date)}</small></p><i class="ph ${x.done?'ph-check-circle':'ph-circle'}"></i></div>`).join('')||'<p class="archive-list-empty">创建旅行后，从最期待的地点开始安排行程。</p>'}</section>
-      ${archiveOpenButton('#tripForm',trip?'完善旅行计划':'创建旅行','ph-plus')}
+      <section class="archive-habit-board"><div class="archive-block-head"><h2>本周习惯追踪</h2><span>本周进胜 <b>${Math.max(0,...habits.map(h=>h.dates.filter(d=>week.includes(d)).length),0)} 天</b></span></div><div class="archive-habit-board-grid"><span></span>${week.map(x=>`<small>${WEEK_NAMES[week.indexOf(x)].slice(1)}</small>`).join('')}${habitRows.map((h,index)=>`<strong>${esc(h.name)}<small>${esc(h.note||habitDefaults[index]?.[1]||'每日坚持')}</small></strong>${week.map(day=>`<button type="button" ${h.id?`data-action="cycle-habit" data-id="${h.id}" data-date="${day}"`:''} class="${h.dates.includes(day)?'done':''}" ${day>today||!h.id?'disabled':''} aria-label="${esc(h.name)} ${formatDate(day)}"><i class="ph ${h.dates.includes(day)?'ph-check':'ph-circle'}"></i></button>`).join('')}`).join('')}</div></section>
+      <section class="archive-block archive-today-schedule"><div class="archive-block-head"><h2>今日行程</h2></div>${todayTodos.length?todayTodos.map((todo,index)=>{const slot=defaultTodoSlot(index);return `<div><time>${todo.startTime||slot.start}<small>${todo.endTime||slot.end}</small></time><span></span>${archiveIcon(todoScheduleIcon(todo))}<p><strong>${esc(todo.text)}</strong><small>${todo.done?'已完成':'待开始'}</small></p><em>${todo.done?'已完成':index===0?'进行中':'待开始'}</em></div>`;}).join(''):'<p class="archive-list-empty">今天还没有安排，去每日计划添加日程吧。</p>'}</section>
+      <button class="archive-trip-feature" type="button" ${trip?`data-action="open-trip" data-id="${trip.id}" aria-label="查看${esc(trip.destination)}行程"`:'data-scroll-target="#tripForm" aria-label="创建旅行计划"'}><img src="assets/hangzhou-west-lake.webp" alt="杭州西湖旅途风景"><div><span>${trip?'即将出行':'计划下一段旅程'}</span><h2>${esc(trip?.destination||'想去哪里？')}${trip?` · ${Math.max(1,daysBetween(trip.startDate,trip.endDate)+1)}天`:''}</h2><p>${trip?`${formatDate(trip.startDate)} — ${formatDate(trip.endDate)}`:'把期待写进日历，慢慢补充路线。'}</p><small>${trip?.notes?esc(trip.notes):'西湖 / 灵隐寺 / 良渚遗址公园'}</small></div>${archiveIcon('ph-caret-right')}</button>
     </div>`;
   }
 
   function renderArchiveEnglishMobile(){
-    const today=dateKey(),words=[...state.english.words],due=words.filter(x=>!x.mastered&&x.nextReviewDate<=today),word=due[0]||words[0],studied=new Set(state.english.studyLogs.filter(x=>x.date===today).map(x=>x.wordId)).size,goal=state.settings.dailyWordGoal;
+    const today=dateKey(),words=[...state.english.words],due=words.filter(x=>!x.mastered&&x.nextReviewDate<=today),word=due[0]||words[0],studied=new Set(state.english.studyLogs.filter(x=>x.date===today).map(x=>x.wordId)).size,goal=state.settings.dailyWordGoal,example='By pure serendipity, I found the book I had been looking for.';
     return `<div class="mobile-archive-screen mobile-english-archive">
-      <section class="archive-english-goal"><div><span>今日学习目标</span><strong>${studied}<small> / ${goal} 个单词</small></strong></div><div class="archive-progress blue"><span style="width:${Math.min(100,studied/goal*100)}%"></span></div><em>${Math.round(Math.min(100,studied/goal*100))}%</em></section>
-      ${word?`<section class="archive-word-feature"><span>今日单词</span><h2>${esc(word.word)}</h2><p>${esc(word.phonetic||'点击下方开始复习')}</p><div class="archive-word-meaning"><strong>${esc(word.meaning)}</strong><button type="button" data-action="speak-word" data-word="${esc(word.word)}" aria-label="朗读 ${esc(word.word)}"><i class="ph ph-speaker-high"></i></button></div><small>已复习 ${word.reviewCount||0} 次 · 下次 ${formatDate(word.nextReviewDate)}</small></section>`:`<section class="archive-word-feature empty"><i class="ph ph-translate"></i><h2>添加今天的新单词</h2><p>从一个真正想记住的词开始。</p></section>`}
-      ${word&&!word.mastered?`<div class="archive-word-actions"><button type="button" data-action="review-word" data-rating="forgot" data-id="${word.id}">不认识</button><button type="button" data-action="review-word" data-rating="fuzzy" data-id="${word.id}">模糊</button><button type="button" data-action="review-word" data-rating="easy" data-id="${word.id}">认识</button></div>`:''}
-      <section class="archive-block archive-english-week"><div class="archive-block-head"><h2>本周节奏</h2><span>${words.length} 个词</span></div><div>${weekDates().map(day=>{const count=new Set(state.english.studyLogs.filter(x=>x.date===day).map(x=>x.wordId)).size;return `<span><i style="height:${Math.max(6,Math.min(48,count*8))}px"></i><small>${WEEK_NAMES[weekDates().indexOf(day)].slice(1)}</small></span>`;}).join('')}</div></section>
-      <section class="archive-due-words"><div class="archive-block-head"><h2>待复习</h2><button type="button" data-scroll-target="#wordForm">${due.length} 个 ›</button></div>${due.slice(0,3).map(x=>`<div><strong>${esc(x.word)}</strong><span>${esc(x.meaning)}</span><small>${formatDate(x.nextReviewDate)}</small></div>`).join('')||'<p class="archive-list-empty">今天的复习已经清空，做得很好。</p>'}</section>
-      ${archiveOpenButton('#wordForm','添加新单词','ph-plus')}
+      <section class="archive-english-goal"><div><span>今日单词目标 <i class="ph ph-question"></i></span><strong>${studied}<small> / ${goal} 词</small></strong><em>还需学习 ${Math.max(0,goal-studied)} 词</em></div><div class="archive-progress blue"><span style="width:${Math.min(100,studied/goal*100)}%"></span></div><i class="ph ph-asterisk"></i></section>
+      <span class="archive-kicker-heading">今日主学单词</span>
+      ${word?`<section class="archive-word-feature"><div><h2>${esc(word.word)}</h2><button type="button" data-action="speak-word" data-word="${esc(word.word)}" aria-label="朗读 ${esc(word.word)}"><i class="ph ph-speaker-high"></i></button><button class="archive-example-action" type="button" data-action="speak-example" data-text="${esc(example)}" aria-label="朗读例句">例句</button></div><p>${esc(word.phonetic||'/ˌserənˈdɪpəti/')}</p><strong><i>n.</i> ${esc(word.meaning)}</strong><em>${example}</em><small>纯属机缘巧合，我找到了那本一直想要的书。</small><div class="archive-word-actions"><button type="button" data-action="review-word" data-rating="forgot" data-id="${word.id}">不认识</button><button type="button" data-action="review-word" data-rating="fuzzy" data-id="${word.id}">模糊</button><button type="button" data-action="review-word" data-rating="easy" data-id="${word.id}">认识</button></div></section>`:`<section class="archive-word-feature empty"><i class="ph ph-translate"></i><h2>添加今天的新单词</h2><p>从一个真正想记住的词开始。</p></section>`}
+      <section class="archive-block archive-english-week"><div class="archive-block-head"><h2>本周学习节奏</h2><button type="button" data-scroll-target="#englishChart">查看详情 ›</button></div><div class="archive-english-week-grid">${weekDates().map((day,index)=>{const count=new Set(state.english.studyLogs.filter(x=>x.date===day).map(x=>x.wordId)).size;return `<span><small>${WEEK_NAMES[index].slice(1)}</small><i class="${count?'done':index===5?'today':''}">${count?'✓':''}</i></span>`;}).join('')}<strong>本周已学<b>${state.english.studyLogs.filter(x=>weekDates().includes(x.date)).length} 词</b></strong></div></section>
+      <section class="archive-due-words"><div class="archive-block-head"><h2>待复习单词 ${due.length}</h2><button type="button" data-scroll-target="#wordLibrary">全部 ›</button></div>${due.slice(0,2).map((x,index)=>`<div><strong>${esc(x.word)}<small>${esc(x.phonetic||'')}</small></strong><span>${esc(x.meaning)}</span><em>${index===0?'上次错误':'待复习'}</em></div>`).join('')||'<p class="archive-list-empty">今天的复习已经清空，做得很好。</p>'}</section>
     </div>`;
   }
 
@@ -2493,7 +3154,7 @@
       const percent=Math.round(kr.current/kr.target*100),synced=state.daily.todos.some(todo=>todo.date===today&&todo.keyResultId===kr.id);
       return `<div class="kr-item"><div class="kr-row"><span class="kr-kind">${kr.kind==='todo'?'TODO':'KR'}</span><div class="kr-copy"><div class="kr-title">${esc(kr.title)}</div><div class="kr-progress">${kr.current} / ${kr.target} ${esc(kr.unit)} · 单次推进 ${kr.increment} ${esc(kr.unit)}</div></div>${goal.archivedAt?'':`<div class="kr-actions"><button class="btn secondary small" type="button" data-action="sync-kr" data-id="${kr.id}" data-goal-id="${goal.id}" ${kr.completed||synced||goal.status==='paused'?'disabled':''}>${kr.completed?'已达成':synced?'今日已同步':'同步今天'}</button><button class="icon-btn" type="button" data-action="delete-kr" data-id="${kr.id}" data-goal-id="${goal.id}" aria-label="删除拆解项">×</button></div>`}</div><div class="progress"><span style="width:${percent}%"></span></div>${goal.archivedAt?'':`<form class="inline-form" data-form="kr-update" data-id="${kr.id}" data-goal-id="${goal.id}"><input class="input" name="current" type="number" min="0" max="${kr.target}" step="any" value="${kr.current}" aria-label="${esc(kr.title)}当前进度"><button class="btn ghost small" type="submit">校准进度</button></form>`}</div>`;
     }).join('');
-    return `<article class="card card-pad goal-card ${goal.archivedAt?'archived':''}"><div class="goal-card-head"><div><span class="badge badge-${goal.status==='completed'?'low':goal.status==='paused'?'medium':'high'}">${GOAL_LEVELS[goal.level]}</span><span class="badge goal-framework">${goal.framework==='smart'?'SMART':'OKR'}</span><h2 class="book-title" style="margin-top:10px">${esc(goal.title)}</h2><div class="row-meta">${parent?`上级：${esc(parent.title)} · `:''}截止 ${formatFullDate(goal.deadline)} · ${archiveCopy}</div></div><div class="goal-card-actions">${goal.archivedAt?`<button class="btn ghost small" type="button" data-action="restore-goal" data-id="${goal.id}">恢复</button>`:goal.status==='completed'?`<button class="btn ghost small" type="button" data-action="archive-goal" data-id="${goal.id}">归档</button>`:''}<button class="icon-btn" type="button" data-action="delete-goal" data-id="${goal.id}" aria-label="删除目标">×</button></div></div><div><div class="progress" role="progressbar" aria-label="目标进度" aria-valuenow="${goal.progress}" aria-valuemin="0" aria-valuemax="100"><span style="width:${goal.progress}%"></span></div><div class="progress-copy"><span>${GOAL_STATUSES[goal.status]}${keyResults.length?` · ${keyResults.filter(x=>x.completed).length}/${keyResults.length} 项已达成`:''}</span><strong>${goal.progress}%</strong></div></div>${goal.archivedAt?'':`<form class="inline-form" data-form="goal-update" data-id="${goal.id}"><input class="input" name="progress" type="number" min="0" max="100" value="${goal.progress}" ${keyResults.length?'disabled title="已有拆解项时由系统自动计算"':''} aria-label="目标进度"><select class="select" name="status" aria-label="目标状态">${Object.entries(GOAL_STATUSES).map(([value,label])=>`<option value="${value}" ${goal.status===value?'selected':''}>${label}</option>`).join('')}</select><button class="btn small" type="submit">更新</button></form>`}<div class="kr-section"><div class="kr-heading"><strong>关键结果 / 待办拆解</strong><span class="section-note">${keyResults.length?`已拆解 ${keyResults.length} 项`:'添加第一项后自动计算进度'}</span></div><div class="kr-list">${krMarkup}</div>${goal.archivedAt?'':`<form class="kr-form" data-form="kr-add" data-id="${goal.id}"><input class="input" name="title" maxlength="200" required placeholder="关键结果或具体待办"><select class="select" name="kind" aria-label="拆解类型"><option value="kr">KR</option><option value="todo">Todo</option></select><input class="input" name="target" type="number" min="0.01" max="1000000000" step="any" value="100" aria-label="目标值" title="目标值"><input class="input" name="increment" type="number" min="0.01" max="1000000000" step="any" value="10" aria-label="单次推进量" title="同步任务每完成一次推进多少"><input class="input" name="unit" maxlength="20" value="%" aria-label="单位" placeholder="页 / 次 / %"><button class="btn small" type="submit">添加拆解</button></form>`}</div></article>`;
+    return `<article class="card card-pad goal-card ${goal.archivedAt?'archived':''}" data-goal-id="${goal.id}"><div class="goal-card-head"><div><span class="badge badge-${goal.status==='completed'?'low':goal.status==='paused'?'medium':'high'}">${GOAL_LEVELS[goal.level]}</span><span class="badge goal-framework">${goal.framework==='smart'?'SMART':'OKR'}</span><h2 class="book-title" style="margin-top:10px">${esc(goal.title)}</h2><div class="row-meta">${parent?`上级：${esc(parent.title)} · `:''}截止 ${formatFullDate(goal.deadline)} · ${archiveCopy}</div></div><div class="goal-card-actions">${goal.archivedAt?`<button class="btn ghost small" type="button" data-action="restore-goal" data-id="${goal.id}">恢复</button>`:goal.status==='completed'?`<button class="btn ghost small" type="button" data-action="archive-goal" data-id="${goal.id}">归档</button>`:''}<button class="icon-btn" type="button" data-action="delete-goal" data-id="${goal.id}" aria-label="删除目标">×</button></div></div><div><div class="progress" role="progressbar" aria-label="目标进度" aria-valuenow="${goal.progress}" aria-valuemin="0" aria-valuemax="100"><span style="width:${goal.progress}%"></span></div><div class="progress-copy"><span>${GOAL_STATUSES[goal.status]}${keyResults.length?` · ${keyResults.filter(x=>x.completed).length}/${keyResults.length} 项已达成`:''}</span><strong>${goal.progress}%</strong></div></div>${goal.archivedAt?'':`<form class="inline-form" data-form="goal-update" data-id="${goal.id}"><input class="input" name="progress" type="number" min="0" max="100" value="${goal.progress}" ${keyResults.length?'disabled title="已有拆解项时由系统自动计算"':''} aria-label="目标进度"><select class="select" name="status" aria-label="目标状态">${Object.entries(GOAL_STATUSES).map(([value,label])=>`<option value="${value}" ${goal.status===value?'selected':''}>${label}</option>`).join('')}</select><button class="btn small" type="submit">更新</button></form>`}<div class="kr-section"><div class="kr-heading"><strong>关键结果 / 待办拆解</strong><span class="section-note">${keyResults.length?`已拆解 ${keyResults.length} 项`:'添加第一项后自动计算进度'}</span></div><div class="kr-list">${krMarkup}</div>${goal.archivedAt?'':`<form class="kr-form" data-form="kr-add" data-id="${goal.id}"><input class="input" name="title" maxlength="200" required placeholder="关键结果或具体待办"><select class="select" name="kind" aria-label="拆解类型"><option value="kr">KR</option><option value="todo">Todo</option></select><input class="input" name="target" type="number" min="0.01" max="1000000000" step="any" value="100" aria-label="目标值" title="目标值"><input class="input" name="increment" type="number" min="0.01" max="1000000000" step="any" value="10" aria-label="单次推进量" title="同步任务每完成一次推进多少"><input class="input" name="unit" maxlength="20" value="%" aria-label="单位" placeholder="页 / 次 / %"><button class="btn small" type="submit">添加拆解</button></form>`}</div></article>`;
   }
 
   function renderGoals(){
@@ -2519,7 +3180,7 @@
           </div></details>
         </div>
       </form>
-      <div class="goal-toolbar"><div><h2 class="section-title">${goalArchiveView?'目标归档':'当前目标'}</h2><p class="section-note">${goalArchiveView?'已归档目标只读保存，可随时恢复。':'完成关联的今日任务时，进度会自动回写。'}</p></div><div class="segmented" aria-label="目标列表范围"><button type="button" aria-pressed="${!goalArchiveView}" data-action="goal-view" data-view="current">当前 ${currentGoals.length}</button><button type="button" aria-pressed="${goalArchiveView}" data-action="goal-view" data-view="archived">归档 ${archivedGoals.length}</button></div></div>
+      <div class="goal-toolbar" id="goalList"><div><h2 class="section-title">${goalArchiveView?'目标归档':'当前目标'}</h2><p class="section-note">${goalArchiveView?'已归档目标只读保存，可随时恢复。':'完成关联的今日任务时，进度会自动回写。'}</p></div><div class="segmented" aria-label="目标列表范围"><button type="button" aria-pressed="${!goalArchiveView}" data-action="goal-view" data-view="current">当前 ${currentGoals.length}</button><button type="button" aria-pressed="${goalArchiveView}" data-action="goal-view" data-view="archived">归档 ${archivedGoals.length}</button></div></div>
       <div class="grid-cards">${visible.length?visible.map(goal=>renderGoalCard(goal,goals,today)).join(''):emptyState(goalArchiveView?'档':'目',goalArchiveView?'归档还是空的':'还没有目标',goalArchiveView?'完成一个目标后，将它归档到这里。':'先写下一个足够具体、可以衡量并且有截止时间的目标。')}</div>
     </section>`;
   }
@@ -2576,19 +3237,19 @@
   }
 
   function renderLedger(){
-    const month=dateKey().slice(0,7);
+    const month=ledgerMonth;
     const monthly=state.ledger.entries.filter(x=>x.date.startsWith(month));
     const income=monthly.filter(x=>x.type==='income').reduce((s,x)=>s+x.amount,0);
     const expenses=monthly.filter(x=>x.type==='expense'),expense=expenses.reduce((s,x)=>s+x.amount,0);
     const investment=expenses.filter(x=>x.isInvestment).reduce((s,x)=>s+x.amount,0),investmentRatio=expense?Math.round(investment/expense*100):0;
     const limit=Number(state.settings.monthlyBudget)||0,remaining=limit-expense,ratio=limit?expense/limit:0;
-    const now=parseDay(dateKey()),daysRemaining=new Date(now.getFullYear(),now.getMonth()+1,0).getDate()-now.getDate()+1;
+    const now=parseDay(dateKey()),selectedMonth=parseDay(`${month}-01`),isCurrentMonth=month===dateKey().slice(0,7),daysRemaining=isCurrentMonth?new Date(now.getFullYear(),now.getMonth()+1,0).getDate()-now.getDate()+1:new Date(selectedMonth.getFullYear(),selectedMonth.getMonth()+1,0).getDate();
     const dailySuggested=limit?Math.max(0,remaining/daysRemaining):0;
     const categoryUsage=BUDGET_CATEGORIES.map(category=>{const categoryLimit=Number(state.settings.categoryBudgets?.[category])||0,spent=expenses.filter(x=>x.category===category).reduce((sum,x)=>sum+x.amount,0);return {category,limit:categoryLimit,spent,ratio:categoryLimit?spent/categoryLimit:0};}).filter(x=>x.limit>0);
     const totalAlert=limit&&ratio>=.8?`<div class="system-alert ${ratio>=1?'danger':''}"><span aria-hidden="true">${ratio>=1?'!':'¥'}</span><strong>${ratio>=1?`本月总预算已超支 ${money(Math.abs(remaining))}`:`本月总预算已使用 ${Math.round(ratio*100)}%，请留意后续支出。`}</strong></div>`:'';
-    const recent=[...state.ledger.entries].sort((a,b)=>b.date.localeCompare(a.date)||String(b.createdAt).localeCompare(String(a.createdAt))).slice(0,20);
+    const recent=[...monthly].sort((a,b)=>b.date.localeCompare(a.date)||String(b.createdAt).localeCompare(String(a.createdAt))).slice(0,20);
     return `<section class="page color-ledger">
-      ${pageHead('记账',`${parseDay(dateKey()).getMonth()+1}月收支清晰可见，花钱更有分寸。`)}
+      ${pageHead('记账',`${selectedMonth.getMonth()+1}月收支清晰可见，花钱更有分寸。`)}
       ${renderArchiveLedgerMobile()}
       ${totalAlert}
       <div class="summary-strip card ledger-summary">
@@ -2613,7 +3274,7 @@
         <div class="card card-pad"><div class="section-head"><div><h2 class="section-title">分类预算进度</h2><p class="section-note">达到 80% 提醒，超过预算显示超支。</p></div></div>${categoryUsage.length?`<div class="budget-grid">${categoryUsage.map(x=>`<div class="budget-item ${x.ratio>=1?'over':x.ratio>=.8?'attention':''}"><div class="budget-item-head"><strong>${esc(x.category)}</strong><span>${Math.round(x.ratio*100)}%</span></div><div class="progress" role="progressbar" aria-label="${esc(x.category)}预算使用率" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.min(100,Math.round(x.ratio*100))}"><span style="width:${Math.min(100,x.ratio*100)}%"></span></div><div class="row-meta" style="margin-top:7px">${money(x.spent)} / ${money(x.limit)}${x.ratio>=1?` · 超支 ${money(x.spent-x.limit)}`:''}</div></div>`).join('')}</div>`:emptyState('¥','还没有分类预算','为餐饮、娱乐或学习等分类设置额度后，这里会显示进度。')}</div>
       </div>
       <div class="grid-main-side">
-        <div class="card card-pad"><div class="section-head"><div><h2 class="section-title">最近记录</h2><p class="section-note">显示最近 20 笔收支。</p></div></div>
+        <div class="card card-pad" id="ledgerEntries"><div class="section-head"><div><h2 class="section-title">最近记录</h2><p class="section-note">显示当前月份最近 20 笔收支。</p></div></div>
           <div class="list">${recent.length?recent.map(x=>`<div class="list-row"><div class="row-main"><div class="row-title">${esc(x.note||x.category)} ${x.isInvestment?'<span class="badge badge-low">自我投资</span>':''}</div><div class="row-meta">${esc(x.category)} · ${formatDate(x.date)}</div></div><strong class="${x.type==='income'?'money-income':'money-expense'}">${x.type==='income'?'+':'-'}${money(x.amount)}</strong><button class="icon-btn" data-action="delete-ledger" data-id="${x.id}" aria-label="删除记录">×</button></div>`).join(''):emptyState('¥','还没有收支记录','从记录第一笔开始，慢慢看见自己的消费习惯。')}</div>
         </div>
         <aside class="card card-pad"><div class="section-head"><div><h2 class="section-title">支出分类</h2><p class="section-note">本月各类支出占比。</p></div></div><div class="chart-wrap"><canvas id="ledgerChart" role="img" aria-label="本月支出分类图"></canvas><div class="chart-empty" id="ledgerChartEmpty" ${expense?'hidden':''}>本月还没有支出数据</div></div><p class="chart-caption">${expense?`本月共 ${expenses.length} 笔支出，合计 ${money(expense)}。`:'记录第一笔支出后，这里会按分类生成图表。'}</p><div class="legend" id="ledgerLegend"></div></aside>
@@ -2648,7 +3309,7 @@
               <details class="form-advanced"><summary>补充卡路里</summary><div class="form-advanced-grid"><div class="field span-4"><label for="fitnessCalories">卡路里（可选）</label><input class="input" id="fitnessCalories" name="calories" type="number" min="0" max="100000" inputmode="numeric" placeholder="例如 180"></div></div></details>
             </div>
           </form>
-          <div class="card card-pad"><div class="section-head"><div><h2 class="section-title">最近运动</h2><p class="section-note">回看你的运动节奏。</p></div></div><div class="list">${records.length?records.map(x=>`<div class="list-row"><div class="nav-icon" style="--icon:#ff9500">${esc(x.type.slice(0,1))}</div><div class="row-main"><div class="row-title">${esc(x.type)} · ${x.minutes} 分钟</div><div class="row-meta">${formatDate(x.date)}${x.calories?` · ${x.calories} 千卡`:''}</div></div><button class="btn ghost small" type="button" data-action="repeat-workout" data-id="${x.id}">再记</button><button class="icon-btn" data-action="delete-workout" data-id="${x.id}" aria-label="删除运动记录">×</button></div>`).join(''):emptyState('动','还没有运动记录','散步、拉伸或跑步都算一次好的开始。')}</div></div>
+          <div class="card card-pad" id="fitnessRecords"><div class="section-head"><div><h2 class="section-title">最近运动</h2><p class="section-note">回看你的运动节奏。</p></div></div><div class="list">${records.length?records.map(x=>`<div class="list-row"><div class="nav-icon" style="--icon:#ff9500">${esc(x.type.slice(0,1))}</div><div class="row-main"><div class="row-title">${esc(x.type)} · ${x.minutes} 分钟</div><div class="row-meta">${formatDate(x.date)}${x.calories?` · ${x.calories} 千卡`:''}</div></div><button class="btn ghost small" type="button" data-action="repeat-workout" data-id="${x.id}">再记</button><button class="icon-btn" data-action="delete-workout" data-id="${x.id}" aria-label="删除运动记录">×</button></div>`).join(''):emptyState('动','还没有运动记录','散步、拉伸或跑步都算一次好的开始。')}</div></div>
         </div>
         <aside class="card card-pad"><div class="section-head"><div><h2 class="section-title">本周热力图</h2><p class="section-note">颜色越深，运动时长越长。</p></div></div>
           <div class="heat-grid">${dates.map((d,i)=>{const total=byDate[d].reduce((s,x)=>s+x.minutes,0),level=total===0?0:total<30?1:total<60?2:3;return `<div class="heat-day heat-${level}" title="${formatDate(d)} ${total}分钟"><span>${WEEK_NAMES[i]}</span><strong>${parseDay(d).getDate()}</strong><small>${total?total+'分':'未打卡'}</small></div>`}).join('')}</div>
@@ -2717,15 +3378,15 @@
         <div class="section-head"><div><h2 class="section-title">添加书籍</h2><p class="section-note">建立一本新书的阅读档案。</p></div></div>
         <div class="form-row">
           <div class="field span-5 mobile-wide"><label for="bookTitle">书名</label><input class="input" id="bookTitle" name="title" maxlength="200" required placeholder="输入书名"></div>
-          <div class="field span-3"><label for="bookPages">总页数</label><input class="input" id="bookPages" name="totalPages" type="number" min="1" max="100000" inputmode="numeric" required placeholder="320"></div>
+          <div class="field span-3"><label for="bookPages">总页数</label><input class="input" id="bookPages" name="totalPages" type="number" min="1" max="100000" inputmode="numeric" required value="320"></div>
           <div class="field span-2"><label for="bookStatus">阅读状态</label><select class="select" id="bookStatus" name="status"><option value="wishlist">想看</option><option value="reading" selected>在看</option><option value="finished">已看</option></select></div>
           <button class="btn span-2" type="submit">添加</button>
           <details class="form-advanced"><summary>补充作者</summary><div class="form-advanced-grid"><div class="field span-5 mobile-wide"><label for="bookAuthor">作者（可选）</label><input class="input" id="bookAuthor" name="author" maxlength="200" placeholder="作者姓名"></div></div></details>
         </div>
       </form>
-      <div class="grid-cards">${books.length?books.map(book=>{
+      <div class="grid-cards" id="bookLibrary">${books.length?books.map(book=>{
         const pct=Math.round(book.currentPage/book.totalPages*100);
-        return `<article class="card book-card"><div class="book-top"><div><span class="badge badge-${book.status==='finished'?'low':book.status==='wishlist'?'medium':'high'}">${{wishlist:'想看',reading:'在看',finished:'已看'}[book.status]}</span><h2 class="book-title" style="margin-top:9px">${esc(book.title)}</h2><div class="book-author">${esc(book.author||'未填写作者')}</div></div><button class="icon-btn" data-action="delete-book" data-id="${book.id}" aria-label="删除书籍">×</button></div>
+        return `<article class="card book-card" data-book-id="${book.id}"><div class="book-top"><div><span class="badge badge-${book.status==='finished'?'low':book.status==='wishlist'?'medium':'high'}">${{wishlist:'想看',reading:'在看',finished:'已看'}[book.status]}</span><h2 class="book-title" style="margin-top:9px">${esc(book.title)}</h2><div class="book-author">${esc(book.author||'未填写作者')}</div></div><button class="icon-btn" data-action="delete-book" data-id="${book.id}" aria-label="删除书籍">×</button></div>
           <div class="progress" role="progressbar" aria-label="阅读进度" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><span style="width:${pct}%"></span></div><div class="progress-copy"><span>第 ${book.currentPage} / ${book.totalPages} 页</span><strong>${pct}%</strong></div>
           <form class="inline-form" data-form="book-progress" data-id="${book.id}"><input class="input" name="page" type="number" min="0" max="${book.totalPages}" value="${book.currentPage}" aria-label="当前阅读页数"><select class="select" name="status" aria-label="阅读状态"><option value="wishlist" ${book.status==='wishlist'?'selected':''}>想看</option><option value="reading" ${book.status==='reading'?'selected':''}>在看</option><option value="finished" ${book.status==='finished'?'selected':''}>已看</option></select><button class="btn small" type="submit">更新</button></form>
           <details class="notes"><summary>读书笔记（${book.notes.length}）</summary>
@@ -2771,7 +3432,7 @@
     const packed=trip.packing.filter(x=>x.done).length, packingRate=trip.packing.length?Math.round(packed/trip.packing.length*100):0;
     const itinerary=[...trip.itinerary].sort((a,b)=>String(a.date||'').localeCompare(String(b.date||''))||String(a.time||'').localeCompare(String(b.time||'')));
     const status=remaining>0?`还有 ${remaining} 天出发`:remaining===0?'今天出发':trip.endDate>=dateKey()?'旅途中':'旅程已结束';
-    return `<div class="stack"><div class="card card-pad"><div class="trip-header"><div><h2 class="trip-destination">${esc(trip.destination)}</h2><p class="section-note">${formatFullDate(trip.startDate)} 至 ${formatFullDate(trip.endDate)} · ${status}</p></div><button class="btn danger small" data-action="delete-trip" data-id="${trip.id}">删除旅行</button></div></div>
+    return `<div class="stack" id="tripDetail-${trip.id}"><div class="card card-pad"><div class="trip-header"><div><h2 class="trip-destination">${esc(trip.destination)}</h2><p class="section-note">${formatFullDate(trip.startDate)} 至 ${formatFullDate(trip.endDate)} · ${status}</p></div><button class="btn danger small" data-action="delete-trip" data-id="${trip.id}">删除旅行</button></div></div>
       <div class="trip-layout">
         <div class="card card-pad"><div class="section-head"><div><h2 class="section-title">行程安排</h2><p class="section-note">按日期和时间自动排序。</p></div></div>
           <form class="quick-form" data-form="itinerary" data-id="${trip.id}"><div class="form-row"><div class="field span-3"><label>日期</label><input class="input" name="date" type="date" min="${trip.startDate}" max="${trip.endDate}" value="${trip.startDate}" required></div><div class="field span-2"><label>时间</label><input class="input" name="time" type="time" value="09:00"></div><div class="field span-5 mobile-wide"><label>安排</label><input class="input" name="title" maxlength="200" required placeholder="参观博物馆"></div><button class="btn span-2" type="submit">添加</button></div></form>
@@ -2802,26 +3463,31 @@
         <form class="card card-pad" id="wordForm"><div class="section-head"><div><h2 class="section-title">添加单词</h2><p class="section-note">先记录英文和释义，音标可以稍后补充。</p></div></div><div class="form-row"><div class="field span-4"><label for="wordName">英文</label><input class="input" id="wordName" name="word" maxlength="100" autocomplete="off" autocapitalize="none" spellcheck="false" required placeholder="serendipity"></div><div class="field span-6 mobile-wide"><label for="wordMeaning">中文释义</label><input class="input" id="wordMeaning" name="meaning" maxlength="500" required placeholder="意外发现美好事物的能力"></div><button class="btn span-2" type="submit">加入词库</button><details class="form-advanced"><summary>补充音标</summary><div class="form-advanced-grid"><div class="field span-5 mobile-wide"><label for="wordPhonetic">音标（可选）</label><input class="input" id="wordPhonetic" name="phonetic" maxlength="100" placeholder="/ˌserənˈdɪpəti/"></div></div></details></div></form>
         <div class="card card-pad"><div class="section-head"><div><h2 class="section-title">本周学习趋势</h2><p class="section-note">按每天接触的不重复单词统计。</p></div><form id="goalForm" class="inline-form" style="margin-top:0"><input class="input" name="goal" type="number" min="1" max="200" value="${goal}" aria-label="每日单词目标" style="width:84px"><button class="btn small secondary" type="submit">设目标</button></form></div><div class="chart-wrap"><canvas id="englishChart" role="img" aria-label="本周英语学习趋势图"></canvas></div><p class="chart-caption">今天已接触 ${todayIds.size} 个单词，当前有 ${due} 个待复习。</p></div>
       </div>
-      <div class="section-head"><div><h2 class="section-title">单词卡片</h2><p class="section-note">翻卡只查看释义；到期后选择“简单、模糊、忘记”，系统才会动态安排下次复习。</p></div></div>
-      <div class="word-grid">${words.length?words.map(x=>{const isDue=!x.mastered&&x.nextReviewDate<=today;return `<article class="word-card"><button class="word-flip" data-action="flip-word" data-id="${x.id}" aria-label="翻转单词 ${esc(x.word)}" aria-pressed="false"><span class="word-card-inner"><span class="word-face word-front"><span class="word-hint">${isDue?'今天待复习':'点击查看释义'}</span><span class="word-name">${esc(x.word)}</span><span class="phonetic">${esc(x.phonetic||'未填写音标')}</span></span><span class="word-face word-back"><span class="word-hint">${isDue?'看完释义后，在下方选择掌握程度':'下次复习 '+formatDate(x.nextReviewDate)}</span><span class="meaning">${esc(x.meaning)}</span><span class="row-meta">已复习 ${x.reviewCount||0} 次 · 当前间隔 ${x.intervalDays||1} 天</span></span></span></button>${isDue?`<div class="word-review-actions" role="group" aria-label="${esc(x.word)} 掌握程度"><button class="btn ghost small" type="button" data-action="review-word" data-rating="forgot" data-id="${x.id}">忘记</button><button class="btn secondary small" type="button" data-action="review-word" data-rating="fuzzy" data-id="${x.id}">模糊</button><button class="btn small" type="button" data-action="review-word" data-rating="easy" data-id="${x.id}">简单</button></div>`:`<div class="word-schedule">下次复习：${formatDate(x.nextReviewDate)} · 难度系数 ${(x.easeFactor||2.5).toFixed(2)}</div>`}<button class="icon-btn word-delete" data-action="delete-word" data-id="${x.id}" aria-label="删除单词">×</button></article>`;}).join(''):emptyState('Aa','词库还是空的','添加一个今天想记住的单词，然后点击卡片查看释义。')}</div>
+      <div id="wordLibrary"><div class="section-head"><div><h2 class="section-title">单词卡片</h2><p class="section-note">翻卡只查看释义；到期后选择“简单、模糊、忘记”，系统才会动态安排下次复习。</p></div></div>
+      <div class="word-grid">${words.length?words.map(x=>{const isDue=!x.mastered&&x.nextReviewDate<=today;return `<article class="word-card"><button class="word-flip" data-action="flip-word" data-id="${x.id}" aria-label="翻转单词 ${esc(x.word)}" aria-pressed="false"><span class="word-card-inner"><span class="word-face word-front"><span class="word-hint">${isDue?'今天待复习':'点击查看释义'}</span><span class="word-name">${esc(x.word)}</span><span class="phonetic">${esc(x.phonetic||'未填写音标')}</span></span><span class="word-face word-back"><span class="word-hint">${isDue?'看完释义后，在下方选择掌握程度':'下次复习 '+formatDate(x.nextReviewDate)}</span><span class="meaning">${esc(x.meaning)}</span><span class="row-meta">已复习 ${x.reviewCount||0} 次 · 当前间隔 ${x.intervalDays||1} 天</span></span></span></button>${isDue?`<div class="word-review-actions" role="group" aria-label="${esc(x.word)} 掌握程度"><button class="btn ghost small" type="button" data-action="review-word" data-rating="forgot" data-id="${x.id}">忘记</button><button class="btn secondary small" type="button" data-action="review-word" data-rating="fuzzy" data-id="${x.id}">模糊</button><button class="btn small" type="button" data-action="review-word" data-rating="easy" data-id="${x.id}">简单</button></div>`:`<div class="word-schedule">下次复习：${formatDate(x.nextReviewDate)} · 难度系数 ${(x.easeFactor||2.5).toFixed(2)}</div>`}<button class="icon-btn word-delete" data-action="delete-word" data-id="${x.id}" aria-label="删除单词">×</button></article>`;}).join(''):emptyState('Aa','词库还是空的','添加一个今天想记住的单词，然后点击卡片查看释义。')}</div></div>
     </section>`;
   }
 
   function render(){
     destroyCharts();
     if(!MODULES.some(x=>x.id===activeModule)) activeModule='home';
+    document.body.classList.remove('archive-detail-view');
     document.getElementById('nav').innerHTML=MODULES.map(m=>`<button class="nav-btn ${m.id===activeModule?'active':''}" style="--module-color:${m.color}" data-module="${m.id}" title="${m.label}" aria-current="${m.id===activeModule?'page':'false'}"><span class="nav-icon" style="--icon:${m.color}"><i class="ph ${m.icon}" aria-hidden="true"></i></span><span class="nav-label">${m.label}</span></button>`).join('');
     const current=MODULES.find(x=>x.id===activeModule);
     document.body.dataset.activeModule=activeModule;
     syncMobileTabbar();
     const mobileDay=parseDay(dateKey()),mobileWeekday=['周日','周一','周二','周三','周四','周五','周六'][mobileDay.getDay()];
     document.getElementById('mobileTitle').textContent=current.label;
-    document.getElementById('mobileDate').innerHTML=`${mobileDay.getMonth()+1}月${mobileDay.getDate()}日 ${mobileWeekday}${activeModule==='home'?'<i class="ph ph-asterisk" aria-hidden="true"></i>':''}`;
+    document.getElementById('mobileDate').innerHTML=activeModule==='home'?`${mobileDay.getMonth()+1}月${mobileDay.getDate()}日 ${mobileWeekday}<i class="ph ph-asterisk" aria-hidden="true"></i>`:'';
     syncTopbarAction();
     document.title=`${current.label} | 人生管理系统`;
     const views={home:renderHome,goals:renderGoals,daily:renderDaily,ledger:renderLedger,fitness:renderFitness,mood:renderMood,reading:renderReading,travel:renderTravel,english:renderEnglish};
     const view=views[activeModule]||renderHome;
     document.getElementById('app').innerHTML=view();
+    const page=document.querySelector('#app > .page'),archiveScreen=page?.querySelector(':scope > .mobile-archive-screen');
+    if(archiveScreen&&!['home','daily'].includes(activeModule)){
+      archiveScreen.insertAdjacentHTML('afterend',`<div class="archive-detail-toolbar"><span>${esc(current.label)}详细管理</span><button type="button" data-action="close-archive-detail"><i class="ph ph-arrow-left" aria-hidden="true"></i>返回摘要</button></div>`);
+    }
     if(chartFrame) cancelAnimationFrame(chartFrame);
     chartFrame=requestAnimationFrame(()=>{chartFrame=0;initActiveCharts();});
   }
@@ -2848,7 +3514,7 @@
   function drawLedgerChart(){
     const canvas=document.getElementById('ledgerChart'); if(!canvas) return;
     releaseCanvas(canvas,'ledger');
-    const month=dateKey().slice(0,7), totals={};
+    const month=ledgerMonth, totals={};
     state.ledger.entries.filter(x=>x.type==='expense'&&x.date.startsWith(month)).forEach(x=>totals[x.category]=(totals[x.category]||0)+x.amount);
     const labels=Object.keys(totals).sort((a,b)=>totals[b]-totals[a]), values=labels.map(x=>totals[x]), total=values.reduce((a,b)=>a+b,0);
     const legend=document.getElementById('ledgerLegend');
@@ -2862,7 +3528,7 @@
   function drawLedgerMobileChart(){
     const canvas=document.getElementById('ledgerMobileChart');if(!canvas)return;
     releaseCanvas(canvas,'ledgerMobile');
-    const month=dateKey().slice(0,7),income=state.ledger.entries.filter(x=>x.type==='income'&&x.date.startsWith(month)).reduce((s,x)=>s+x.amount,0),expense=state.ledger.entries.filter(x=>x.type==='expense'&&x.date.startsWith(month)).reduce((s,x)=>s+x.amount,0);
+    const month=ledgerMonth,income=state.ledger.entries.filter(x=>x.type==='income'&&x.date.startsWith(month)).reduce((s,x)=>s+x.amount,0),expense=state.ledger.entries.filter(x=>x.type==='expense'&&x.date.startsWith(month)).reduce((s,x)=>s+x.amount,0);
     const total=Math.max(income,expense,1),values=[Math.min(expense,total),Math.max(0,total-expense)];
     if(window.Chart){
       const chart=new Chart(canvas,{type:'doughnut',data:{datasets:[{data:values,backgroundColor:['#d99a17','#eee3cf'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,cutout:'74%',plugins:{legend:{display:false},tooltip:{enabled:false}},events:[],animation:{duration:450}}});chartInstances.set('ledgerMobile',chart);
@@ -2904,7 +3570,7 @@
     ctx.fillStyle='#6e6e73';ctx.font='11px -apple-system';ctx.textAlign='center';data.forEach((v,i)=>{const slot=cw/7,bw=Math.min(34,slot*.55),x=p.l+slot*i+(slot-bw)/2,bh=v/max*ch;ctx.fillStyle=color;ctx.beginPath();if(ctx.roundRect)ctx.roundRect(x,p.t+ch-bh,bw,bh,7);else ctx.rect(x,p.t+ch-bh,bw,bh);ctx.fill();ctx.fillStyle='#6e6e73';ctx.fillText(WEEK_NAMES[i],p.l+slot*i+slot/2,h-9);if(v){ctx.fillStyle='#1d1d1f';ctx.fillText(v,p.l+slot*i+slot/2,p.t+ch-bh-7);}});
   }
 
-  let todoSheetLastFocus=null,swipeGesture=null,suppressTodoClickUntil=0,smartNavRestoreTimer=0,smartNavTouchY=null,smartNavTouchDelta=0,smartNavPendingY=null,smartNavFrame=0,smartLastFocus=null;
+  let todoSheetLastFocus=null,editingTodoId='',swipeGesture=null,suppressTodoClickUntil=0,smartNavRestoreTimer=0,smartNavTouchY=null,smartNavTouchDelta=0,smartNavPendingY=null,smartNavFrame=0,smartLastFocus=null;
   const mobileCoreModules=new Set(['home','daily','ledger']);
 
   function haptic(pattern=10){
@@ -2944,6 +3610,31 @@
     }));
   }
 
+  function openArchiveDetail(selector,{afterOpen}={}){
+    const page=document.querySelector('#app > .page');
+    if(!page||!selector)return;
+    page.classList.add('archive-detail-open');
+    document.body.classList.add('archive-detail-view');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>{
+      const target=page.querySelector(selector)||document.querySelector(selector);
+      if(!target)return;
+      const anchor=target.closest('form,.card,.goal-card,.book-card,.stack')||target;
+      const topbar=document.querySelector('.mobile-topbar')?.getBoundingClientRect().height||0;
+      const toolbar=page.querySelector('.archive-detail-toolbar')?.getBoundingClientRect().height||0;
+      const top=anchor.getBoundingClientRect().top+window.scrollY-topbar-toolbar-12;
+      window.scrollTo({top:Math.max(0,top),left:0,behavior:'auto'});
+      initActiveCharts();
+      afterOpen?.(target);
+    }));
+  }
+
+  function closeArchiveDetail(){
+    document.querySelector('#app > .page')?.classList.remove('archive-detail-open');
+    document.body.classList.remove('archive-detail-view');
+    resetModuleScroll();
+    syncTopbarAction();
+  }
+
   function navigateToModule(module,{focusId='',openTodo=false,focusContent=false}={}){
     if(!MODULES.some(item=>item.id===module))return;
     toggleSmart(false);
@@ -2980,9 +3671,21 @@
     panel.style.setProperty('--smart-available-height',`${availableHeight}px`);
   }
 
-  function openTodoSheet(){
+  function openTodoSheet(todoId=''){
     if(!window.matchMedia('(max-width: 767px)').matches)return;
     todoSheetLastFocus=document.activeElement;
+    const form=document.getElementById('todoSheetForm'),editingTodo=state.daily.todos.find(x=>x.id===todoId)||null;
+    editingTodoId=editingTodo?.id||'';clearFormError(form);form.reset();
+    const targetDate=editingTodo?.date||(activeModule==='daily'?activeDailyDate:dateKey()),items=state.daily.todos.filter(x=>x.date===targetDate),itemIndex=Math.max(0,items.findIndex(x=>x.id===editingTodoId)),fallback=defaultTodoSlot(editingTodo?itemIndex:items.length);
+    const explicitEnds=items.map(x=>timeToMinutes(x.endTime||x.startTime)).filter(Number.isFinite),latestEnd=explicitEnds.length?Math.max(...explicitEnds):null;
+    const suggestedStart=editingTodo?timeToMinutes(editingTodo.startTime||fallback.start):Math.min(1410,Math.max(timeToMinutes(fallback.start),latestEnd===null?0:latestEnd+30));
+    const suggestedEnd=editingTodo?timeToMinutes(editingTodo.endTime||fallback.end):Math.min(1439,Math.max(suggestedStart+30,timeToMinutes(fallback.end)));
+    document.getElementById('todoSheetText').value=editingTodo?.text||'';
+    document.getElementById('todoSheetStartTime').value=minutesToTime(suggestedStart);
+    document.getElementById('todoSheetEndTime').value=minutesToTime(suggestedEnd);
+    if(editingTodo)form.querySelector(`input[name="priority"][value="${editingTodo.priority}"]`)?.click();
+    document.getElementById('todoSheetTitle').textContent=editingTodo?'编辑计划':(targetDate===dateKey()?'添加今日计划':`添加${formatDate(targetDate)}计划`);
+    document.querySelector('#todoSheetForm .todo-sheet-submit').textContent=editingTodo?'保存修改':(targetDate===dateKey()?'添加到今天':`添加到${formatDate(targetDate)}`);
     document.getElementById('todoSheetOverlay').hidden=false;
     document.getElementById('todoSheet').hidden=false;
     document.body.classList.add('todo-sheet-open');
@@ -2997,6 +3700,7 @@
     sheet.style.removeProperty('--sheet-keyboard-offset');document.body.classList.remove('todo-sheet-open');
     setBackgroundInert(false);syncSidebarAccessibility();
     if(restoreFocus&&todoSheetLastFocus?.focus)todoSheetLastFocus.focus();
+    editingTodoId='';
   }
 
   function closeTodoSwipes(except=null){
@@ -3047,7 +3751,12 @@
 
   function addTodo(form){
     const fd=new FormData(form),text=String(fd.get('text')||'').trim(); if(!text)return;
-    return mutate(s=>s.daily.todos.push({id:id(),text,priority:fd.get('priority')||'medium',date:dateKey(),done:false,createdAt:nowIso(),completedAt:null}),{message:'已添加到今日计划。'});
+    const rawStart=String(fd.get('startTime')||''),rawEnd=String(fd.get('endTime')||''),startTime=validClockTime(rawStart)?rawStart:null,endTime=validClockTime(rawEnd)?rawEnd:null;
+    if((rawStart||rawEnd)&&(!startTime||!endTime))return showFormError(form,'请选择有效的开始和结束时间。',!startTime?'startTime':'endTime');
+    if(startTime&&endTime&&timeToMinutes(endTime)<=timeToMinutes(startTime))return showFormError(form,'结束时间必须晚于开始时间。','endTime');
+    const editingTodo=editingTodoId?state.daily.todos.find(x=>x.id===editingTodoId):null,targetDate=editingTodo?.date||(form.id==='todoSheetForm'&&activeModule==='daily'?activeDailyDate:dateKey());
+    const message=editingTodo?'计划内容和时间已更新。':(targetDate===dateKey()?'已添加到今日计划。':`已添加到${formatDate(targetDate)}的计划。`);
+    return mutate(s=>{const todo=editingTodoId?s.daily.todos.find(x=>x.id===editingTodoId):null;if(todo){todo.text=text;todo.priority=fd.get('priority')||'medium';todo.startTime=startTime;todo.endTime=endTime;}else s.daily.todos.push({id:id(),text,priority:fd.get('priority')||'medium',date:targetDate,startTime,endTime,done:false,createdAt:nowIso(),completedAt:null});},{message});
   }
   function addGoal(form){
     const fd=new FormData(form),title=String(fd.get('title')||'').trim(),deadline=String(fd.get('deadline'));
@@ -3188,14 +3897,7 @@
     }
     const scrollBtn=event.target.closest('[data-scroll-target]');
     if(scrollBtn){
-      const page=scrollBtn.closest('.page'),selector=scrollBtn.dataset.scrollTarget;
-      page?.classList.add('archive-detail-open');
-      requestAnimationFrame(()=>{
-        const target=document.querySelector(selector);
-        if(!target)return;
-        target.scrollIntoView({block:'start',behavior:'smooth'});
-        setTimeout(()=>target.matches('input,select,textarea,button')?target.focus():target.querySelector('input,select,textarea,button')?.focus(),320);
-      });
+      openArchiveDetail(scrollBtn.dataset.scrollTarget);
       return;
     }
     const moduleBtn=event.target.closest('[data-module]');
@@ -3203,6 +3905,26 @@
     if(!event.target.closest('.todo-swipe'))closeTodoSwipes();
     const el=event.target.closest('[data-action]'); if(!el)return;
     const action=el.dataset.action,itemId=el.dataset.id,tripId=el.dataset.tripId,bookId=el.dataset.bookId;
+    if(action==='close-archive-detail'){closeArchiveDetail();return;}
+    if(action==='open-mood'){
+      const score=Number(el.dataset.score);
+      openArchiveDetail('#moodForm',{afterOpen:form=>form.querySelector(`input[name="score"][value="${score}"]`)?.click()});
+      return;
+    }
+    if(action==='open-goal'){
+      goalArchiveView=false;render();
+      openArchiveDetail(`[data-goal-id="${CSS.escape(itemId)}"]`);
+      return;
+    }
+    if(action==='open-book'){
+      openArchiveDetail(`[data-book-id="${CSS.escape(itemId)}"]`);
+      return;
+    }
+    if(action==='open-trip'){
+      activeTripId=itemId;render();
+      openArchiveDetail(`#tripDetail-${CSS.escape(itemId)}`);
+      return;
+    }
     if(action==='set-field'){
       const target=document.getElementById(el.dataset.target);if(!target)return;
       target.value=el.dataset.value||'';target.dispatchEvent(new Event('input',{bubbles:true}));target.focus();haptic(8);return;
@@ -3211,10 +3933,23 @@
       const word=String(el.dataset.word||'').trim();if(!word||!('speechSynthesis' in window))return toast('当前浏览器不支持单词朗读。');
       window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(word);utterance.lang='en-US';utterance.rate=.86;window.speechSynthesis.speak(utterance);return;
     }
+    if(action==='speak-example'){
+      const text=String(el.dataset.text||'').trim();if(!text||!('speechSynthesis' in window))return toast('当前浏览器不支持例句朗读。');
+      window.speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);utterance.lang='en-US';utterance.rate=.82;window.speechSynthesis.speak(utterance);return;
+    }
     if(action==='export-backup') return exportData();
     if(action==='ai-deep-analysis') return openAnalysis('ai');
     if(action==='analysis-overview') return openAnalysis('overview');
     if(action==='open-todo-sheet') return openTodoSheet();
+    if(action==='edit-todo-time') return openTodoSheet(itemId);
+    if(action==='shift-daily-date'){
+      const delta=Number(el.dataset.delta);
+      if(!Number.isInteger(delta)||Math.abs(delta)!==1)return;
+      activeDailyDate=shiftDay(activeDailyDate,delta);
+      render();
+      requestAnimationFrame(()=>document.querySelector(`[data-action="shift-daily-date"][data-delta="${delta}"]`)?.focus());
+      return;
+    }
     if(action==='goal-view'){goalArchiveView=el.dataset.view==='archived';render();return;}
     if(action==='mood-range'){moodRange=el.dataset.range==='month'?'month':'week';localStorage.setItem('lifeWorkbench.moodRange',moodRange);render();return;}
     if(action==='toggle-todo'){
@@ -3558,19 +4293,32 @@
   function syncTopbarAction(){
     const btn=document.getElementById('menuBtn'),sidebar=document.getElementById('sidebar');
     if(!btn||sidebar.classList.contains('open'))return;
-    const isHome=activeModule==='home';
-    btn.setAttribute('aria-label',isHome?'编辑今日计划':'打开导航');
-    btn.innerHTML=`<i class="ph ${isHome?'ph-pencil-simple-line':'ph-list'}" aria-hidden="true"></i>`;
+    const actions={home:['编辑今日计划','ph-pencil-simple-line'],daily:['添加计划','ph-plus'],ledger:['查看记账图表','ph-chart-bar'],fitness:['添加运动记录','ph-plus'],mood:['添加心情记录','ph-plus'],reading:['管理阅读档案','ph-pencil-simple-line'],travel:['添加习惯或行程','ph-plus'],english:['查看学习统计','ph-chart-bar'],goals:['添加目标','ph-plus']};
+    const [label,icon]=actions[activeModule]||['打开导航','ph-list'];
+    btn.setAttribute('aria-label',label);
+    btn.innerHTML=`<i class="ph ${icon}" aria-hidden="true"></i>`;
   }
   function openSidebar(){const btn=document.getElementById('menuBtn'),sidebar=document.getElementById('sidebar');sidebar.classList.add('open');sidebar.inert=false;sidebar.setAttribute('aria-hidden','false');document.getElementById('mobileOverlay').hidden=false;btn.setAttribute('aria-expanded','true');btn.setAttribute('aria-label','关闭导航');btn.innerHTML='<i class="ph ph-x" aria-hidden="true"></i>';document.getElementById('mobileMoreBtn').setAttribute('aria-expanded','true');document.body.classList.add('drawer-open');}
   function closeSidebar(){const btn=document.getElementById('menuBtn');document.getElementById('sidebar').classList.remove('open');document.getElementById('mobileOverlay').hidden=true;btn.setAttribute('aria-expanded','false');document.getElementById('mobileMoreBtn').setAttribute('aria-expanded','false');document.body.classList.remove('drawer-open');syncTopbarAction();syncSidebarAccessibility();}
   function toggleSidebar(){document.getElementById('sidebar').classList.contains('open')?closeSidebar():openSidebar();}
 
-  document.getElementById('analysisBtn').addEventListener('click',()=>openAnalysis());
+  document.getElementById('analysisBtn').addEventListener('click',()=>{closeSidebar();openAnalysis();});
+  document.addEventListener('change',event=>{
+    const control=event.target.closest('[data-action]');
+    if(!control)return;
+    if(control.dataset.action==='ledger-month'){
+      ledgerMonth=/^\d{4}-\d{2}$/.test(control.value)?control.value:dateKey().slice(0,7);
+      render();
+    }
+    if(control.dataset.action==='goal-year'){
+      goalYear=Number(control.value)||new Date().getFullYear();
+      render();
+    }
+  });
   document.getElementById('skipLink').addEventListener('click',event=>{event.preventDefault();setTimeout(()=>{const app=document.getElementById('app');app.focus({preventScroll:true});app.scrollIntoView({block:'start'});},0);});
-  document.getElementById('quickActionBtn').addEventListener('click',()=>toggleSmart(true));
-  document.getElementById('exportBtn').addEventListener('click',exportData);
-  document.getElementById('importBtn').addEventListener('click',()=>document.getElementById('importFile').click());
+  document.getElementById('quickActionBtn').addEventListener('click',()=>{closeSidebar();toggleSmart(true);});
+  document.getElementById('exportBtn').addEventListener('click',()=>{closeSidebar();exportData();});
+  document.getElementById('importBtn').addEventListener('click',()=>{closeSidebar();document.getElementById('importFile').click();});
   document.getElementById('importFile').addEventListener('change',e=>importData(e.target.files[0]));
   document.getElementById('modalClose').addEventListener('click',closeModal);
   document.getElementById('confirmCancel').addEventListener('click',()=>closeConfirm(false));
@@ -3582,7 +4330,13 @@
   document.getElementById('smartSubmit').addEventListener('click',submitSmart);
   document.getElementById('smartInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submitSmart();}});
   document.querySelectorAll('[data-example]').forEach(btn=>btn.addEventListener('click',()=>{document.getElementById('smartInput').value=btn.dataset.example;document.getElementById('smartInput').focus();}));
-  document.getElementById('menuBtn').addEventListener('click',()=>activeModule==='home'&&!document.getElementById('sidebar').classList.contains('open')?openTodoSheet():toggleSidebar());
+  document.getElementById('menuBtn').addEventListener('click',()=>{
+    if(document.getElementById('sidebar').classList.contains('open')){closeSidebar();return;}
+    if(['home','daily'].includes(activeModule)){openTodoSheet();return;}
+    const targets={ledger:'#ledgerChart',fitness:'#fitnessForm',mood:'#moodForm',reading:'#bookLibrary',travel:'#habitForm',english:'#englishChart',goals:'#objectiveForm'};
+    if(document.querySelector(targets[activeModule]))openArchiveDetail(targets[activeModule]);
+    else openSidebar();
+  });
   document.getElementById('mobileMoreBtn').addEventListener('click',openSidebar);
   document.getElementById('mobileOverlay').addEventListener('click',closeSidebar);
   document.getElementById('todoSheetClose').addEventListener('click',()=>closeTodoSheet());
