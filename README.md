@@ -62,11 +62,22 @@ python3 -m http.server 8080
 
 ```text
 .
-├── index.html       # 应用页面、样式和业务逻辑
+├── assets/          # 当前 Web 版图片资源
+├── docs/            # 产品、架构与实施文档
+│   └── ios-app/     # iPhone App v1 计划与规格
+├── ios-preview/     # 当前 Xcode Canvas Web 预览包
+├── index.html       # 当前应用页面、样式和业务逻辑
 ├── README.md        # 项目说明
 ├── CHANGELOG.md     # 开发日志
 └── .gitignore       # Git 忽略规则
 ```
+
+## iPhone App 文档
+
+- [实施计划](docs/ios-app/plan.md)
+- [产品与技术规格](docs/ios-app/spec.md)
+
+正式 App 的目标目录结构、文件归属和边界以规格文档为准；结构迁移完成前，本节继续描述仓库当前状态。
 
 ## 开发日志
 
